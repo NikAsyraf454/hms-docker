@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Claim extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'staff_id',
+        'details',
+        'broker',
+        'plate_number',
+        'date',
+        'amount',
+        'receipt',
+        'status',
+        'payment_status',
+        'payment_date',
+    ];
 }
