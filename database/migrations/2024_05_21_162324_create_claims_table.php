@@ -20,9 +20,9 @@ return new class extends Migration
             $table->date('date');
             $table->string('amount');
             $table->string('receipt');
-            $table->string('status');
-            $table->string('payment_status');
-            $table->string('payment_date');
+            $table->string('status')->nullable();
+            $table->string('payment_status')->nullable();
+            $table->string('payment_date')->nullable();
             $table->foreign('staff_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
