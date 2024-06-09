@@ -21,4 +21,9 @@ class Claim extends Model
         'payment_status',
         'payment_date',
     ];
+
+    public function fleet(): BelongsTo
+    {
+        return $this->belongsTo(Fleet::class);
+    }
 }

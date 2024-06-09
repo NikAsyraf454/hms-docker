@@ -5,13 +5,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Claim;
 use App\Models\Fleet;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ClaimController extends Controller
 {
+    public function home(){
+        // $claims = Claim::paginate(5);
+
+        return view('index');
+    }
+
     public function index(){
-        $claims = Claim::paginate(5);
+        $claims = DB::table('claims')
+            ->join('users', 'claims.staff_id', '=', 'users.id')
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.amount',
+                'claims.plate_number',
+                'claims.date',
+                'users.name as user_name',
+            )
+            ->get();
+            // dd($claims);
+            // return response()->json($claims);
+        // $claims = Claim::paginate(5);
 
         return view('claim.index')->with('claims', $claims);
     }
@@ -69,7 +89,7 @@ class ClaimController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'detail' => 'required|max:255',
+            'details' => 'required',
             'plate_number' => 'required',
         ]);
 

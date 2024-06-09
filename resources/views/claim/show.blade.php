@@ -1,47 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <title>Claim</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-        <div class="container-fluid">
-            <a class="navbar-brand h1" href={{ route('claim.index') }}>CRUDPosts</a>
-            <div class="justify-end ">
-                <div class="col ">
-                    <a class="btn btn-sm btn-success" href={{ route('claim.create') }}>Add Post</a>
+@extends('layouts.layout')
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Claim Form</h5>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+            @endif
+            <!-- Vertical Form -->
+            {{-- @dd($claim) --}}
+            <form class="row g-3" action="{{ route('claim.update', $claim->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            <div class="col-12">
+                <label for="details" class="form-label">Claim Detail</label>
+                <input type="text" class="form-control" name="details" id="details" value="{{ $claim->details }}" readonly>
             </div>
-    </nav>
-    <div class="container h-100 mt-5">
-        <div class="row h-100 justify-content-center align-items-center">
-
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">{{ $claim->details }}</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ $claim->plate_number }}</p>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ route('claim.edit', $claim->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="{{ route('claim.destroy', $claim->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </div>
+            <div class="col-12">
+                <label for="plate_number" class="form-label">Plate</label>
+                <input type="text" class="form-control" name="plate_number" id="plate_number" value="{{$claim->plate_number}}" readonly>
             </div>
+            <div class="col-12">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" class="form-control" name="date" id="date" value="{{$claim->date}}" readonly>
+            </div>
+            <div class="col-12">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" name="amount" id="amount" value="{{$claim->amount}}" readonly>
+            </div>
+            <div class="col-12">
+                <img src="{{ asset($claim->receipt) }}" alt="Receipt">
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" onclick="window.history.back()">Go Back</button>
+            </div>
+            </form><!-- Vertical Form -->
+
         </div>
     </div>
-</body>
 
-</html>
+@endsection

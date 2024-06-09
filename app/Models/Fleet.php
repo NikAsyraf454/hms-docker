@@ -14,7 +14,14 @@ class Fleet extends Model
         'model',
         'year',
         'license_plate',
+        'color',
         'transmission',
         'status'
     ];
+
+    public function claims(): HasMany
+    {
+        return $this->hasMany(Claim::class);
+    }
+
 }
