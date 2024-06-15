@@ -28,6 +28,12 @@ Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.ed
 Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
 Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
+    Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
+
+});
+
 // Fleet 
 Route::prefix('fleet')->group(function(){
     Route::get('/', [FleetController::class, 'index'])->name('fleet.index');

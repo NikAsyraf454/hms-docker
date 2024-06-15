@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hasta MS</title>
     @include('layouts.partials.head')
+  
 </head>
 <body>
     @include('layouts.partials.nav')
@@ -18,5 +19,7 @@
     @include('layouts.partials.footer')
     @include('layouts.partials.scripts')
     @stack('scripts')
+   
+    
 </body>
 </html>

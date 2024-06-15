@@ -36,7 +36,7 @@
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Update Claim</button>
-                  <button class="btn " onclick="window.history.back()">Go Back</button>
+                  <button class="btn btn-sm" onclick="window.history.back()">Go Back</button>
                 </div>
               </form><!-- Vertical Form -->
 

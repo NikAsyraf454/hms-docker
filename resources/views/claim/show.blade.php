@@ -34,10 +34,12 @@
                 <input type="number" class="form-control" name="amount" id="amount" value="{{$claim->amount}}" readonly>
             </div>
             <div class="col-12">
-                <img src="{{ asset($claim->receipt) }}" alt="Receipt">
+                <div class="image-container">
+                    <img src="{{ asset($claim->receipt) }}" alt="Receipt">
+                </div>
             </div>
             <div class="text-center">
-                <button class="btn btn-primary" onclick="window.history.back()">Go Back</button>
+                <a href="{{route('claim.index')}}" class="btn btn-primary">Go Back</a>
             </div>
             </form><!-- Vertical Form -->
 

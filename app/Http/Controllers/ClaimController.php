@@ -8,6 +8,7 @@ use App\Models\Fleet;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ClaimController extends Controller
 {
@@ -25,7 +26,9 @@ class ClaimController extends Controller
                 'claims.details',
                 'claims.amount',
                 'claims.plate_number',
+                'claims.status',
                 'claims.date',
+                'claims.payment_date',
                 'users.name as user_name',
             )
             ->get();
@@ -36,8 +39,25 @@ class ClaimController extends Controller
         return view('claim.index')->with('claims', $claims);
     }
 
-    public function create()
-    {
+    public function indexAdmin(){
+         $claims = DB::table('claims')
+            ->join('users', 'claims.staff_id', '=', 'users.id')
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.amount',
+                'claims.plate_number',
+                'claims.status',
+                'claims.date',
+                'claims.payment_date',
+                'users.name as user_name',
+            )
+            ->get();
+
+        return view('claim.admin.index')->with('claims', $claims);
+    }
+
+    public function create(){
         $fleet = Fleet::all();
         // dd($fleet);
        return view('claim.create', compact('fleet'));
@@ -104,5 +124,17 @@ class ClaimController extends Controller
         $claim->delete();
         return redirect()->route('claim.index')
         ->with('success', 'Claim deleted successfully');
+    }
+
+    public function updateStatus(Claim $claim)
+    {
+        $claim->status = $claim->status === 'approved' ? 'declined' : 'approved';
+        $currentDate = Carbon::now();
+        // echo $currentDate;
+        // exit;
+        $claim->payment_date = $currentDate;
+        $claim->save();
+
+        return redirect()->back()->with('success', 'Claim status updated successfully.');
     }
 }

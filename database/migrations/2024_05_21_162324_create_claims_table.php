@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('amount');
             $table->string('receipt');
             $table->string('status')->nullable();
-            $table->string('payment_status')->nullable();
             $table->string('payment_date')->nullable();
             $table->foreign('staff_id')->nullable()->references('id')->on('users');
             $table->timestamps();

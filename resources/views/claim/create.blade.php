@@ -5,6 +5,8 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
+                    {{-- @dd($fleet) --}}
+                   
                         <h5 class="card-title">New Claim Form</h5>
                         <!-- Vertical Form -->
                             @php
@@ -27,7 +29,12 @@
                         </div>
                         <div class="col-12">
                         <label for="plate_number" class="form-label">Plate</label>
-                        <input type="text" class="form-control" name="plate_number" id="plate_number" >
+                        <select class="form-control" name="plate_number" id="plate_number">
+                            @foreach ($fleet as $car)
+                                <option value="{{$car->license_plate}}">{{$car->license_plate}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" class="form-control" name="plate_number" id="plate_number" > --}}
                         </div>
                         <div class="col-12">
                         <label for="date" class="form-label">Date</label>

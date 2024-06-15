@@ -18,7 +18,6 @@ class Claim extends Model
         'amount',
         'receipt',
         'status',
-        'payment_status',
         'payment_date',
     ];
 

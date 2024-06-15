@@ -18,9 +18,6 @@
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
-
-            
-
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
                 <a href="" class="card info-card sales-card">
