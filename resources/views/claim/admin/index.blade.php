@@ -1,7 +1,92 @@
 @extends('layouts.layout')
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        height: 34px;
+    }
+
+    .switch input {
+        display: none;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ca2222;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2ab934;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(55px);
+        -ms-transform: translateX(55px);
+        transform: translateX(55px);
+    }
+
+    /*------ ADDED CSS ---------*/
+    .on {
+        display: none;
+    }
+
+    .on,
+    .off {
+        color: white;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        font-size: 10px;
+        font-family: Verdana, sans-serif;
+        user-select: none;
+    }
+
+    input:checked+.slider .on {
+        display: block;
+    }
+
+    input:checked+.slider .off {
+        display: none;
+    }
+
+    /*--------- END --------*/
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
 @section('content')
     <section class="section">
-        
         <div class="row">
             @if (session('success'))
                 <div class="alert alert-success">
@@ -22,8 +107,8 @@
                                         <th>Staff</th>
                                         <th>Details</th>
                                         <th>Plate Number</th>
+                                        <th>Claim Date</th>
                                         <th>Status</th>
-                                        <th>Payment Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -34,14 +119,16 @@
                                             <td>{{ $item->user_name }}</td>
                                             <td>{{ $item->details }}</td>
                                             <td>{{ $item->plate_number }}</td>
-                                            {{-- @dd($item->status) --}}
-                                                <td>
-                                                    @if ($item->status == 'approved')
-                                                        <span class="badge bg-success">Approved</span>
-                                                    @elseif($item->status == 'declined')
-                                                        <span class="badge bg-warning">Declined</span>
-                                                    @endif
-                                                </td>
+                                            <td>{{$item->date}}</td>
+                                            <td>
+                                                @if ($item->status == 'approved')
+                                                    <span class="badge bg-success">Approved</span>
+                                                @elseif($item->status == 'declined')
+                                                    <span class="badge bg-danger">Declined</span>
+                                                @else
+                                                    <span class="badge bg-warning">Pending</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
@@ -58,12 +145,26 @@
                                                                     </button>
                                                                 @endif
                                                         </form>
+                                                        {{-- <form action="{{ route('claims.updateStatus', $item->claim_id) }}"
+                                                            method="POST" class="claim-status-form">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <label class="switch">
+                                                                <input type="checkbox" class="tog-btn"
+                                                                    value="{{ $item->status === 'approved' ? 'declined' : 'approved' }}"
+                                                                    {{ $item->status === 'approved' ? 'checked' : '' }}>
+                                                                <div class="slider round">
+                                                                    <span class="on"></span>
+                                                                    <span class="off"></span>
+                                                                </div>
+                                                            </label>
+                                                        </form> --}}
                                                     </div>
                                                     {{-- <div class="col">
-                                                        <a href="{{ route('claim.edit', $item->claim_id) }}"
+                                                        <a href="{{ routinye('claim.edit', $item->claim_id) }}"
                                                             class="btn btn-primary btn-sm">Edit</a>
                                                     </div> --}}
-                                                        <div class="col">
+                                                    <div class="col">
                                                         <a href="{{ route('claim.show', $item->claim_id) }}"
                                                             class="btn btn-primary btn-sm">View</a>
                                                     </div>
@@ -95,4 +196,14 @@
         $('#tableData').DataTable();
     });
 </script> --}}
+    <script>
+        const togBtns = document.querySelectorAll('.tog-btn');
+        const claimStatusForms = document.querySelectorAll('.claim-status-form');
+
+        togBtns.forEach((togBtn, index) => {
+            togBtn.addEventListener('change', function() {
+                claimStatusForms[index].submit();
+            });
+        });
+    </script>
 @endpush

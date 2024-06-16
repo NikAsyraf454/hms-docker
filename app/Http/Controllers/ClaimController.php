@@ -18,9 +18,11 @@ class ClaimController extends Controller
         return view('index');
     }
 
-    public function index(){
+    public function index(Request $request){
+        $user_id = $request->session()->get('user_id');
         $claims = DB::table('claims')
             ->join('users', 'claims.staff_id', '=', 'users.id')
+            ->where('users.id', '=', $user_id)
             ->select(
                 'claims.id as claim_id',
                 'claims.details',
@@ -37,24 +39,6 @@ class ClaimController extends Controller
         // $claims = Claim::paginate(5);
 
         return view('claim.index')->with('claims', $claims);
-    }
-
-    public function indexAdmin(){
-         $claims = DB::table('claims')
-            ->join('users', 'claims.staff_id', '=', 'users.id')
-            ->select(
-                'claims.id as claim_id',
-                'claims.details',
-                'claims.amount',
-                'claims.plate_number',
-                'claims.status',
-                'claims.date',
-                'claims.payment_date',
-                'users.name as user_name',
-            )
-            ->get();
-
-        return view('claim.admin.index')->with('claims', $claims);
     }
 
     public function create(){
@@ -136,5 +120,23 @@ class ClaimController extends Controller
         $claim->save();
 
         return redirect()->back()->with('success', 'Claim status updated successfully.');
+    }
+
+    public function indexAdmin(){
+         $claims = DB::table('claims')
+            ->join('users', 'claims.staff_id', '=', 'users.id')
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.amount',
+                'claims.plate_number',
+                'claims.status',
+                'claims.date',
+                'claims.payment_date',
+                'users.name as user_name',
+            )
+            ->get();
+
+        return view('claim.admin.index')->with('claims', $claims);
     }
 }
