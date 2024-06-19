@@ -1,4 +1,5 @@
-  <!-- ======= Header ======= -->
+
+<!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
@@ -174,6 +175,7 @@
             <span class="d-none d-md-block dropdown-toggle ps-2">
               @php
                   $userName = session('user_name');
+                    $role = session('role');
               @endphp
               {{$userName}}
             </span>
@@ -182,7 +184,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{$userName}}</h6>
-              <span>Manager</span>
+              <span>{{$role}}</span>
             </li>
             <li>
               <hr class="dropdown-divider">

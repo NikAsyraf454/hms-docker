@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class ClaimController extends Controller
 {
+
     public function home(){
         // $claims = Claim::paginate(5);
 
