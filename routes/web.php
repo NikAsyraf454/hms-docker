@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,31 +18,46 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', [ClaimController::class, 'home'])->name('claim.home');
 
-// Claim Module
-Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
-Route::get('/claim/create', [ClaimController::class, 'create'])->name('claim.create');
-Route::post('/claim', [ClaimController::class, 'store'])->name('claim.store');
-Route::get('/claim/{id}', [ClaimController::class, 'show'])->name('claim.show');
-Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.edit');
-Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
-Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
+// User Permission
+Route::get('role',[UserController::class,'createRole']);
+Route::get('role-assign',[UserController::class,'assignRole']);
 
-Route::prefix('admin')->group(function () {
-    Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
-    Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
-
-});
-
-// Fleet 
-Route::prefix('fleet')->group(function(){
+Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
+    // Routes accessible only to users with the Admin role
+    // Fleet 
+    Route::prefix('fleet')->group(function(){
     Route::get('/', [FleetController::class, 'index'])->name('fleet.index');
-Route::get('/create', [FleetController::class, 'create'])->name('fleet.create');
-Route::post('/', [FleetController::class, 'store'])->name('fleet.store');
-Route::get('/{id}', [FleetController::class, 'show'])->name('fleet.show');
-Route::get('/{id}/edit', [FleetController::class, 'edit'])->name('fleet.edit');
-Route::put('/{id}', [FleetController::class, 'update'])->name('fleet.update');
-Route::delete('/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
+    Route::get('/create', [FleetController::class, 'create'])->name('fleet.create');
+    Route::post('/', [FleetController::class, 'store'])->name('fleet.store');
+    Route::get('/{id}', [FleetController::class, 'show'])->name('fleet.show');
+    Route::get('/{id}/edit', [FleetController::class, 'edit'])->name('fleet.edit');
+    Route::put('/{id}', [FleetController::class, 'update'])->name('fleet.update');
+    Route::delete('/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
+    });
+
+    // Claim Module
+    Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
+    Route::get('/claim/create', [ClaimController::class, 'create'])->name('claim.create');
+    Route::post('/claim', [ClaimController::class, 'store'])->name('claim.store');
+    Route::get('/claim/{id}', [ClaimController::class, 'show'])->name('claim.show');
+    Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.edit');
+    Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
+    Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
+
 });
+
+
+
+
+Route::middleware(['role:Admin|Manager'])->group(function () {
+    Route::prefix('manage')->group(function () {
+        Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
+        Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
+    }); 
+});
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

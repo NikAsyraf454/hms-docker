@@ -1,5 +1,8 @@
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
+    @php
+      $role = session('role');
+    @endphp
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -183,7 +186,11 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('claim.index')}}">
+        @if ($role=='Staff')
+          <a class="nav-link collapsed" href="{{route('claim.index')}}">
+        @else
+          <a class="nav-link collapsed" href="{{route('claim.indexAdmin')}}">
+        @endif
           <i class="bi bi-person"></i>
           <span>Claims</span>
         </a>
