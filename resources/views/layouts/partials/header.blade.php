@@ -176,6 +176,7 @@
               @php
                   $userName = session('user_name');
                     $role = session('role');
+                    // dd($role)
               @endphp
               {{$userName}}
             </span>

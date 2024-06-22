@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
-        $role = $user->roles;
+        $role = $user->getRoleNames()->first();
 
         // return response()->json($role);
         $request->session()->put('user_id', $user->id);
