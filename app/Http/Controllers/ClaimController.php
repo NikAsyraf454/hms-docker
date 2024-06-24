@@ -50,13 +50,13 @@ class ClaimController extends Controller
 
     public function store(Request $request){
 
-        // $request->validate([
-        // 'details' => 'required|max:255',
-        // 'amount' => 'required',
-        // 'plate_number' => 'required',
-        // 'date' => 'required',
-        // 'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        // ]);
+        $request->validate([
+        'details' => 'required|max:255',
+        'amount' => 'required',
+        'plate_number' => 'required',
+        'date' => 'required',
+        'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
 
         $data = $request->all();
 
@@ -70,7 +70,7 @@ class ClaimController extends Controller
         $claim = new Claim();
         $claim->staff_id = $request->staff_id;
         $claim->details = $request->details;
-        $claim->broker = $request->broker;
+        // $claim->broker = $request->broker;
         $claim->plate_number = $request->plate_number;
         $claim->date = $request->date;
         $claim->amount = $request->amount;

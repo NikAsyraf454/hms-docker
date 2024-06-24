@@ -36,5 +36,9 @@ class UserController extends Controller
         // You can also assign multiple roles to a user
         // $user->assignRole('Top', 'Staff');
     }
+
+    public function profile(){
+        return view('user.profile');
+    }
     
 }

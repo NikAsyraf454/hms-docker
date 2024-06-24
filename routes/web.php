@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
 Route::get('/home', [ClaimController::class, 'home'])->name('claim.home');
 
 // User Permission
+Route::get('user-profile',[UserController::class,'profile'])->name('profile');
 Route::get('role',[UserController::class,'createRole']);
 Route::get('role-assign',[UserController::class,'assignRole']);
 

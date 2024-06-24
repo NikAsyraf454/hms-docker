@@ -5,6 +5,15 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     {{-- @dd($fleet) --}}
                    
                         <h5 class="card-title">New Claim Form</h5>
@@ -18,14 +27,6 @@
                         <div class="col-12">
                         <label for="details" class="form-label">Claim Detail</label>
                         <input type="text" class="form-control" name="details" id="details">
-                        </div>
-                        <div class="col-12">
-                            <label for="details">Broker</label>
-                            <select name="broker" id="broker" class="form-select">
-                            {{-- <option selected="">Choose Broker</option> --}}
-                                <option value="Hasta">Hasta</option>
-                                <option value="Sinergi">Sinergi</option>
-                            </select>
                         </div>
                         <div class="col-12">
                         <label for="plate_number" class="form-label">Plate</label>

@@ -1,12 +1,10 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="row">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-        <section class="section">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -72,9 +70,6 @@
 
                 </div>
             </div>
-        </section>
-
-    </div>
 @endsection
 
 @push('scripts')

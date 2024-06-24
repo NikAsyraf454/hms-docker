@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("staff_id");
             $table->string("details");
-            $table->string('broker');
             $table->string('plate_number');
             $table->date('date');
             $table->string('amount');

@@ -203,13 +203,13 @@
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('password.request')}}">
           <i class="bi bi-envelope"></i>
-          <span>Contact</span>
+          <span>Forgot Pass</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
+{{--
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
