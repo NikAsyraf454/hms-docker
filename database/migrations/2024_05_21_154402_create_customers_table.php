@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('ic');
             $table->string('address');
+            $table->string('college');
+            $table->string('faculty');
             $table->timestamps();
         });
     }

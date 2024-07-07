@@ -45,17 +45,27 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
     Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
 
+  
+
 });
 
+    //Rental Module
+
+    Route::get('/rental', [RentalController::class, 'index'])->name('rental.index');
+    Route::get('/rental/create', [RentalController::class, 'create'])->name('rental.create');
+    Route::post('/rental', [RentalController::class, 'store'])->name('rental.store');
+    Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
+    Route::get('/rental/{id}/edit', [RentalController::class, 'edit'])->name('rental.edit');
+    Route::put('/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
+    Route::delete('/rental{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
 
 
-
-Route::middleware(['role:Admin|Manager'])->group(function () {
-    Route::prefix('manage')->group(function () {
-        Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
-        Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
-    }); 
-});
+    Route::middleware(['role:Admin|Manager'])->group(function () {
+        Route::prefix('manage')->group(function () {
+            Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
+            Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
+        }); 
+    });
 
 
 

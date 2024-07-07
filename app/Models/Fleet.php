@@ -24,4 +24,8 @@ class Fleet extends Model
         return $this->hasMany(Claim::class);
     }
 
+     public function rentals()
+    {
+        return $this->hasMany(Rental::class);
+    }
 }

@@ -16,5 +16,12 @@ class Customer extends Model
         'phone',
         'ic',
         'address',
+        'college',
+        'faculty'
     ];
+
+    public function rentals()
+    {
+        return $this->hasMany(Rental::class);
+    }
 }
