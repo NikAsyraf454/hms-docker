@@ -14,6 +14,7 @@ class Rental extends Model
         'customer_id',
         'staff_id',
         'fleet_id',
+        'depo_id',
         'pickup_date',
         'return_date',
         'pickup_time',
@@ -25,33 +26,6 @@ class Rental extends Model
         'rental_amount',
         'addon_amount',
         'total_amount',
-        'depo_amount',
-        'depo_date',
-        'note',
+        'staff',
     ];
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
-    public function staff()
-    {
-        return $this->belongsTo(User::class, 'staff_id');
-    }
-
-    public function fleet()
-    {
-        return $this->belongsTo(Fleet::class);
-    }
-
-     public function getFormattedPickupDateAttribute()
-    {
-        return Carbon::parse($this->pickup_date)->format('d M Y');
-    }
-
-    public function getFormattedReturnDateAttribute()
-    {
-        return Carbon::parse($this->return_date)->format('d M Y');
-    }
 }

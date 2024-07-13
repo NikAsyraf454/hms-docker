@@ -37,6 +37,7 @@ class RentalController extends Controller
 
     public function store(StoreRentalRequest $request, storeCustomerRequest $crequest){
         $customerRequest = $crequest->validated();
+        $depositRequest = $drequest->validated();
         $rentalRequest = $request->validated();
 
         // dd($rentalRequest);
@@ -48,7 +49,7 @@ class RentalController extends Controller
         if($customer){
             //store rental only
             $rentalRequest['customer_id'] = $customer->id;
-            // dd($rentalRequest);
+            // dd($rentalRequest); 
 
             $this->rentalService->storeRental($rentalRequest);
             // dd('woa kosong');

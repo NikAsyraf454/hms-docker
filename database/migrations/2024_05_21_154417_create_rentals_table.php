@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("customer_id");
             $table->unsignedBigInteger("staff_id");
             $table->unsignedBigInteger("fleet_id");
+            $table->unsignedBigInteger("depo_id");
             $table->date('pickup_date');
             $table->date('return_date');
             $table->string('pickup_time');
