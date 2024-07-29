@@ -24,39 +24,42 @@
                         <form action="{{ route('rental.store') }}" method="post">
                             @csrf
                             <div class="row">
-                                <input type="hidden" class="" id="staff_id" name="staff_id" value="{{ $userId }}">
+                                <input type="hidden" class="" id="staff_id" name="staff_id"
+                                    value="{{ $userId }}">
                                 <input type="hidden" class="" id="customer_id" name="customer_id" value="">
                                 {{-- Customer Detail --}}
                                 <div class="col-6">
                                     <h4>Customer Info</h4>
                                     <div class="col-12">
                                         <label for="name" class="form-label">Customer Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                        <input type="text" placeholder="Ahmad Irfan" class="form-control" name="name"
+                                            id="name" value="{{ old('name') }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
+                                            <input type="text" placeholder="ahmad@graduate.utm.my" class="form-control"
+                                                name="email" id="email" value="{{ old('email') }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
-                                            <input type="number" class="form-control" name="ic" id="ic" value="{{ old('ic') }}">
+                                            <input type="number" placeholder="000627101198" class="form-control"
+                                                name="ic" id="ic" value="{{ old('ic') }}">
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-6">
                                             <label for="matric" class="form-label">Matric</label>
-                                            <input type="text" class="form-control" name="matric" id="matric" value="{{ old('matric') }}">
+                                            <input type="text" placeholder="A24EC0021" class="form-control"
+                                                name="matric" id="matric" value="{{ old('matric') }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
-                                            <input type="number" class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
+                                            <input type="number" placeholder="012-3456789" class="form-control"
+                                                name="phone" id="phone" value="{{ old('phone') }}">
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-6">
                                             <label for="college" class="form-label">College </label>
-                                            <select class="form-control" name="college" id="college" value="{{ old('college') }}">
+                                            <select class="form-control" name="college" id="college"
+                                                value="{{ old('college') }}">
                                                 <option value="KRP">KRP</option>
                                                 <option value="KTF">KTF</option>
                                                 <option value="KTHO">KTHO</option>
@@ -70,7 +73,8 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="faculty" class="form-label">Faculty </label>
-                                            <select class="form-control" name="faculty" id="faculty" value="{{ old('faculty') }}">
+                                            <select class="form-control" name="faculty" id="faculty"
+                                                value="{{ old('faculty') }}">
                                                 <option value="FC">Civil Engineering</option>
                                                 <option value="FM">Mechanical Engineering</option>
                                                 <option value="FE">Electrical Engineering</option>
@@ -83,11 +87,35 @@
                                                 <option value="MJIIT">MJIIT</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-6">
                                             <label for="address" class="form-label">Address </label>
-                                            <input type="text" class="form-control" name="address" id="address" value="{{ old('address') }}">
+                                            <input type="text" class="form-control" name="address" id="address"
+                                                value="{{ old('address') }}">
+                                        </div>
+
+                                    </div>
+                                    <div class="row pt-2">
+                                        <h5>Bank Details</h5>
+                                        <div class="col-6">
+                                            <label for="bank" class="form-label">Bank</label>
+                                            <select class="form-control" name="bank" id="bank"
+                                                value="{{ old('bank') }}">
+                                                <option value="Maybank">Maybank</option>
+                                                <option value="Bank Islam">Bank Islam</option>
+                                                <option value="Bank Rakyat">Bank Rakyat</option>
+                                                <option value="Bank Muamalat">Bank Muamalat</option>
+                                                <option value="CIMB Bank">CIMB Bank</option>
+                                                <option value="UOB">UOB</option>
+                                                <option value="OCBC">OCBC</option>
+                                                <option value="Rize">Rize</option>
+                                                <option value="GXBank">GXBank</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="acc_num" class="form-label"> Account Number</label>
+                                            <input type="text" placeholder="" class="form-control" name="acc_num"
+                                                id="acc_num" value="{{ old('acc_num') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +133,8 @@
                                         </div> --}}
                                         <div class="col-6">
                                             <label for="fleet_id" class="form-label">Plate Number</label>
-                                            <select class="form-control" name="fleet_id" id="fleet_id" value="{{ old('fleet_id') }}">
+                                            <select class="form-control" name="fleet_id" id="fleet_id"
+                                                value="">
                                                 @foreach ($fleet as $car)
                                                     <option value="{{ $car->id }}">{{ $car->model }}
                                                         {{ $car->license_plate }}</option>
@@ -344,7 +373,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="note" class="form-label">Note</label>
-                                            <textarea name="note" class="form-control" id="note" cols="30" rows="5" value="{{ old('note') }}"></textarea>
+                                            <textarea name="note" class="form-control" id="note" cols="30" rows="5"
+                                                value="{{ old('note') }}"></textarea>
                                         </div>
                                         <div class="col-6">
                                             <label for="destination" class="form-label">Destination</label>
@@ -352,10 +382,8 @@
                                                 id="destination" value="{{ old('destination') }}">
                                         </div>
                                     </div>
-                                </div> {{-- Rental Detail --}}
-
-                            </div>
-                            <div class="row">
+                                    <div class="row pt-2">
+                                <h5>Payment Details</h5>
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6">
@@ -375,6 +403,9 @@
                                             <input type="number" class="form-control" name="total_amount"
                                                 id="total_amount" value="{{ old('total_amount') }}">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                         <div class="col-6">
                                             <label for="depo_amount" class="form-label">Depo Amount</label>
                                             <input type="number" class="form-control" name="depo_amount"
@@ -382,12 +413,22 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="depo_date" class="form-label">Depo Date</label>
-                                              <input type="date" class="form-control" name="depo_date"
-                                                id="depo_date" value="{{ old('depo_date') }}">
+                                            <input type="date" class="form-control" name="depo_date" id="depo_date"
+                                                value="{{ old('depo_date') }}">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="depo_status" class="form-label">Deposit Status</label>
+                                            <select class="form-control" name="depo_status" id="depo_status">
+                                                <option value="Unpaid">Unpaid</option>
+                                                <option value="Paid">Paid</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
                             </div>
+                                </div> 
+                                {{-- Rental Detail --}}
+                            </div>
+                            
                             <div class="pt-2">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>

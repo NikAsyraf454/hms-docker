@@ -23,19 +23,34 @@ class CustomerService
         return $customer->id;
     }
 
-    /**
-     * Validate the customer data.
-     *
-     * @param array $data
-     * @return array
-     */
-    // protected function validate(array $data)
-    // {
-    //     return validator($data, [
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:customers',
-    //         'phone' => 'nullable|string|max:15',
-    //         'address' => 'nullable|string|max:255',
-    //     ])->validate();
-    // }
+    public function getCustomerById($customerId)
+    {
+        return Customer::find($customerId);
+    }
+
+    public function updateCustomer($customerId, $data)
+    {
+        $customer = Customer::find($customerId);
+        if (!$customer) {
+            return null;
+        }
+        $customer->update($data);
+        return $customer;
+    }
+
+    public function deleteCustomer($customerId)
+    {
+        $customer = Customer::find($customerId);
+        if (!$customer) {
+            return null;
+        }
+        $customer->delete();
+        return $customerId;
+    }
+
+    public function listCustomer()
+    {
+        return Customer::all();
+    }
+    
 }

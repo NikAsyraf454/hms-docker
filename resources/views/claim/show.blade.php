@@ -38,36 +38,11 @@
                     <input type="number" class="form-control" name="amount" id="amount" value="{{ $claim->amount }}"
                         readonly>
                 </div>
-                {{-- <div class="col-12">
-                    <div class="image-container">
-                        <img src="{{ asset($claim->receipt) }}" alt="Receipt">
-                    </div>
-                </div> --}}
-                <div class="col-4">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                    View Receipt
-                    </button>
+
+               <div class="col-4">
+                    <a class="btn btn-primary" href="{{ asset($claim->receipt) }}" target="_blank">View</a>
                 </div>
                 
-                <div class="modal fade" id="verticalycentered" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title">Vertically Centered</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="image-container">
-                                <img src="{{ asset($claim->receipt) }}" alt="Receipt">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                        </div>
-                    </div>
-                    </div>
-                </div>
                 <div class="text-center">
                     <a href="{{ route('claim.index') }}" class="btn btn-primary">Go Back</a>
                 </div>

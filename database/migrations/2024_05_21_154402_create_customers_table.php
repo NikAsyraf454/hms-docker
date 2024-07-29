@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('college');
             $table->string('faculty');
+            $table->string('bank');
+            $table->string('acc_num');
             $table->timestamps();
         });
     }

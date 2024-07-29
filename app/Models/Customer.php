@@ -17,7 +17,9 @@ class Customer extends Model
         'ic',
         'address',
         'college',
-        'faculty'
+        'faculty',
+        'bank',
+        'acc_num'
     ];
 
     public function rentals()

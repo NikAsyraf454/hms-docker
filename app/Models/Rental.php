@@ -27,5 +27,26 @@ class Rental extends Model
         'addon_amount',
         'total_amount',
         'staff',
+        'note'
     ];
+
+     public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+     public function staff()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
+    }
+
+    public function deposit()
+    {
+        return $this->belongsTo(Deposit::class, 'depo_id');
+    }
 }

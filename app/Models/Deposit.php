@@ -17,7 +17,7 @@ class Deposit extends Model
         'updated_by'
     ];
 
-    public function rental()
+    public function rentals()
     {
         return $this->hasOne(Rental::class, 'depo_id');
     }

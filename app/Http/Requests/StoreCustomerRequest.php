@@ -30,6 +30,8 @@ class StoreCustomerRequest extends FormRequest
             'college' => 'required|string|max:255',
             'faculty' => 'required|string|max:255',
             'address' => 'nullable|string|max:255',
+            'bank' => 'required|string|max:255',
+            'acc_num' => 'required|string|max:255',
         ];
     }
 }

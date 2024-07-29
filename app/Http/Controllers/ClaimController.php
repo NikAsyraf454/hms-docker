@@ -8,6 +8,7 @@ use App\Models\Fleet;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class ClaimController extends Controller
@@ -65,6 +66,9 @@ class ClaimController extends Controller
         $file = $request->file('receipt');
         // dd($file);
         $filename = time(). '.' . $file->getClientOriginalExtension();
+        // $uniqueId = Str::uuid()->toString();
+        // $uniqueId = hashName();
+        $filename = $filename. '.' . $file->getClientOriginalExtension();
         $file->move('receipts', $filename);
 
         $claim = new Claim();
@@ -84,6 +88,13 @@ class ClaimController extends Controller
 
     public function show($id){
         $claim = Claim::find($id);
+
+        $fileUrl = asset($claim->receipt);
+        $extension = pathinfo($claim->receipt, PATHINFO_EXTENSION);
+
+        $claim->extension = $extension;
+        // return response()->json($claim);
+
         return view('claim.show', compact('claim'));
     }
 

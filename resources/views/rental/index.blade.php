@@ -29,8 +29,8 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->fleet->license_plate }}</td>
-                                            <td>{{ $item->formatted_pickup_date }} <br> {{ $item->pickup_time }}</td>
-                                            <td>{{ $item->formatted_return_date }} <br> {{ $item->return_time }}</td>
+                                            <td>{{ $item->pickup_date }} <br> {{ $item->pickup_time }}</td>
+                                            <td>{{ $item->return_date }} <br> {{ $item->return_time }}</td>
                                             <td> {{$item->payment_status}}</td>
                                             <td>{{ $item->total_amount }}</td>
                                             <td>
