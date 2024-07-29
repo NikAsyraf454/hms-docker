@@ -21,7 +21,7 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form action="{{ route('rental.store') }}" method="post">
+                        <form action="{{ route('rental.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="" id="staff_id" name="staff_id"
@@ -133,8 +133,7 @@
                                         </div> --}}
                                         <div class="col-6">
                                             <label for="fleet_id" class="form-label">Plate Number</label>
-                                            <select class="form-control" name="fleet_id" id="fleet_id"
-                                                value="">
+                                            <select class="form-control" name="fleet_id" id="fleet_id" value="">
                                                 @foreach ($fleet as $car)
                                                     <option value="{{ $car->id }}">{{ $car->model }}
                                                         {{ $car->license_plate }}</option>
@@ -383,52 +382,63 @@
                                         </div>
                                     </div>
                                     <div class="row pt-2">
-                                <h5>Payment Details</h5>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <label for="payment_status" class="form-label">Payment Status</label>
-                                            <select class="form-control" name="payment_status" id="payment_status">
-                                                <option value="Unpaid">Unpaid</option>
-                                                <option value="Paid">Paid</option>
-                                            </select>
+                                        <h5>Payment Details</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="payment_status" class="form-label">Payment Status</label>
+                                                <select class="form-control" name="payment_status" id="payment_status">
+                                                    <option value="Unpaid">Unpaid</option>
+                                                    <option value="Paid">Paid</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="rental_amount" class="form-label">Rental Amount</label>
+                                                <input type="number" class="form-control" name="rental_amount"
+                                                    id="rental_amount" value="{{ old('rental_amount') }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="total_amount" class="form-label">Total Amount</label>
+                                                <input type="number" class="form-control" name="total_amount"
+                                                    id="total_amount" value="{{ old('total_amount') }}">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inputNumber" class="col-sm col-form-label">Payment
+                                                    Proof</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" name="payment_proof" id="payment_proof" type="file" id="formFile">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <label for="rental_amount" class="form-label">Rental Amount</label>
-                                            <input type="number" class="form-control" name="rental_amount"
-                                                id="rental_amount" value="{{ old('rental_amount') }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="total_amount" class="form-label">Total Amount</label>
-                                            <input type="number" class="form-control" name="total_amount"
-                                                id="total_amount" value="{{ old('total_amount') }}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="depo_amount" class="form-label">Depo Amount</label>
+                                                <input type="number" class="form-control" name="depo_amount"
+                                                    id="depo_amount" value="{{ old('depo_amount') }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="depo_date" class="form-label">Depo Date</label>
+                                                <input type="date" class="form-control" name="depo_date"
+                                                    id="depo_date" value="{{ old('depo_date') }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="depo_status" class="form-label">Deposit Status</label>
+                                                <select class="form-control" name="depo_status" id="depo_status">
+                                                    <option value="Unpaid">Unpaid</option>
+                                                    <option value="Paid">Paid</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inputNumber" class="col-sm col-form-label">Deposit Proof</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" name="deposit_proof" id="deposit_proof" type="file" id="formFile">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                        <div class="col-6">
-                                            <label for="depo_amount" class="form-label">Depo Amount</label>
-                                            <input type="number" class="form-control" name="depo_amount"
-                                                id="depo_amount" value="{{ old('depo_amount') }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="depo_date" class="form-label">Depo Date</label>
-                                            <input type="date" class="form-control" name="depo_date" id="depo_date"
-                                                value="{{ old('depo_date') }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="depo_status" class="form-label">Deposit Status</label>
-                                            <select class="form-control" name="depo_status" id="depo_status">
-                                                <option value="Unpaid">Unpaid</option>
-                                                <option value="Paid">Paid</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                            </div>
-                                </div> 
                                 {{-- Rental Detail --}}
                             </div>
-                            
+
                             <div class="pt-2">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('amount');
             $table->string('date');
             $table->string('status');
+            $table->string('proof')->nullable();
             $table->string('return_date')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

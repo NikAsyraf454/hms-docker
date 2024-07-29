@@ -18,7 +18,7 @@
     </div> --}}
     @include('layouts.partials.footer')
     @include('layouts.partials.scripts')
-    @stack('scripts')
+    @yield('script')
    
     
 </body>

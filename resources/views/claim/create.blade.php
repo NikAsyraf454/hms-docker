@@ -63,3 +63,14 @@
 </div>
     
 @endsection
+@section('script')
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+        <script>
+        $( function() {
+            // $( "#date" ).datepicker();
+            $('#date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+        } );
+        </script>
+@endsection

@@ -12,9 +12,30 @@ class RentalService
      * @param array $data
      * @return \App\Models\Customer
      */
-    public function storeRental(array $data)
+    public function storeRental($data, $file)
     {
-       return Rental::create($data);
+        $filename = time(). '.' . $file->getClientOriginalExtension();  
+        $file->move('rentals', $filename);
+     
+        return Rental::create([
+            'customer_id' => $data['customer_id'],
+            'staff_id' => $data['staff_id'],
+            'fleet_id' => $data['fleet_id'],
+            'depo_id' => $data['depo_id'],
+            'pickup_date' => $data['pickup_date'],
+            'return_date' => $data['return_date'],
+            'pickup_time' => $data['pickup_time'],
+            'return_time' => $data['return_time'],
+            'pickup_location' => $data['pickup_location'],
+            'return_location' => $data['return_location'],
+            'destination' => $data['destination'],
+            'payment_status' => $data['payment_status'],
+            'rental_amount' => $data['rental_amount'],
+            'total_amount' => $data['total_amount'],
+            'proof' => 'rentals/'.$filename,
+            'note' => $data['note'],
+
+        ]);
     }
 
     public function getRentalById($rentalId)
@@ -45,5 +66,10 @@ class RentalService
     public function listRental()
     {
         return Rental::all();
+    }
+
+    public function addProof($file){
+        $filename = time(). '.' . $file->getClientOriginalExtension();  
+        $file->move('rentals', $filename);
     }
 }

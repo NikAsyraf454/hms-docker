@@ -38,15 +38,16 @@ class RentalController extends Controller
         return view('rental.create', compact('fleet'));
     }
 
-    public function store(StoreRentalRequest $request, storeCustomerRequest $crequest, DepositRequest $drequest){
+    public function store(Request $request,StoreRentalRequest $rrequest, storeCustomerRequest $crequest, DepositRequest $drequest){
         
         $user_id = session('user_id');
         
         $customerRequest = $crequest->validated();
         $depositRequest = $drequest->validated();
-        $rentalRequest = $request->validated();
+        $rentalRequest = $rrequest->validated();
 
-        // dd($rentalRequest);
+        $filePay = $request->file('payment_proof');
+        $fileDepo = $request->file('deposit_proof');
 
         $depositRequest['updated_by'] = $user_id;
 
@@ -54,18 +55,17 @@ class RentalController extends Controller
                     ->where('matric', $customerRequest['matric'])
                     ->first();
 
-
         if($customer){
             //store rental only
             $rentalRequest['customer_id'] = $customer->id;
-            $deposit = $this->depositService->addDeposit($depositRequest);
+            $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
             $rentalRequest['depo_id'] = $deposit->id;
 
-            $this->rentalService->storeRental($rentalRequest);
+            $this->rentalService->storeRental($rentalRequest, $filePay);
            
         }else{
             //store rental and customer
-            $deposit = $this->depositService->addDeposit($depositRequest);
+            $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
             $rentalRequest['depo_id'] = $deposit->id;
 
             $customer = $this->customerService->storeCustomer($customerRequest);
@@ -73,7 +73,7 @@ class RentalController extends Controller
             $rentalRequest['customer_id'] = $customer;
             
             // dd($rentalRequest);
-           $this->rentalService->storeRental($rentalRequest);
+           $this->rentalService->storeRental($rentalRequest, $filePay);
 
         }
     

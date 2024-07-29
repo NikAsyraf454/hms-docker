@@ -146,25 +146,25 @@
                                     <div class="row pt-2">
                                         <h5>Payment Details</h5>
                                         <div class="col-6">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="payment_status" class="form-label">Payment Status</label>
-                                                    <input type="text" class="form-control" name="payment_status"
-                                                    id="payment_status" value="{{ $rental->payment_status }}" disabled>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="rental_amount" class="form-label">Rental Amount</label>
-                                                    <input type="number" class="form-control" name="rental_amount"
-                                                        id="rental_amount" value="{{ $rental->rental_amount }}" disabled>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="total_amount" class="form-label">Total Amount</label>
-                                                    <input type="number" class="form-control" name="total_amount"
-                                                        id="total_amount" value="{{ $rental->total_amount }}" disabled>
-                                                </div>
-                                            </div>
+                                            <label for="payment_status" class="form-label">Payment Status</label>
+                                            <input type="text" class="form-control" name="payment_status"
+                                            id="payment_status" value="{{ $rental->payment_status }}" disabled>
                                         </div>
-                                        <div class="row">
+                                        <div class="col-6">
+                                            <label for="rental_amount" class="form-label">Rental Amount</label>
+                                            <input type="number" class="form-control" name="rental_amount"
+                                                id="rental_amount" value="{{ $rental->rental_amount }}" disabled>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="total_amount" class="form-label">Total Amount</label>
+                                            <input type="number" class="form-control" name="total_amount"
+                                                id="total_amount" value="{{ $rental->total_amount }}" disabled>
+                                        </div>
+                                        <div class="col-4 d-flex align-items-end">
+                                                <a class="btn btn-light" href="{{ asset($rental->proof) }}" target="_blank">View</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                             <div class="col-6">
                                                 <label for="depo_amount" class="form-label">Depo Amount</label>
                                                 <input type="number" class="form-control" name="depo_amount"
@@ -180,7 +180,9 @@
                                                <input type="date" class="form-control" name="depo_status"
                                                     id="depo_status" value="{{ $rental->deposit->status}}" disabled>
                                             </div>
-                                        </div>
+                                            <div class="col-4 d-flex align-items-end">
+                                                <a class="btn btn-light" href="{{ asset($rental->deposit->proof) }}" target="_blank">View</a>
+                                            </div>
                                     </div>
                                 </div>
                                 {{-- Rental Detail --}}

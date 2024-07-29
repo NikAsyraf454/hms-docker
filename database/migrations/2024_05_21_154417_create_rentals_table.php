@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('payment_status');
             $table->string('rental_amount');
             $table->string('total_amount');
+            $table->string('proof')->nullable();
             $table->string('note')->nullable();
             $table->foreign('depo_id')->nullable()->references('id')->on('deposits');
             $table->foreign('fleet_id')->nullable()->references('id')->on('fleets');

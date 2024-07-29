@@ -68,7 +68,7 @@ class ClaimController extends Controller
         $filename = time(). '.' . $file->getClientOriginalExtension();
         // $uniqueId = Str::uuid()->toString();
         // $uniqueId = hashName();
-        $filename = $filename. '.' . $file->getClientOriginalExtension();
+        // $filename = $filename. '.' . $file->getClientOriginalExtension();
         $file->move('receipts', $filename);
 
         $claim = new Claim();

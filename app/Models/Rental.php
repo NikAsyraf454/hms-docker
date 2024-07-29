@@ -27,7 +27,8 @@ class Rental extends Model
         'addon_amount',
         'total_amount',
         'staff',
-        'note'
+        'note',
+        'proof'
     ];
 
      public function customer()
