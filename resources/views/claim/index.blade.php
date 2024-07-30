@@ -16,21 +16,30 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Staff</th>
-                                        <th>Details</th>
-                                        <th>Plate Number</th>
+                                        <th>Category</th>
                                         <th>Status</th>
                                         <th>Payment Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                    // dd($claims)
+                                    @endphp
                                     @foreach ($claims as $item)
                                         <tr>
-                                            <td>{{ $item->claim_id }}</td>
-                                            <td>{{ $item->user_name }}</td>
-                                            <td>{{ $item->details }}</td>
-                                            <td>{{ $item->plate_number }}</td>
+                                            <td>{{ $item->id }}</td>
+                                            <td>
+                                                @if ($item->category == 'members')
+                                                        <span class="badge bg-success">Members Rental</span>
+                                                @elseif($item->category == 'extra')
+                                                    <span class="badge bg-secondary">Extra Job</span>
+                                                @elseif($item->category == 'depo')
+                                                    <span class="badge bg-info">Morning Depo</span>
+                                                @elseif($item->category == 'claims')
+                                                    <span class="badge bg-dark">Staff Claims</span>
+                                                @endif
+                                            </td>
                                                 <td>
                                                     @if ($item->status == 'approved')
                                                         <span class="badge bg-success">Approved</span>
@@ -44,15 +53,15 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="{{ route('claim.edit', $item->claim_id) }}"
+                                                        <a href="{{ route('claim.edit', $item->id) }}"
                                                             class="btn btn-primary btn-sm">Edit</a>
                                                     </div>
                                                      <div class="col">
-                                                        <a href="{{ route('claim.show', $item->claim_id) }}"
+                                                        <a href="{{ route('claim.show', $item->id) }}"
                                                             class="btn btn-primary btn-sm">Show</a>
                                                     </div>
                                                     <div class="col">
-                                                        <form action="{{ route('claim.destroy', $item->claim_id) }}"
+                                                        <form action="{{ route('claim.destroy', $item->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')

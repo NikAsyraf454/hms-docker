@@ -28,6 +28,10 @@ class User extends Authenticatable
         return $this->hasMany(Rental::class, 'staff_id');
     }
 
+    public function claims()
+    {
+        return $this->hasMany(Claim::class, 'staff_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             FleetSeeder::class,
+            // ClaimTypeSeeder::class,
             // Add other seeders here
         ]);
         

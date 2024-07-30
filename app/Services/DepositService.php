@@ -15,14 +15,19 @@ class DepositService
         // $newArray['return_date'] = $data['depo_amount'];
         // dd($newArray);
 
-        $filename = time(). '.' . $file->getClientOriginalExtension();  
-        $file->move('deposits', $filename);
+        if($file){
+            $filename = 'deposits/'.time(). '.' . $file->getClientOriginalExtension();  
+            $file->move('deposits', $filename);
+        }else{
+            $filename = null;
+        }
+
         //    return Rental::create($data);
         return Deposit::create([
             'amount' => $data['depo_amount'],
             'date' => $data['depo_date'],
             'status' => $data['depo_status'],
-            'proof' => 'deposits/'.$filename,
+            'proof' => $filename,
         ]);
 
         return Deposit::create($newArray);

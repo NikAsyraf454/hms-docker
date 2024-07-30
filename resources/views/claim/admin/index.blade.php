@@ -103,8 +103,10 @@
                             <table id="tableData" class="datatable table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
+                                        {{-- <th>ID</th> --}}
                                         <th>Staff</th>
+                                        <th>Category</th>
                                         <th>Details</th>
                                         <th>Plate Number</th>
                                         <th>Claim Date</th>
@@ -115,8 +117,20 @@
                                 <tbody>
                                     @foreach ($claims as $item)
                                         <tr>
-                                            <td>{{ $item->claim_id }}</td>
-                                            <td>{{ $item->user_name }}</td>
+                                            <td>{{$loop->index+1}}</td>
+                                            {{-- <td>{{ $item->id }}</td> --}}
+                                            <td>{{ $item->name }}</td>
+                                            <td>
+                                                @if ($item->category == 'members')
+                                                        <span class="badge bg-success">Members Rental</span>
+                                                @elseif($item->category == 'extra')
+                                                    <span class="badge bg-secondary">Extra Job</span>
+                                                @elseif($item->category == 'depo')
+                                                    <span class="badge bg-info">Morning Depo</span>
+                                                @elseif($item->category == 'claims')
+                                                    <span class="badge bg-dark">Staff Claims</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $item->details }}</td>
                                             <td>{{ $item->plate_number }}</td>
                                             <td>{{$item->date}}</td>
@@ -132,7 +146,7 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <form action="{{ route('claims.updateStatus', $item->claim_id) }}" method="POST">
+                                                        <form action="{{ route('claims.updateStatus', $item->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                                 @if ($item->status === 'approved')
@@ -165,11 +179,11 @@
                                                             class="btn btn-primary btn-sm">Edit</a>
                                                     </div> --}}
                                                     <div class="col">
-                                                        <a href="{{ route('claim.show', $item->claim_id) }}"
+                                                        <a href="{{ route('claim.show', $item->id) }}"
                                                             class="btn btn-primary btn-sm">View</a>
                                                     </div>
                                                     <div class="col">
-                                                        <form action="{{ route('claim.destroy', $item->claim_id) }}"
+                                                        <form action="{{ route('claim.destroy', $item->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
@@ -190,13 +204,15 @@
     </section>
 @endsection
 
-@push('scripts')
+@section('script')
     {{-- <script>
     $(document).ready(function() {
         $('#tableData').DataTable();
     });
 </script> --}}
     <script>
+        // $('#example').DataTable();
+
         const togBtns = document.querySelectorAll('.tog-btn');
         const claimStatusForms = document.querySelectorAll('.claim-status-form');
 
@@ -206,4 +222,4 @@
             });
         });
     </script>
-@endpush
+@endsection

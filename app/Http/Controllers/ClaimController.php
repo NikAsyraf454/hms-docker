@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Claim;
+use App\Models\ClaimType;
 use App\Models\Fleet;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Services\ClaimService;
+
 use Carbon\Carbon;
 
 class ClaimController extends Controller
 {
+    protected $claimService;
+
+    public function __construct(ClaimService $claimService){
+        $this->claimService = $claimService;
+    }
 
     public function home(){
         // $claims = Claim::paginate(5);
@@ -22,66 +30,86 @@ class ClaimController extends Controller
 
     public function index(Request $request){
         $user_id = $request->session()->get('user_id');
-        $claims = DB::table('claims')
-            ->join('users', 'claims.staff_id', '=', 'users.id')
-            ->where('users.id', '=', $user_id)
-            ->select(
-                'claims.id as claim_id',
-                'claims.details',
-                'claims.amount',
-                'claims.plate_number',
-                'claims.status',
-                'claims.date',
-                'claims.payment_date',
-                'users.name as user_name',
-            )
-            ->get();
+        //  $claims = DB::table('claims')
+        //     ->join('users', 'claims.staff_id', '=', 'users.id')
+        //     ->where('users.id', '=', $user_id)
+        //     ->select(
+        //         'claims.id as claim_id',
+        //         'claims.details',
+        //         'claims.amount',
+        //         'claims.plate_number',
+        //         'claims.status',
+        //         'claims.date',
+        //         'claims.payment_date',
+        //         'users.name as user_name',
+        //     )
+        //     ->get();
             // dd($claims);
             // return response()->json($claims);
         // $claims = Claim::paginate(5);
+        $claims = $this->claimService->listClaim($user_id);
+        // return response()->json($claims);
 
         return view('claim.index')->with('claims', $claims);
     }
 
     public function create(){
         $fleet = Fleet::all();
+        $claimType = ClaimType::all();
         // dd($fleet);
-       return view('claim.create', compact('fleet'));
+       return view('claim.create', compact('fleet','claimType'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request, $id){
+        $claim_type_id = $request->input('claim_type_id');
+        // dd($claim_type_id);
 
-        $request->validate([
-        'details' => 'required|max:255',
-        'amount' => 'required',
-        'plate_number' => 'required',
-        'date' => 'required',
-        'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        ]);
+        if($id == 'members'){
+            $data = $request->all();
 
-        $data = $request->all();
+            $data = $request->validate([
+                'rental_id' => 'required',
+                'details' => 'required',
+                'staff_id' => 'required',
+                'date' => 'required',
+            ]);
 
-        // dd($data);
+            $data['category'] = 'members';
+            // dd($data);
+            $claim = $this->claimService->storeClaimMember($data);
+            // dd($claim);
 
-        $file = $request->file('receipt');
-        // dd($file);
-        $filename = time(). '.' . $file->getClientOriginalExtension();
-        // $uniqueId = Str::uuid()->toString();
-        // $uniqueId = hashName();
-        // $filename = $filename. '.' . $file->getClientOriginalExtension();
-        $file->move('receipts', $filename);
+        }
+        if($id == 'extra'){
+            $data = $request->all();
+            $data['category'] = 'extra';
+            $claim = $this->claimService->storeClaimMember($data);
+        }
+        if($id == 'depo'){
+            $data = $request->all();
+            $data['category'] = 'depo';
+            $claim = $this->claimService->storeClaimMember($data);
+        }
+        if($id == 'claim'){
+            $request->validate([
+                'details' => 'required|max:255',
+                'amount' => 'required',
+                'plate_number' => 'required',
+                'date2' => 'required',
+                'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            ]);
 
-        $claim = new Claim();
-        $claim->staff_id = $request->staff_id;
-        $claim->details = $request->details;
-        // $claim->broker = $request->broker;
-        $claim->plate_number = $request->plate_number;
-        $claim->date = $request->date;
-        $claim->amount = $request->amount;
-        $claim->receipt = 'receipts/'. $filename;
-        $claim->save();
+            $data = $request->all();
+            
+            $data['category'] = 'claims';
 
-        // Claim::create($request->all());
+            $file = $request->file('receipt');
+            // dd($data);
+
+            $claim = $this->claimService->storeClaim($data, $file);
+            // dd($claim);
+        }
+
         return redirect()->route('claim.index')
         ->with('success', 'Claim created successfully.');
     }
@@ -122,6 +150,8 @@ class ClaimController extends Controller
         ->with('success', 'Claim deleted successfully');
     }
 
+    //Admin functions
+
     public function updateStatus(Claim $claim)
     {
         $claim->status = $claim->status === 'approved' ? 'declined' : 'approved';
@@ -137,18 +167,19 @@ class ClaimController extends Controller
     public function indexAdmin(){
          $claims = DB::table('claims')
             ->join('users', 'claims.staff_id', '=', 'users.id')
-            ->select(
-                'claims.id as claim_id',
-                'claims.details',
-                'claims.amount',
-                'claims.plate_number',
-                'claims.status',
-                'claims.date',
-                'claims.payment_date',
-                'users.name as user_name',
-            )
+            // ->select(
+            //     'claims.id as claim_id',
+            //     'claims.details',
+            //     'claims.amount',
+            //     'claims.plate_number',
+            //     'claims.status',
+            //     'claims.date',
+            //     'claims.payment_date',
+            //     'users.name as user_name',
+            // )
             ->get();
 
+            // return response()->json($claims);
         return view('claim.admin.index')->with('claims', $claims);
     }
 }

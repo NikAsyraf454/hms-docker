@@ -14,9 +14,13 @@ class RentalService
      */
     public function storeRental($data, $file)
     {
-        $filename = time(). '.' . $file->getClientOriginalExtension();  
-        $file->move('rentals', $filename);
-     
+        if($file){
+            $filename = 'rentals/'.time(). '.' . $file->getClientOriginalExtension();  
+            $file->move('rentals', $filename);
+        }else{
+            $filename = null;
+        }
+      
         return Rental::create([
             'customer_id' => $data['customer_id'],
             'staff_id' => $data['staff_id'],
@@ -32,7 +36,7 @@ class RentalService
             'payment_status' => $data['payment_status'],
             'rental_amount' => $data['rental_amount'],
             'total_amount' => $data['total_amount'],
-            'proof' => 'rentals/'.$filename,
+            'proof' => $filename,
             'note' => $data['note'],
 
         ]);

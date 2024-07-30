@@ -14,14 +14,25 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("staff_id");
+            $table->string("category");
+            // $table->unsignedBigInteger('claim_type_id');
             $table->string("details");
-            $table->string('plate_number');
+            $table->string('plate_number')->nullable();
             $table->date('date');
-            $table->string('amount');
-            $table->string('receipt');
-            $table->string('status')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('receipt')->nullable();
+
+            //Additional Details
+            $table->string('destination')->nullable(); //extra job
+            $table->string('matric')->nullable(); //depo morning
+            $table->unsignedBigInteger('rental_id')->nullable(); //depo morning & members rental
+            $table->string('commission')->nullable(); //depo morning
+            //Admin
+            $table->string('status')->default('pending');
             $table->string('payment_date')->nullable();
             $table->foreign('staff_id')->nullable()->references('id')->on('users');
+            // $table->foreign('claim_type_id')->references('id')->on('claim_types')->onDelete('cascade');
+            $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
             $table->timestamps();
         });
     }

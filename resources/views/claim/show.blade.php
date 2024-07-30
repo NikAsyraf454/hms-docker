@@ -44,7 +44,7 @@
                 </div>
                 
                 <div class="text-center">
-                    <a href="{{ route('claim.index') }}" class="btn btn-primary">Go Back</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Go Back</a>
                 </div>
             </form><!-- Vertical Form -->
 
