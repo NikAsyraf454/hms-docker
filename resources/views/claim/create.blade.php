@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container">
+        @if($errors->any())
+            {!! implode('', $errors->all('<div>:message</div>')) !!}
+        @endif
         <!-- Alert -->
         @if ($message = Session::get('success'))
         <div class="alert alert-success" role="alert">
@@ -47,8 +50,8 @@
                             type="button" role="tab" aria-controls="claim" aria-selected="false">Staff Claim</button>
                     </li>
                 </ul>
+                {{-- Member Rental --}}
                 <div class="tab-content pt-2" id="myTabContent">
-                    {{-- @dd($claimType) --}}
                     <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab">
                         <form action="{{ route('claim.store', ['id' => 'members']) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -72,6 +75,7 @@
                             </div>
                         </form>
                     </div>
+                    {{-- Morning Depo --}}
                     <div class="tab-pane fade" id="depo" role="tabpanel" aria-labelledby="depo-tab">
                         <form action="{{ route('claim.store', ['id' => 'depo']) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -81,6 +85,14 @@
                                 <label for="rental_id" class="form-label">Rental ID</label>
                                 <input type="number" class="form-control" name="rental_id" id="rental_id">
                             </div>
+                            {{-- <div class="col-6">
+                                <label for="plate_number" class="form-label">Plate</label>
+                                <select class="form-control" name="plate_number" id="plate_number">
+                                    @foreach ($fleet as $car)
+                                        <option value="{{ $car->license_plate }}">{{ $car->license_plate }}</option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
                             <div class="col-6">
                                 <label for="amount" class="form-label">Deduction</label>
                                 <input type="number" class="form-control" placeholder="RM" name="amount" id="amount">
@@ -99,6 +111,7 @@
                             </div>
                         </form>
                     </div>
+                    {{-- Extra Jobs --}}
                     <div class="tab-pane fade" id="extra" role="tabpanel" aria-labelledby="extra-tab">
                       <form action="{{ route('claim.store', ['id' => 'extra']) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -115,12 +128,16 @@
                                 {{-- <input type="text" class="form-control" name="plate_number" id="plate_number" > --}}
                             </div>
                             <div class="col-6">
-                                <label for="details" class="form-label">Destination</label>
+                                <label for="details" class="form-label">Details</label>
                                 <input type="text" class="form-control" name="details" id="details">
                             </div>
                             <div class="col-6">
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" name="destination" id="destination">
+                            </div>
+                            <div class="col-6">
                                 <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control date" name="date" id="date">
+                                <input type="date" class="form-control" name="date-extra" id="date-extra">
                             </div>
                             <div class="col-6">
                                 <label for="time" class="form-label">Time</label>
@@ -136,6 +153,7 @@
                             </div>
                         </form>
                     </div>
+                    {{-- Staff Claim --}}
                     <div class="tab-pane fade" id="claim" role="tabpanel" aria-labelledby="claim-tab">
                         <form action="{{ route('claim.store', ['id'=>'claim']) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -154,7 +172,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control date" name="date" id="date">
+                                <input type="date" class="form-control" name="date-claim" id="date-claim">
                             </div>
                             <div class="col-6">
                                 <label for="amount" class="form-label">Amount</label>
@@ -209,10 +227,17 @@
             $('.date').datepicker({
                 dateFormat: 'yy-mm-dd'
             }).val();
+
+            $('#date-extra').datepicker({
+                 dateFormat: 'yy-mm-dd'
+            }).val();
             
-            // $('#date2').datepicker({
-            //     dateFormat: 'yy-mm-dd'
-            // }).val();
+            $('#date-claim').datepicker({
+                 dateFormat: 'yy-mm-dd'
+            }).val();
+
+             
+            
         });
     </script>
 @endsection

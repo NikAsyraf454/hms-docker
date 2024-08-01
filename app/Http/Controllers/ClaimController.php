@@ -22,33 +22,26 @@ class ClaimController extends Controller
         $this->claimService = $claimService;
     }
 
-    public function home(){
-        // $claims = Claim::paginate(5);
-
-        return view('index');
-    }
-
     public function index(Request $request){
         $user_id = $request->session()->get('user_id');
-        //  $claims = DB::table('claims')
-        //     ->join('users', 'claims.staff_id', '=', 'users.id')
-        //     ->where('users.id', '=', $user_id)
-        //     ->select(
-        //         'claims.id as claim_id',
-        //         'claims.details',
-        //         'claims.amount',
-        //         'claims.plate_number',
-        //         'claims.status',
-        //         'claims.date',
-        //         'claims.payment_date',
-        //         'users.name as user_name',
-        //     )
-        //     ->get();
-            // dd($claims);
-            // return response()->json($claims);
-        // $claims = Claim::paginate(5);
-        $claims = $this->claimService->listClaim($user_id);
+        $claims = DB::table('claims')
+            ->join('users', 'claims.staff_id', '=', 'users.id')
+            ->where('users.id', '=', $user_id)
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.category',
+                'claims.amount',
+                'claims.plate_number',
+                'claims.status',
+                'claims.date',
+                'claims.payment_date',
+                'users.name as user_name',
+            )
+            ->get();
         // return response()->json($claims);
+        // $claims = Claim::paginate(5);
+        // $claims = $this->claimService->listClaim($user_id);
 
         return view('claim.index')->with('claims', $claims);
     }
@@ -75,14 +68,17 @@ class ClaimController extends Controller
             ]);
 
             $data['category'] = 'members';
-            // dd($data);
             $claim = $this->claimService->storeClaimMember($data);
             // dd($claim);
 
         }
         if($id == 'extra'){
             $data = $request->all();
+            $date = $data['date-extra'];
+            $time = $data['time'];
+            $data['date'] = $date.' '. $time;
             $data['category'] = 'extra';
+
             $claim = $this->claimService->storeClaimMember($data);
         }
         if($id == 'depo'){
@@ -91,11 +87,12 @@ class ClaimController extends Controller
             $claim = $this->claimService->storeClaimMember($data);
         }
         if($id == 'claim'){
+           
             $request->validate([
                 'details' => 'required|max:255',
                 'amount' => 'required',
                 'plate_number' => 'required',
-                'date2' => 'required',
+                'date-claim' => 'required',
                 'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
             ]);
 
@@ -104,24 +101,43 @@ class ClaimController extends Controller
             $data['category'] = 'claims';
 
             $file = $request->file('receipt');
-            // dd($data);
 
             $claim = $this->claimService->storeClaim($data, $file);
-            // dd($claim);
         }
 
         return redirect()->route('claim.index')
         ->with('success', 'Claim created successfully.');
     }
 
-    public function show($id){
+    public function show($id,$category){
+        
         $claim = Claim::find($id);
-
-        $fileUrl = asset($claim->receipt);
-        $extension = pathinfo($claim->receipt, PATHINFO_EXTENSION);
-
-        $claim->extension = $extension;
+        $rental_id = $claim->rental_id;
         // return response()->json($claim);
+
+        switch($category){
+            case 'members':{
+                $claim = $this->claimService->getMember($rental_id);
+                $claim = $claim[0];
+                $customer_id = $claim->customer_id;
+                $customer = $this->claimService->getCustomer($customer_id);
+                // return response()->json($customer);
+                return view('claim.show', compact('claim','customer','category'));
+            }
+            case 'claims':
+                // dd($claim);
+                return view('claim.show', compact('claim','category'));
+            case 'extra':
+                return view('claim.show', compact('claim','category'));
+            case 'depo':
+                return view('claim.show', compact('claim','category'));
+        };
+       
+        // dd($claim);
+        // $fileUrl = asset($claim->receipt);
+        // $extension = pathinfo($claim->receipt, PATHINFO_EXTENSION);
+
+        // $claim->extension = $extension;
 
         return view('claim.show', compact('claim'));
     }
@@ -167,16 +183,17 @@ class ClaimController extends Controller
     public function indexAdmin(){
          $claims = DB::table('claims')
             ->join('users', 'claims.staff_id', '=', 'users.id')
-            // ->select(
-            //     'claims.id as claim_id',
-            //     'claims.details',
-            //     'claims.amount',
-            //     'claims.plate_number',
-            //     'claims.status',
-            //     'claims.date',
-            //     'claims.payment_date',
-            //     'users.name as user_name',
-            // )
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.amount',
+                'claims.category',
+                'claims.plate_number',
+                'claims.status',
+                'claims.date',
+                'claims.payment_date',
+                'users.name as user_name',
+            )
             ->get();
 
             // return response()->json($claims);

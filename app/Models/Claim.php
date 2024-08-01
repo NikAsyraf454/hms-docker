@@ -32,14 +32,13 @@ class Claim extends Model
         return $this->belongsTo(Fleet::class);
     }
 
-
-    // public function claimType()
-    // {
-    //     return $this->belongsTo(ClaimType::class);
-    // }
-
     public function staff()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function rental()
+    {
+        return $this->belongsTo(Rental::class);
     }
 }

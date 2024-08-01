@@ -22,7 +22,7 @@ class ClaimService
         $claim->staff_id = $data['staff_id'];
         $claim->details = $data['details'];
         $claim->plate_number = $data['plate_number'];
-        $claim->date = $data['date2'];
+        $claim->date = $data['date-claim'];
         $claim->amount = $data['amount'];
         $claim->category = $data['category'];
         $claim->receipt = 'receipts/'. $filename;
@@ -75,6 +75,45 @@ class ClaimService
 
         // return Claim::with('staff:id,name')->where('id',$user_id);
         // $claim = Claim::with('staff:id,name')->get();
+    }
+
+    public function getMember($id){
+         $claim = DB::table('claims')
+            ->join('rentals', 'claims.rental_id', '=', 'rentals.id')
+            ->where('rentals.id', '=', $id)
+            ->select(
+                'claims.id as claim_id',
+                'claims.details',
+                'claims.category',
+                'claims.amount',
+                'claims.plate_number',
+                'claims.status',
+                'claims.date',
+                'claims.payment_date',
+                'rentals.customer_id',
+                'rentals.pickup_date',
+                'rentals.return_date',
+                'rentals.rental_amount',
+            )
+            ->get();
+
+            return $claim;
+    }   
+
+    public function getCustomer($customer_id){
+        // Second query to get customer details
+        $customer = DB::table('customers')
+            ->where('id', '=', $customer_id)
+            ->select(
+                'id',
+                'name',
+                'email',
+                'phone',
+                'address'
+            )
+            ->first(); 
+
+        return $customer;
     }
     
 }

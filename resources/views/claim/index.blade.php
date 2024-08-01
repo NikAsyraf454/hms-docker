@@ -28,7 +28,7 @@
                                     @endphp
                                     @foreach ($claims as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->claim_id }}</td>
                                             <td>
                                                 @if ($item->category == 'members')
                                                         <span class="badge bg-success">Members Rental</span>
@@ -53,15 +53,15 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="{{ route('claim.edit', $item->id) }}"
+                                                        <a href="{{ route('claim.edit', $item->claim_id) }}"
                                                             class="btn btn-primary btn-sm">Edit</a>
                                                     </div>
                                                      <div class="col">
-                                                        <a href="{{ route('claim.show', $item->id) }}"
+                                                        <a href="{{ route('claim.show', ['id'=>$item->claim_id,'category'=>$item->category]) }}"
                                                             class="btn btn-primary btn-sm">Show</a>
                                                     </div>
                                                     <div class="col">
-                                                        <form action="{{ route('claim.destroy', $item->id) }}"
+                                                        <form action="{{ route('claim.destroy', $item->claim_id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')

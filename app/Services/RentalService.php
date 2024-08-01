@@ -42,13 +42,11 @@ class RentalService
         ]);
     }
 
-    public function getRentalById($rentalId)
-    {
+    public function getRentalById($rentalId){
         return Rental::with('customer','staff:id,name','fleet:id,model,license_plate','deposit' )->find($rentalId);
     }
 
-    public function updateRental($rentalId, $data)
-    {
+    public function updateRental($rentalId, $data){
         $rental = Rental::find($rentalId);
         if (!$rental) {
             return null;
@@ -57,8 +55,7 @@ class RentalService
         return $rental;
     }
 
-    public function deleteRental($rentalId)
-    {
+    public function deleteRental($rentalId){
         $rental = Rental::find($rentalId);
         if (!$rental) {
             return null;
@@ -67,8 +64,7 @@ class RentalService
         return $rentalId;
     }
 
-    public function listRental()
-    {
+    public function listRental(){
         return Rental::all();
     }
 

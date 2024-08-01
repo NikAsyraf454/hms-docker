@@ -40,7 +40,7 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
     Route::get('/claim/create', [ClaimController::class, 'create'])->name('claim.create');
     Route::post('/claim/{id}', [ClaimController::class, 'store'])->name('claim.store');
-    Route::get('/claim/{id}', [ClaimController::class, 'show'])->name('claim.show');
+    Route::get('/claim/{id}/{category}', [ClaimController::class, 'show'])->name('claim.show');
     Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.edit');
     Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
     Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
