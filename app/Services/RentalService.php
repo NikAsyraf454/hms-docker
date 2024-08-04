@@ -92,6 +92,17 @@ class RentalService
         $kiri = $this->addInspectPhoto($gambar[2]);
         $kanan = $this->addInspectPhoto($gambar[3]);
 
+        if(isset($gambar[4])){
+            $add1 = $this->addInspectPhoto($gambar[4]);
+            $input['img_add1'] = $add1; 
+
+        }
+        if(isset($gambar[5])){
+            $add2 = $this->addInspectPhoto($gambar[5]);
+            $input['img_add2'] = $add2; 
+
+        }
+
         $input['img_front'] = $depan; 
         $input['img_back'] = $belakang; 
         $input['img_left'] = $kiri; 
