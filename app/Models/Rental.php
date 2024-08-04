@@ -50,4 +50,9 @@ class Rental extends Model
     {
         return $this->belongsTo(Deposit::class, 'depo_id');
     }
+
+    public function inspection()
+    {
+        return $this->hasMany(Inspection::class);
+    }
 }

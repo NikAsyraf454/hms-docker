@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Rental;
+use App\Models\Inspection;
 
 class RentalService
 {
@@ -12,8 +13,7 @@ class RentalService
      * @param array $data
      * @return \App\Models\Customer
      */
-    public function storeRental($data, $file)
-    {
+    public function storeRental($data, $file){
         if($file){
             $filename = 'rentals/'.time(). '.' . $file->getClientOriginalExtension();  
             $file->move('rentals', $filename);
@@ -71,5 +71,32 @@ class RentalService
     public function addProof($file){
         $filename = time(). '.' . $file->getClientOriginalExtension();  
         $file->move('rentals', $filename);
+    }
+
+    public function addInspectPhoto($file){
+        $filename = 'pre'.time(). '.' . $file->getClientOriginalExtension();  
+        $file->move('inspections', $filename);
+
+        return $filename;
+    }
+
+    public function storeInspection($input,$gambar){
+        // foreach($gambar as $g){
+        //     if(!empty($g)){
+        //         $filename = $this->addInspectPhoto($g);
+        //     }
+        // }
+        
+        $depan = $this->addInspectPhoto($gambar[0]);
+        $belakang = $this->addInspectPhoto($gambar[1]);
+        $kiri = $this->addInspectPhoto($gambar[2]);
+        $kanan = $this->addInspectPhoto($gambar[3]);
+
+        $input['img_front'] = $depan; 
+        $input['img_back'] = $belakang; 
+        $input['img_left'] = $kiri; 
+        $input['img_right'] = $kanan; 
+
+        return Inspection::create($input);
     }
 }

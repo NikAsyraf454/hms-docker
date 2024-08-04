@@ -66,16 +66,24 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
         Route::delete('/{id}', [MaintenanceController::class, 'destroy'])->name('maintenance.destroy');
     });
 
+    //Rental Module
+    Route::prefix('rental')->group(function(){
+        Route::get('/', [RentalController::class, 'index'])->name('rental.index');
+        Route::get('/create', [RentalController::class, 'create'])->name('rental.create');
+        Route::post('/', [RentalController::class, 'store'])->name('rental.store');
+        Route::get('/{id}', [RentalController::class, 'show'])->name('rental.show');
+        Route::get('/{id}/edit', [RentalController::class, 'edit'])->name('rental.edit');
+        Route::put('/{id}', [RentalController::class, 'update'])->name('rental.update');
+        Route::delete('/{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
+
+        Route::get('/inspection/create/{id}', [RentalController::class, 'displayForm'])->name('rental.inspection.create');
+        Route::post('/inspection', [RentalController::class, 'submitForm'])->name('rental.inspection.store');
+    });
+    
+
 });
 
-    //Rental Module
-    Route::get('/rental', [RentalController::class, 'index'])->name('rental.index');
-    Route::get('/rental/create', [RentalController::class, 'create'])->name('rental.create');
-    Route::post('/rental', [RentalController::class, 'store'])->name('rental.store');
-    Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
-    Route::get('/rental/{id}/edit', [RentalController::class, 'edit'])->name('rental.edit');
-    Route::put('/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
-    Route::delete('/rental{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
+    
 
     Route::prefix('deposit')->group(function(){
         Route::get('/', [DepositController::class, 'index'])->name('deposit.index');
@@ -94,10 +102,10 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
         }); 
     });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 
 require __DIR__.'/auth.php';

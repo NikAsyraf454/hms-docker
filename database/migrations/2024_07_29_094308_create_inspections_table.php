@@ -13,13 +13,20 @@ return new class extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
-            $table->string('parts');
-            $table->string('image');
-            $table->string('mileage');
-            $table->string('fuel');
-            $table->string('remarks');
-            $table->string('PIC');
+            $table->unsignedBigInteger('rental_id');
+            $table->string('parts')->nullable();
+            $table->string('mileage')->nullable();
+            $table->string('fuel')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('img_front')->nullable();
+            $table->string('img_back')->nullable();
+            $table->string('img_left')->nullable();
+            $table->string('img_right')->nullable();
+            $table->string('img_add1')->nullable();
+            $table->string('img_add2')->nullable();
+            $table->string('PIC')->nullable();
             $table->string('staff');
+            $table->foreign('rental_id')->nullable()->references('id')->on('rentals');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Http\Requests\DepositRequest;
 use App\Models\Rental;
 use App\Models\Customer;
 use App\Models\Fleet;
+use App\Models\Inspection;
 
 use App\Services\CustomerService;
 use App\Services\RentalService;
@@ -106,4 +107,81 @@ class RentalController extends Controller
         return redirect()->route('rental.index')
         ->with('success', 'Rental deleted successfully');
     }
+
+    public function displayForm($id){
+        
+        return view('rental.inspection-form', compact('id'));
+    }
+
+    public function submitForm(Request $request){
+        $request->validate([
+            'parts' => 'required',
+            'parts' => 'required',
+            'mileage'=>'required',
+            'fuel'=>'required',
+            'remarks'=>'required',
+        ]);
+
+        $front = $request->file('img_front');
+        $back = $request->file('img_back');
+        $left = $request->file('img_left');
+        $right = $request->file('img_right');
+        $add1 = $request->file('img_add1');
+        $add2 = $request->file('img_add2');
+
+        $gambar = [$front, $back, $left, $right];
+
+        // Check if $add1 is not null
+        if ($add1 !== null) {
+            $gambar[] = $add1;
+        }
+
+        // Check if $add2 is not null
+        if ($add2 !== null) {
+            $gambar[] = $add2;
+        }
+
+
+        $input = $request->all();
+        // dd($input);
+
+        $result = $this->rentalService->storeInspection($input,$gambar);
+
+        // dd($result);
+        return redirect()->route('rental.index')
+        ->with('success', 'Inpespection form created');
+
+        // if($request->hasFile('image')){
+        //     // $allowedfileExtension=['pdf','jpg','png','docx'];
+        //     // $files = $request->file('image');
+
+            
+        //     // $barang;
+        //     //Loop for image
+        //     // foreach($files as $file){
+        //     //     $filename = $file->getClientOriginalName();
+        //     //     $extension = $file->getClientOriginalExtension();
+        //     //     $check=in_array($extension,$allowedfileExtension);
+
+        //     //     if($check){
+        //     //         $filenama = $filename . $extension;
+        //     //         $barang['file'] = $filenama;
+        //     //         $file->move('inspections', $filenama);
+
+        //     //         foreach ($files as $photo) {
+        //     //             $photo->move('inspections', $filename);
+        //     //         }
+        //     //         // echo "Upload Successfully";
+        //     //     }
+        //     // }
+        //     Inspection::create([
+        //         'staff' => $data['staff_id'],
+        //         'rental_id' => '1',
+        //         'image' => $barang['file']
+        //     ]);
+        // }
+        // echo "Upload Successfully";
+        
+    }
 }
+

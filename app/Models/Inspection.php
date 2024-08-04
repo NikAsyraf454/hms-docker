@@ -16,6 +16,19 @@ class Inspection extends Model
         'fuel',
         'remarks',
         'PIC',
-        'staff',
+        'staff_id',
+        'rental_id',
+        'img_front',
+        'img_back',
+        'img_left',
+        'img_right',
+        'img_add1',
+        'img_add2',
+
     ];
+
+    public function rental()
+    {
+        return $this->belongsTo(Rental::class);
+    }
 }
