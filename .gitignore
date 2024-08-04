@@ -19,3 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 public/receipts
+public/rentals
+public/inspections
+public/deposits
+public/receipts
