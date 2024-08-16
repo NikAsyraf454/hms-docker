@@ -15,6 +15,7 @@ class Rental extends Model
         'staff_id',
         'fleet_id',
         'depo_id',
+        'payment_id',
         'pickup_date',
         'return_date',
         'pickup_time',
@@ -28,7 +29,6 @@ class Rental extends Model
         'total_amount',
         'staff',
         'note',
-        'proof'
     ];
 
      public function customer()
@@ -49,6 +49,11 @@ class Rental extends Model
     public function deposit()
     {
         return $this->belongsTo(Deposit::class, 'depo_id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 
     public function inspection()

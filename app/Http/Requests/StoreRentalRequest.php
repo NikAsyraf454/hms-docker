@@ -23,6 +23,7 @@ class StoreRentalRequest extends FormRequest
     {
         return [
             'fleet_id' => 'required|string|max:255',
+            // 'matric' => 'required',
             // 'pickup_date' => 'required|date|after_or_equal:today',
             'pickup_date' => 'required|date',
             // 'return_date' => 'required|date|after_or_equal:pickup_date',
@@ -31,14 +32,12 @@ class StoreRentalRequest extends FormRequest
             'return_time' => 'required',
             'pickup_location' => 'required|string|max:255',
             'return_location' => 'required|string|max:255',
-            'note' => 'required|string|max:255',
+            // 'note' => 'required|string|max:255',
             'destination' => 'required|string|max:255',
-            'payment_status' => 'required',
-            'rental_amount' => 'required',
-            'total_amount' => 'nullable',
+            // 'payment_status' => 'required',
+            // 'rental_amount' => 'required',
+            // 'total_amount' => 'nullable',
             'staff_id' => 'required',
-            'bank' => 'required',
-            'acc_num' => 'required',
         ];
     }
 }

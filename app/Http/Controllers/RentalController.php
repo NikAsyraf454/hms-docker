@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRentalRequest;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\DepositRequest;
+use App\Http\Requests\PaymentRequest;
 use App\Models\Rental;
 use App\Models\Customer;
 use App\Models\Fleet;
@@ -12,6 +13,7 @@ use App\Models\Inspection;
 use App\Services\CustomerService;
 use App\Services\RentalService;
 use App\Services\DepositService;
+use App\Services\PaymentService;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +22,11 @@ class RentalController extends Controller
 {
     protected $customerService;
 
-    public function __construct(CustomerService $customerService, RentalService $rentalService, DepositService $depositService){
+    public function __construct(CustomerService $customerService, RentalService $rentalService, DepositService $depositService, PaymentService $paymentService){
         $this->customerService = $customerService;
         $this->rentalService = $rentalService;
         $this->depositService = $depositService;
+        $this->paymentService = $paymentService;
     }
 
     public function index(){
@@ -39,13 +42,14 @@ class RentalController extends Controller
         return view('rental.create', compact('fleet'));
     }
 
-    public function store(Request $request,StoreRentalRequest $rrequest, storeCustomerRequest $crequest, DepositRequest $drequest){
+    public function store(Request $request,StoreRentalRequest $rrequest, storeCustomerRequest $crequest, DepositRequest $drequest, PaymentRequest $prequest){
         
         $user_id = session('user_id');
         
         $customerRequest = $crequest->validated();
         $depositRequest = $drequest->validated();
         $rentalRequest = $rrequest->validated();
+        $paymentRequest = $prequest->validated();
 
         $filePay = $request->file('payment_proof');
         $fileDepo = $request->file('deposit_proof');
@@ -60,21 +64,29 @@ class RentalController extends Controller
             //store rental only
             $rentalRequest['customer_id'] = $customer->id;
             $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
-            $rentalRequest['depo_id'] = $deposit->id;
+            $payment = $this->paymentService->storePayment($paymentRequest, $filePay);
 
-            $this->rentalService->storeRental($rentalRequest, $filePay);
+            $rentalRequest['depo_id'] = $deposit->id;
+            $rentalRequest['payment_id'] = $payment->id;
+            // dd($rentalRequest['payment_id']);
+
+            $this->rentalService->storeRental($rentalRequest);
            
         }else{
             //store rental and customer
             $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
+            $payment = $this->paymentService->storePayment($paymentRequest, $filePay);
+
             $rentalRequest['depo_id'] = $deposit->id;
+            $rentalRequest['payment_id'] = $payment->id;
+            // dd($rentalRequest['payment_id']);
 
             $customer = $this->customerService->storeCustomer($customerRequest);
 
             $rentalRequest['customer_id'] = $customer;
             
             // dd($rentalRequest);
-           $this->rentalService->storeRental($rentalRequest, $filePay);
+           $this->rentalService->storeRental($rentalRequest);
 
         }
     

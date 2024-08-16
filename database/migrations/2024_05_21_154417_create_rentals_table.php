@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("staff_id");
             $table->unsignedBigInteger("fleet_id");
             $table->unsignedBigInteger("depo_id");
+            $table->unsignedBigInteger("payment_id");
             $table->date('pickup_date');
             $table->date('return_date');
             $table->string('pickup_time');
@@ -24,11 +25,8 @@ return new class extends Migration
             $table->string('pickup_location');
             $table->string('return_location');
             $table->string('destination');
-            $table->string('payment_status');
-            $table->string('rental_amount');
-            $table->string('total_amount');
-            $table->string('proof')->nullable();
             $table->string('note')->nullable();
+            $table->foreign('payment_id')->nullable()->references('id')->on('payments');
             $table->foreign('depo_id')->nullable()->references('id')->on('deposits');
             $table->foreign('fleet_id')->nullable()->references('id')->on('fleets');
             $table->foreign('staff_id')->nullable()->references('id')->on('users');

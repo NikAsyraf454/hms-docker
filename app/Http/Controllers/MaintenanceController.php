@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MaintenanceRecord;
 use Illuminate\Http\Request;
 
-class MaintenanceRecordController extends Controller
+class MaintenanceController extends Controller
 {
     /**
      * Display a listing of the resource.

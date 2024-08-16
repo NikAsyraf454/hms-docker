@@ -32,18 +32,18 @@
                                     <h4>Customer Info</h4>
                                     <div class="col-12">
                                         <label for="name" class="form-label">Customer Name</label>
-                                        <input type="text" placeholder="Ahmad Irfan" class="form-control" name="name"
-                                            id="name" value="{{ old('name') }}">
+                                        <input type="text" placeholder="Customer Name" class="form-control"
+                                            name="name" id="name" value="{{ old('name') }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" placeholder="ahmad@graduate.utm.my" class="form-control"
+                                            <input type="text" placeholder="email@gmail.com" class="form-control"
                                                 name="email" id="email" value="{{ old('email') }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
-                                            <input type="number" placeholder="000627101198" class="form-control"
+                                            <input type="number" placeholder="000000110000" class="form-control"
                                                 name="ic" id="ic" value="{{ old('ic') }}">
                                         </div>
                                         <div class="col-6">
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
-                                            <input type="number" placeholder="012-3456789" class="form-control"
+                                            <input type="number" placeholder="0123456789" class="form-control"
                                                 name="phone" id="phone" value="{{ old('phone') }}">
                                         </div>
                                         <div class="col-6">
@@ -116,6 +116,11 @@
                                             <label for="acc_num" class="form-label"> Account Number</label>
                                             <input type="text" placeholder="" class="form-control" name="acc_num"
                                                 id="acc_num" value="{{ old('acc_num') }}">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="acc_num_name" class="form-label"> Account Owner</label>
+                                            <input type="text" placeholder="" class="form-control"
+                                                name="acc_num_name" id="acc_num_name" value="{{ old('acc_num_name') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -387,14 +392,20 @@
                                             <div class="col-6">
                                                 <label for="payment_status" class="form-label">Payment Status</label>
                                                 <select class="form-control" name="payment_status" id="payment_status">
-                                                    <option value="Unpaid">Unpaid</option>
-                                                    <option value="Paid">Paid</option>
+                                                    <option value="unpaid">Unpaid</option>
+                                                    <option value="paid">Paid</option>
                                                 </select>
                                             </div>
                                             <div class="col-6">
-                                                <label for="rental_amount" class="form-label">Rental Amount</label>
-                                                <input type="number" class="form-control" name="rental_amount"
-                                                    id="rental_amount" value="{{ old('rental_amount') }}">
+                                                <label for="rental_amount" class="form-label">Rental Amount</l abel>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">RM</span>
+                                                        <input type="number" name="rental_amount" id="rental_amount"
+                                                            class="form-control" placeholder="Rental Amount"
+                                                            aria-label="Rental Amount" aria-describedby="basic-addon1">
+                                                    </div>
+                                                    {{-- <input type="number" class="form-control" name="rental_amount"
+                                                    id="rental_amount" value="{{ old('rental_amount') }}"> --}}
                                             </div>
                                             <div class="col-6">
                                                 <label for="total_amount" class="form-label">Total Amount</label>
@@ -405,7 +416,8 @@
                                                 <label for="inputNumber" class="col-sm col-form-label">Payment
                                                     Proof</label>
                                                 <div class="col-sm-10">
-                                                    <input class="form-control" name="payment_proof" id="payment_proof" type="file" id="formFile">
+                                                    <input class="form-control" name="payment_proof" id="payment_proof"
+                                                        type="file" id="formFile">
                                                 </div>
                                             </div>
                                         </div>
@@ -428,9 +440,11 @@
                                                 </select>
                                             </div>
                                             <div class="col-12">
-                                                <label for="inputNumber" class="col-sm col-form-label">Deposit Proof</label>
+                                                <label for="inputNumber" class="col-sm col-form-label">Deposit
+                                                    Proof</label>
                                                 <div class="col-sm-10">
-                                                    <input class="form-control" name="deposit_proof" id="deposit_proof" type="file" id="formFile">
+                                                    <input class="form-control" name="deposit_proof" id="deposit_proof"
+                                                        type="file" id="formFile">
                                                 </div>
                                             </div>
                                         </div>
@@ -452,4 +466,65 @@
 
     </div>
 
+@endsection
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script>
+        $(document).ready(function() {
+            $('#name').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: '{{ route('customers.autocomplete') }}',
+                        dataType: 'json',
+                        data: {
+                            query: request.term
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            response($.map(data, function(item) {
+                                return {
+                                    label: item.name + ' (' + item.matric + ')',
+                                    value: item.name,
+                                    id: item.id,
+                                    email: item.email,
+                                    ic: item.ic,
+                                    matric: item.matric,
+                                    phone: item.phone,
+                                    college: item.college,
+                                    faculty: item.faculty,
+                                    address: item.address,
+                                    bank: item.bank,
+                                    acc_num: item.acc_num,
+                                    acc_num_name: item.acc_num_name,
+                                };
+                            }));
+                        }
+                    });
+                },
+                select: function(event, ui) {
+                    //set values to input
+                    $('#name').val(ui.item.value);
+                    $('#customer_id').val(ui.item.id);
+                    // $('#ic').val(ui.item.ic);
+                    $('#ic').val(Number(ui.item.ic));
+                    $('#matric').val(ui.item.matric);
+                    $('#email').val(ui.item.email);
+                    $('#phone').val(ui.item.phone);
+                    $('#college').val(ui.item.college);
+                    $('#faculty').val(ui.item.faculty);
+                    $('#address').val(ui.item.address);
+                    $('#bank').val(ui.item.bank);
+                    $('#acc_num_name').val(ui.item.acc_num_name);
+                    $('#acc_num').val(ui.item.acc_num);
+                    return false;
+                },
+                minLength: 2,
+            });
+        });
+    </script>
+    <script>
+        console.log('hehe');
+    </script>
 @endsection

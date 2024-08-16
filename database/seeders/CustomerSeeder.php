@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Customer;
 
 class CustomerSeeder extends Seeder
 {
@@ -12,6 +13,46 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Customer::create([
+            'name' => 'Adriana Aina',
+            'matric' => 'A19EC0001',
+            'email' => 'adrianaaina322@gmail.com',
+            'phone' => '01125709642',
+            'ic' => ' 000123456789',
+            'address' => 'Blok H1',
+            'college' => 'K9',
+            'faculty' => 'FSSH',
+            'bank' => 'Maybank',
+            'acc_num' => '12342342434',
+            'acc_num_name' => 'Adriana Aina',
+        ]);
+
+        Customer::create([
+            'name' => 'Ahmad Najwan Bin Lawrence',
+            'matric' => 'A19EA0001',
+            'email' => 'farwanajwan@gmail.com',
+            'phone' => '60198599544',
+            'ic' => ' 000123456789',
+            'address' => 'Blok MA1',
+            'college' => 'KTDI',
+            'faculty' => 'FC',
+            'bank' => 'Maybank',
+            'acc_num' => '151516162626',
+            'acc_num_name' => 'Ahmad Najwan',
+        ]);
+
+        Customer::create([
+            'name' => 'Ahmad Shahril Adham Bin Mustafa',
+            'matric' => 'A19EM0001',
+            'email' => 'shahriladham77@gmail.com',
+            'phone' => ' 60199755463',
+            'ic' => ' 000123456789',
+            'address' => 'Blok MA1',
+            'college' => 'KTDI',
+            'faculty' => 'FC',
+            'bank' => 'Maybank',
+            'acc_num' => '956846459485',
+            'acc_num_name' => 'Ahmad Shahril Adham Bin Mustafa',
+        ]);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class DepositRequest extends FormRequest
 {
-     public function rules(): array
+    public function rules(): array
     {
         return [
             'depo_amount' => 'required',

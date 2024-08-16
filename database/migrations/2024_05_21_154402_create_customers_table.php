@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('matric');
+            $table->string('matric')->unique();
             $table->string('email');
             $table->string('phone');
             $table->string('ic');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('faculty');
             $table->string('bank');
             $table->string('acc_num');
+            $table->string('acc_num_name');
             $table->timestamps();
         });
     }

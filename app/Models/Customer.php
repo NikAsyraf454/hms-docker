@@ -19,7 +19,8 @@ class Customer extends Model
         'college',
         'faculty',
         'bank',
-        'acc_num'
+        'acc_num',
+        'acc_num_name'
     ];
 
     public function rentals()

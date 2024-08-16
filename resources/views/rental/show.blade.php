@@ -17,6 +17,7 @@
                         {{-- @dd($fleet) --}}
 
                         <h5 class="card-title">View Rental</h5>
+                        <a href="{{ route('invoice.create', $rental->id) }}" class="btn btn-primary btn-sm">Invoice</a>
                         <!-- Vertical Form -->
                         @php
                             $userId = session('user_id');
@@ -39,7 +40,8 @@
                                         <div class="col-6">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="text" placeholder="ahmad@graduate.utm.my" class="form-control"
-                                                name="email" id="email" value="{{ $rental->customer->email }}" disabled>
+                                                name="email" id="email" value="{{ $rental->customer->email }}"
+                                                disabled>
                                         </div>
                                         <div class="col-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
@@ -49,7 +51,8 @@
                                         <div class="col-6">
                                             <label for="matric" class="form-label">Matric</label>
                                             <input type="text" placeholder="A24EC0021" class="form-control"
-                                                name="matric" id="matric" value="{{ $rental->customer->matric }}" disabled>
+                                                name="matric" id="matric" value="{{ $rental->customer->matric }}"
+                                                disabled>
                                         </div>
                                         <div class="col-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
@@ -77,7 +80,7 @@
                                         <h5>Bank Details</h5>
                                         <div class="col-6">
                                             <label for="bank" class="form-label">Bank</label>
-                                             <input type="text" class="form-control" name="bank" id="bank"
+                                            <input type="text" class="form-control" name="bank" id="bank"
                                                 value="{{ $rental->customer->bank }}" disabled>
                                         </div>
                                         <div class="col-6">
@@ -93,8 +96,9 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="license_plate" class="form-label">Plate Number</label>
-                                            <input type="text" placeholder="" class="form-control" name="license_plate"
-                                                id="license_plate" value="{{ $rental->fleet->license_plate }}" disabled>
+                                            <input type="text" placeholder="" class="form-control"
+                                                name="license_plate" id="license_plate"
+                                                value="{{ $rental->fleet->license_plate }}" disabled>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -128,7 +132,7 @@
                                         <div class="col-6">
                                             <label for="return_location" class="form-label">Return Location</label>
                                             <input type="text" class="form-control" name="return_location"
-                                                id="return_location" value="{{ $rental->return_location}}" disabled>
+                                                id="return_location" value="{{ $rental->return_location }}" disabled>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -148,41 +152,52 @@
                                         <div class="col-6">
                                             <label for="payment_status" class="form-label">Payment Status</label>
                                             <input type="text" class="form-control" name="payment_status"
-                                            id="payment_status" value="{{ $rental->payment_status }}" disabled>
+                                                id="payment_status" value="{{ $rental->payment->payment_status }}"
+                                                disabled>
                                         </div>
                                         <div class="col-6">
                                             <label for="rental_amount" class="form-label">Rental Amount</label>
                                             <input type="number" class="form-control" name="rental_amount"
-                                                id="rental_amount" value="{{ $rental->rental_amount }}" disabled>
+                                                id="rental_amount" value="{{ $rental->payment->rental_amount }}"
+                                                disabled>
                                         </div>
-                                        <div class="col-6">
+                                        {{-- <div class="col-6">
                                             <label for="total_amount" class="form-label">Total Amount</label>
                                             <input type="number" class="form-control" name="total_amount"
                                                 id="total_amount" value="{{ $rental->total_amount }}" disabled>
-                                        </div>
-                                        <div class="col-4 d-flex align-items-end">
-                                                <a class="btn btn-light" href="{{ asset($rental->proof) }}" target="_blank">View</a>
-                                        </div>
+                                        </div> --}}
+                                        @if (isset($rental->deposit->proof))
+                                            <div class="col-4 d-flex align-items-end pt-2">
+                                                <a class="btn btn-light" href="{{ asset($rental->payment->proof) }}"
+                                                    target="_blank">View</a>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="row">
-                                            <div class="col-6">
-                                                <label for="depo_amount" class="form-label">Depo Amount</label>
-                                                <input type="number" class="form-control" name="depo_amount"
-                                                    id="depo_amount" value="{{ $rental->deposit->amount }}" disabled>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="depo_date" class="form-label">Depo Date</label>
-                                                <input type="date" class="form-control" name="depo_date"
-                                                    id="depo_date" value="{{ $rental->deposit->date}}" disabled>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="depo_status" class="form-label">Deposit Status</label>
-                                               <input type="date" class="form-control" name="depo_status"
-                                                    id="depo_status" value="{{ $rental->deposit->status}}" disabled>
-                                            </div>
+                                        <div class="col-6">
+                                            <label for="depo_amount" class="form-label">Depo Amount</label>
+                                            <input type="number" class="form-control" name="depo_amount"
+                                                id="depo_amount" value="{{ $rental->deposit->amount }}" disabled>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="depo_date" class="form-label">Depo Date</label>
+                                            <input type="date" class="form-control" name="depo_date" id="depo_date"
+                                                value="{{ $rental->deposit->date }}" disabled>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="depo_status" class="form-label">Deposit Status</label>
+                                            <input type="date" class="form-control" name="depo_status"
+                                                id="depo_status" value="{{ $rental->deposit->status }}" disabled>
+                                        </div>
+                                        @if (isset($rental->deposit->proof))
                                             <div class="col-4 d-flex align-items-end">
-                                                <a class="btn btn-light" href="{{ asset($rental->deposit->proof) }}" target="_blank">View</a>
+                                                <a class="btn btn-light" href="{{ asset($rental->deposit->proof) }}"
+                                                    target="_blank">View</a>
                                             </div>
+                                        @else
+                                            {{-- Add Proof Logic --}}
+                                        @endif
+
                                     </div>
                                 </div>
                                 {{-- Rental Detail --}}
@@ -192,7 +207,8 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form><!-- Vertical Form -->
-                            <a href="{{route('rental.inspection.create',['id'=>$rental->id])}}" class="btn btn-primary mt-2">Inspection Form</a>
+                        <a href="{{ route('rental.inspection.create', ['id' => $rental->id]) }}"
+                            class="btn btn-primary mt-2">Inspection Form</a>
 
                     </div>
                 </div>
@@ -200,5 +216,4 @@
         </div>
 
     </div>
-
 @endsection

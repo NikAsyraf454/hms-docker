@@ -25,13 +25,15 @@ class StoreCustomerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'ic' => 'required',
-            'matric' => 'required',
-            'phone' => 'required|max:15',
+            'matric' => 'required|max:10',
+            // 'phone' => 'required|string|max:50',
+            'phone' => 'required|numeric|digits_between:10,15',
             'college' => 'required|string|max:255',
             'faculty' => 'required|string|max:255',
             'address' => 'nullable|string|max:255',
             'bank' => 'required|string|max:255',
-            'acc_num' => 'required|string|max:255',
+            'acc_num' => 'required|numeric|digits_between:10,15',
+            'acc_num_name' => 'required',
         ];
     }
 }
