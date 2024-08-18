@@ -12,9 +12,8 @@ Route::get('/template', function () {
     return view('template.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard' , [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/test' , [DashboardController::class, 'test'])->middleware(['auth', 'verified'])->name('test');
 
 Route::get('/home', [ClaimController::class, 'home'])->name('claim.home');
 

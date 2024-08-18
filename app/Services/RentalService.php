@@ -91,12 +91,17 @@ class RentalService
         //         $filename = $this->addInspectPhoto($g);
         //     }
         // }
-        
-        $depan = $this->addInspectPhoto($gambar[0]);
-        $belakang = $this->addInspectPhoto($gambar[1]);
-        $kiri = $this->addInspectPhoto($gambar[2]);
-        $kanan = $this->addInspectPhoto($gambar[3]);
 
+            $depan = $this->addInspectPhoto($gambar[0]);
+            $belakang = $this->addInspectPhoto($gambar[1]);
+            $kiri = $this->addInspectPhoto($gambar[2]);
+            $kanan = $this->addInspectPhoto($gambar[3]);
+
+            // $depan = '';
+            // $belakang = '';
+            // $kiri = '';
+            // $kanan = '';
+        
         if(isset($gambar[4])){
             $add1 = $this->addInspectPhoto($gambar[4]);
             $input['img_add1'] = $add1; 

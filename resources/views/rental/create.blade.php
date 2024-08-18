@@ -62,6 +62,8 @@
                                                 value="{{ old('college') }}">
                                                 <option value="KRP">KRP</option>
                                                 <option value="KTF">KTF</option>
+                                                <option value="KTC">KTC</option>
+                                                <option value="KP">KP</option>
                                                 <option value="KTHO">KTHO</option>
                                                 <option value="KTR">KTR</option>
                                                 <option value="KTDI">KTDI</option>
@@ -104,12 +106,17 @@
                                                 <option value="Bank Islam">Bank Islam</option>
                                                 <option value="Bank Rakyat">Bank Rakyat</option>
                                                 <option value="Bank Muamalat">Bank Muamalat</option>
+                                                <option value="Public Bank">Public Bank</option>
+                                                <option value="RHB Bank">RHB Bank</option>
+                                                <option value="Hong Leong">Hong Leong</option>
+                                                <option value="Ambank">Ambank</option>
                                                 <option value="CIMB Bank">CIMB Bank</option>
+                                                <option value="Affin Bank">Affin Bank</option>
                                                 <option value="UOB">UOB</option>
                                                 <option value="OCBC">OCBC</option>
                                                 <option value="Rize">Rize</option>
                                                 <option value="GXBank">GXBank</option>
-
+                                                <option value="TNG">TNG</option>
                                             </select>
                                         </div>
                                         <div class="col-6">

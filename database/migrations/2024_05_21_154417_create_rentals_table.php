@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('return_location');
             $table->string('destination');
             $table->string('note')->nullable();
-            $table->foreign('payment_id')->nullable()->references('id')->on('payments');
-            $table->foreign('depo_id')->nullable()->references('id')->on('deposits');
+            $table->foreign('payment_id')->nullable()->references('id')->on('payments')->onDelete('cascade');
+            $table->foreign('depo_id')->nullable()->references('id')->on('deposits')->onDelete('cascade');
             $table->foreign('fleet_id')->nullable()->references('id')->on('fleets');
             $table->foreign('staff_id')->nullable()->references('id')->on('users');
             $table->foreign('customer_id')->nullable()->references('id')->on('customers');

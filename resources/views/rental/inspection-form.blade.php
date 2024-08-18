@@ -46,23 +46,19 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Front</label><br>
-                                            <input type="file" class="form-control-file" id="img_front" name="img_front"
-                                                required>
+                                            <input type="file" class="form-control-file" id="img_front" name="img_front">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Left</label><br>
-                                            <input type="file" class="form-control-file" id="img_left" name="img_left"
-                                                required>
+                                            <input type="file" class="form-control-file" id="img_left" name="img_left">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Right</label><br>
-                                            <input type="file" class="form-control-file" id="img_right" name="img_right"
-                                                required>
+                                            <input type="file" class="form-control-file" id="img_right" name="img_right">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Back</label><br>
-                                            <input type="file" class="form-control-file" id="img_back" name="img_back"
-                                                required>
+                                            <input type="file" class="form-control-file" id="img_back" name="img_back">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Additional Image 1</label><br>

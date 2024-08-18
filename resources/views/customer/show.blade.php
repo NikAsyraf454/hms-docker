@@ -21,7 +21,7 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form action="" method="post">
+                        <form action="{{ route('customer.update', $customer->id) }}" method="post">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="" id="staff_id" name="staff_id"
@@ -33,43 +33,43 @@
                                     <div class="col-12">
                                         <label for="name" class="form-label">Customer Name</label>
                                         <input type="text" placeholder="Ahmad Irfan" class="form-control" name="name"
-                                            id="name" value="{{ $customer->name }}" disabled>
+                                            id="name" value="{{ $customer->name }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="text" placeholder="ahmad@graduate.utm.my" class="form-control"
-                                                name="email" id="email" value="{{ $customer->email }}" disabled>
+                                                name="email" id="email" value="{{ $customer->email }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
                                             <input type="number" placeholder="000627101198" class="form-control"
-                                                name="ic" id="ic" value="{{ $customer->ic }}" disabled>
+                                                name="ic" id="ic" value="{{ $customer->ic }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="matric" class="form-label">Matric</label>
                                             <input type="text" placeholder="A24EC0021" class="form-control"
-                                                name="matric" id="matric" value="{{ $customer->matric }}" disabled>
+                                                name="matric" id="matric" value="{{ $customer->matric }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
                                             <input type="number" class="form-control" name="phone" id="phone"
-                                                value="{{ $customer->phone }}" disabled>
+                                                value="{{ $customer->phone }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="college" class="form-label">College </label>
-                                            <input type="text" class="form-control" value="{{ $customer->college }}"
-                                                disabled>
+                                            <input type="text" class="form-control" name="college"
+                                                value="{{ $customer->college }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="faculty" class="form-label">Faculty </label>
-                                            <input type="text" class="form-control" value="{{ $customer->faculty }}"
-                                                disabled>
+                                            <input type="text" class="form-control" name="faculty"
+                                                value="{{ $customer->faculty }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="address" class="form-label">Address </label>
                                             <input type="text" class="form-control" name="address" id="address"
-                                                value="{{ $customer->address }}" disabled>
+                                                value="{{ $customer->address }}">
                                         </div>
 
                                     </div>
@@ -78,18 +78,18 @@
                                         <div class="col-6">
                                             <label for="bank" class="form-label">Bank</label>
                                             <input type="text" class="form-control" name="bank" id="bank"
-                                                value="{{ $customer->bank }}" disabled>
+                                                value="{{ $customer->bank }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="acc_num" class="form-label"> Account Number</label>
                                             <input type="text" placeholder="" class="form-control" name="acc_num"
-                                                id="acc_num" value="{{ $customer->acc_num }}" disabled>
+                                                id="acc_num" value="{{ $customer->acc_num }}">
                                         </div>
                                         <div class="col-6">
                                             <label for="acc_num_name" class="form-label"> Account Number</label>
                                             <input type="text" placeholder="" class="form-control"
                                                 name="acc_num_name" id="acc_num_name"
-                                                value="{{ $customer->acc_num_name }}" disabled>
+                                                value="{{ $customer->acc_num_name }}">
                                         </div>
                                     </div>
                                 </div>

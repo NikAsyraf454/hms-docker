@@ -9,6 +9,8 @@ use App\Models\Rental;
 use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Inspection;
+use App\Models\Payment;
+use App\Models\Deposit;
 
 use App\Services\CustomerService;
 use App\Services\RentalService;
@@ -106,9 +108,55 @@ class RentalController extends Controller
     }
 
     public function update(Request $request, $id){
-        
         $rental = Rental::find($id);
-        $rental->update($request->all());
+        $payment = Payment::find($rental->payment_id);
+        $deposit = Deposit::find($rental->depo_id);
+
+        $data = $request->validate([
+            'staff_id' => 'required|exists:users,id',
+            'customer_id' => 'nullable|exists:customers,id',
+            'fleet_id' => 'required|string|max:255',
+            'pickup_date' => 'required|date',
+            'return_date' => 'required|date|after_or_equal:pickup_date',
+            'pickup_time' => 'required|string',
+            'return_time' => 'required|string',
+            'pickup_location' => 'required|string|max:255',
+            'return_location' => 'required|string|max:255',
+            'note' => 'nullable|string|max:500',
+            'destination' => 'required|string|max:255',
+            'payment_status' => 'required|in:paid,unpaid',
+            'rental_amount' => 'required|numeric|min:0',
+            'depo_amount' => 'required|numeric|min:0',
+            'depo_date' => 'required|date',
+            'depo_status' => 'required|in:paid,unpaid',
+        ]);
+        
+        // dd($data);
+
+        $rental->staff_id = $request->input('staff_id');
+        $rental->customer_id = $request->input('customer_id');
+        // $rental->fleet_id = $request->input('fleet_id');
+        $rental->pickup_date = $request->input('pickup_date');
+        $rental->return_date = $request->input('return_date');
+        $rental->pickup_time = $request->input('pickup_time');
+        $rental->return_time = $request->input('return_time');
+        $rental->pickup_location = $request->input('pickup_location');
+        $rental->return_location = $request->input('return_location');
+        $rental->note = $request->input('note');
+        $rental->destination = $request->input('destination');
+
+        $payment->payment_status = $request->input('payment_status');
+        $payment->rental_amount = $request->input('rental_amount');
+
+        $deposit->depo_amount = $request->input('depo_amount');
+        $deposit->depo_date = $request->input('depo_date');
+        $deposit->depo_status = $request->input('depo_status');
+
+        $rental->save();
+        $payment->save();
+
+        // dd($request->all());
+        // $rental->update($request->all());
         return redirect()->route('rental.index')
         ->with('success', 'Rental updated successfully.');
     }
@@ -127,7 +175,6 @@ class RentalController extends Controller
 
     public function submitForm(Request $request){
         $request->validate([
-            'parts' => 'required',
             'parts' => 'required',
             'mileage'=>'required',
             'fuel'=>'required',

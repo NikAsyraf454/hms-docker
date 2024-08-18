@@ -25,8 +25,9 @@ return new class extends Migration
             $table->string('img_add1')->nullable();
             $table->string('img_add2')->nullable();
             $table->string('PIC')->nullable();
-            $table->string('staff');
+            $table->string('staff_id');
             $table->foreign('rental_id')->nullable()->references('id')->on('rentals');
+            $table->foreign('staff_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

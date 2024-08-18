@@ -38,4 +38,27 @@ class CustomerController extends Controller
         return response()->json($customers);
     }
 
+    public function update(Request $request, $id){
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'matric' => 'required|max:255',
+            'ic' => 'required',
+            'college' => 'required',
+            'phone' => 'required',
+            'faculty' => 'required',
+            'address' => 'required',
+            'bank' => 'required',
+            'acc_num' => 'required',
+            'acc_num_name' => 'required',
+        ]);
+
+        // $fleet = Fleet::find($id);
+        $customer = $this->customerService->updateCustomer($id, $data);
+
+        // $customer->update($request->all());
+        return redirect()->route('customer.index')
+        ->with('success', 'Customer updated successfully.');
+    }
+
 }
