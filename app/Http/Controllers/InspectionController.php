@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Inspection;
 use Illuminate\Http\Request;
+use App\Services\InspectionService;
 
 class InspectionController extends Controller
 {
+    protected $inspectionService;
+
+    public function __construct(InspectionService $inspectionService){
+        $this->inspectionService = $inspectionService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -18,9 +24,9 @@ class InspectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('rental.inspection-form', compact('id'));
     }
 
     /**
@@ -28,15 +34,19 @@ class InspectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        $createdData = $this->inspectionService->addInspection($data);
+        // dd($createdData);
+        return redirect()->route('rental.index')->with('success','Product Created');   
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Inspection $inspection)
+    public function show($rentalId, $type)
     {
-        //
+        $inspection = $this->getInspectionById($rentalId, $type);
     }
 
     /**

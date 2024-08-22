@@ -404,14 +404,15 @@
                                                 </select>
                                             </div>
                                             <div class="col-6">
-                                                <label for="rental_amount" class="form-label">Rental Amount</l abel>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">RM</span>
-                                                        <input type="number" name="rental_amount" id="rental_amount"
-                                                            class="form-control" placeholder="Rental Amount"
-                                                            aria-label="Rental Amount" aria-describedby="basic-addon1">
-                                                    </div>
-                                                    {{-- <input type="number" class="form-control" name="rental_amount"
+                                                <label for="rental_amount" class="form-label">Rental Amount</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">RM</span>
+                                                    <input type="number" name="rental_amount" id="rental_amount"
+                                                        class="form-control" placeholder="Rental Amount"
+                                                        aria-label="Rental Amount" aria-describedby="basic-addon1"
+                                                        required>
+                                                </div>
+                                                {{-- <input type="number" class="form-control" name="rental_amount"
                                                     id="rental_amount" value="{{ old('rental_amount') }}"> --}}
                                             </div>
                                             <div class="col-6">

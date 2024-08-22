@@ -69,8 +69,9 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::put('/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
     Route::delete('/rental/{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
 
-    Route::get('/inspection/create/{id}', [RentalController::class, 'displayForm'])->name('rental.inspection.create');
-    Route::post('/inspection', [RentalController::class, 'submitForm'])->name('rental.inspection.store');
+    Route::get('/inspection/create/{id}', [InspectionController::class, 'create'])->name('inspection.create');
+    Route::post('/inspection', [InspectionController::class, 'store'])->name('inspection.store');
+    Route::post('/inspection/{id}', [InspectionController::class, 'store'])->name('inspection.store');
 
     //Invoice
     Route::get('/invoice', [PaymentController::class, 'download'])->name('invoice.download');

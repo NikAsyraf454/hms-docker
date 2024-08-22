@@ -199,16 +199,27 @@
                                         @endif
 
                                     </div>
+                                    <a href="{{ route('inspection.create', ['id' => $rental->id]) }}"
+                                        class="btn btn-primary mt-2">Pre Inspection Form</a>
+
+                                    <a href="{{ route('inspection.create', ['id' => $rental->id]) }}"
+                                        class="btn btn-primary mt-2">Post Inspection Form</a>
+
+                                    <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
+                                        class="btn btn-primary mt-2">Pre Inspection Form</a>
+
+                                    <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
+                                        class="btn btn-primary mt-2">Post Inspection Form</a>
                                 </div>
                                 {{-- Rental Detail --}}
+
                             </div>
 
                             <div class="pt-2">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form><!-- Vertical Form -->
-                        <a href="{{ route('rental.inspection.create', ['id' => $rental->id]) }}"
-                            class="btn btn-primary mt-2">Inspection Form</a>
+
 
                     </div>
                 </div>

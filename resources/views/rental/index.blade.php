@@ -17,9 +17,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Car</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
                                     <th>Pickup</th>
                                     <th>Return</th>
-                                    <th>Payment</th>
                                     <th>Amount (RM)</th>
                                     <th>Actions</th>
                                 </tr>
@@ -29,9 +30,10 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->fleet->license_plate }}</td>
+                                        <td>{{ $item->customer->name }}</td>
+                                        <td>{{ $item->customer->phone }}</td>
                                         <td>{{ $item->pickup_date }} <br> {{ $item->pickup_time }}</td>
                                         <td>{{ $item->return_date }} <br> {{ $item->return_time }}</td>
-                                        <td> {{ $item->payment->payment_status }}</td>
                                         <td>{{ $item->payment->rental_amount }}</td>
                                         <td>
                                             <div class="row">
