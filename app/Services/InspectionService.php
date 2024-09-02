@@ -18,16 +18,22 @@ class InspectionService
         
         $names = [];
 
-        foreach ($gambar as $image) {
+        foreach ($gambar as $key => $image) {
             $destinationPath = 'inspections/';
+            // $destinationPath = 'public/inspections/'; for live server
             $filename = date('Ymd'). '_' . $image->getClientOriginalName();
             $image->move($destinationPath, $filename);
-            array_push($names, $filename); 
+            $names[$key] = 'inspections/'. $filename; 
+            // array_push($names, $filename); 
         }
+        // dd($names);
 
-        $korok = implode(',', $names);
-        $data['image'] = json_encode($korok);
-        $data['type'] = 'pre';
+        // $korok = implode(',', $names);
+
+        $data['image'] = json_encode($names);
+        // dd($data['image']);
+
+        // $data['type'] = 'pre';
 
         $inspection = new Inspection();
 
@@ -46,8 +52,28 @@ class InspectionService
         // return Inspection::create($data);
     }
 
-    public function getInspectionById($rentalId, $type){
-        $exists = Inspection::where('rental_id', $rentalId)->exists();
+     public function getInspectionById($rentalId, $type){
+        $inspection = Inspection::where('rental_id', '=' , $rentalId)
+                                ->where('type', '=' , $type)
+                                ->first();
+
+        return $inspection;
+    }
+
+    public function getPreInspectionById($rentalId){
+        $inspection = Inspection::where('rental_id', '=' , $rentalId)
+                                ->where('type', '=' , 'pre')
+                                ->first();
+
+        return $inspection;
+    }
+
+    public function getPostInspectionById($rentalId){
+        $inspection = Inspection::where('rental_id', '=' , $rentalId)
+                                ->where('type', '=' , 'post')
+                                ->first();
+
+        return $inspection;
     }
     
 }

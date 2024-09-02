@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -13,7 +13,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
                         {{-- @dd($fleet) --}}
 
                         <h5 class="card-title">New Rental Form</h5>
@@ -34,27 +34,42 @@
                                         <label for="name" class="form-label">Customer Name</label>
                                         <input type="text" placeholder="Customer Name" class="form-control"
                                             name="name" id="name" value="{{ old('name') }}">
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="text" placeholder="email@gmail.com" class="form-control"
                                                 name="email" id="email" value="{{ old('email') }}">
+                                            @error('email')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
                                             <input type="number" placeholder="000000110000" class="form-control"
                                                 name="ic" id="ic" value="{{ old('ic') }}">
+                                            @error('ic')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="matric" class="form-label">Matric</label>
                                             <input type="text" placeholder="A24EC0021" class="form-control"
                                                 name="matric" id="matric" value="{{ old('matric') }}">
+                                            @error('matric')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
                                             <input type="number" placeholder="0123456789" class="form-control"
                                                 name="phone" id="phone" value="{{ old('phone') }}">
+                                            @error('phone')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="college" class="form-label">College </label>
@@ -72,6 +87,9 @@
                                                 <option value="KDSE">KDSE</option>
                                                 <option value="KDOJ">KDOJ</option>
                                             </select>
+                                            @error('college')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="faculty" class="form-label">Faculty </label>
@@ -93,6 +111,9 @@
                                             <label for="address" class="form-label">Address </label>
                                             <input type="text" class="form-control" name="address" id="address"
                                                 value="{{ old('address') }}">
+                                            @error('address')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                     </div>
@@ -123,11 +144,17 @@
                                             <label for="acc_num" class="form-label"> Account Number</label>
                                             <input type="text" placeholder="" class="form-control" name="acc_num"
                                                 id="acc_num" value="{{ old('acc_num') }}">
+                                            @error('acc_num')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="acc_num_name" class="form-label"> Account Owner</label>
                                             <input type="text" placeholder="" class="form-control"
                                                 name="acc_num_name" id="acc_num_name" value="{{ old('acc_num_name') }}">
+                                            @error('acc_num_name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -158,11 +185,17 @@
                                             <label for="pickup_date" class="form-label">Pickup Date</label>
                                             <input type="date" class="form-control" name="pickup_date"
                                                 id="pickup_date" value="{{ old('pickup_date') }}">
+                                            @error('pickup_date')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="return_date" class="form-label">Return Date</label>
                                             <input type="date" class="form-control" name="return_date"
                                                 id="return_date" value="{{ old('return_date') }}">
+                                            @error('return_date')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
@@ -374,11 +407,17 @@
                                             <label for="pickup_location" class="form-label">Pickup Location</label>
                                             <input type="text" class="form-control" name="pickup_location"
                                                 id="pickup_location" value="{{ old('pickup_location') }}">
+                                            @error('pickup_location')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="return_location" class="form-label">Return Location</label>
                                             <input type="text" class="form-control" name="return_location"
                                                 id="return_location" value="{{ old('return_location') }}">
+                                            @error('return_location')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row">
@@ -386,11 +425,17 @@
                                             <label for="note" class="form-label">Note</label>
                                             <textarea name="note" class="form-control" id="note" cols="30" rows="5"
                                                 value="{{ old('note') }}"></textarea>
+                                            @error('note')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-6">
                                             <label for="destination" class="form-label">Destination</label>
                                             <input type="text" class="form-control" name="destination"
                                                 id="destination" value="{{ old('destination') }}">
+                                            @error('destination')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row pt-2">
@@ -412,13 +457,9 @@
                                                         aria-label="Rental Amount" aria-describedby="basic-addon1"
                                                         required>
                                                 </div>
-                                                {{-- <input type="number" class="form-control" name="rental_amount"
-                                                    id="rental_amount" value="{{ old('rental_amount') }}"> --}}
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="total_amount" class="form-label">Total Amount</label>
-                                                <input type="number" class="form-control" name="total_amount"
-                                                    id="total_amount" value="{{ old('total_amount') }}">
+                                                @error('rental_amount')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputNumber" class="col-sm col-form-label">Payment
@@ -427,6 +468,9 @@
                                                     <input class="form-control" name="payment_proof" id="payment_proof"
                                                         type="file" id="formFile">
                                                 </div>
+                                                @error('payment_proof')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row">
@@ -434,11 +478,17 @@
                                                 <label for="depo_amount" class="form-label">Depo Amount</label>
                                                 <input type="number" class="form-control" name="depo_amount"
                                                     id="depo_amount" value="{{ old('depo_amount') }}">
+                                                @error('depo_amount')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-6">
                                                 <label for="depo_date" class="form-label">Depo Date</label>
                                                 <input type="date" class="form-control" name="depo_date"
                                                     id="depo_date" value="{{ old('depo_date') }}">
+                                                @error('depo_date')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-6">
                                                 <label for="depo_status" class="form-label">Deposit Status</label>
@@ -446,6 +496,9 @@
                                                     <option value="Unpaid">Unpaid</option>
                                                     <option value="Paid">Paid</option>
                                                 </select>
+                                                @error('depo_status')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputNumber" class="col-sm col-form-label">Deposit
@@ -454,6 +507,9 @@
                                                     <input class="form-control" name="deposit_proof" id="deposit_proof"
                                                         type="file" id="formFile">
                                                 </div>
+                                                @error('deposit_proof')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -465,7 +521,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
-                        </form><!-- Vertical Form -->
+                        </form>
 
                     </div>
                 </div>
@@ -473,7 +529,6 @@
         </div>
 
     </div>
-
 @endsection
 @section('script')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

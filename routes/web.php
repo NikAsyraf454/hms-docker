@@ -31,7 +31,7 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::get('/fleet/{id}', [FleetController::class, 'show'])->name('fleet.show');
     Route::get('/fleet/{id}/edit', [FleetController::class, 'edit'])->name('fleet.edit');
     Route::put('/fleet/{id}', [FleetController::class, 'update'])->name('fleet.update');
-    Route::delete('/fleet/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
+    Route::get('/fleet/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
 
     // Claim Module
     Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
@@ -40,7 +40,7 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::get('/claim/{id}/{category}', [ClaimController::class, 'show'])->name('claim.show');
     Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.edit');
     Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
-    Route::delete('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
+    Route::get('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
 
     // Maintenance Type
     Route::get('/maintenance/type', [MaintenanceTypeController::class, 'index'])->name('maintenance-type.index');
@@ -53,7 +53,7 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
 
     // Maintenance
     Route::get('/maintenance/index', [MaintenanceController::class, 'index'])->name('maintenance.index');
-    Route::get('/maintenance/create', [MaintenanceController::class, 'create'])->name('maintenance.create');
+    Route::get('/maintenance/create/{id}', [MaintenanceController::class, 'create'])->name('maintenance.create');
     Route::post('/maintenance', [MaintenanceController::class, 'store'])->name('maintenance.store');
     Route::get('/maintenance/{id}', [MaintenanceController::class, 'show'])->name('maintenance.show');
     Route::get('/maintenance/{id}/edit', [MaintenanceController::class, 'edit'])->name('maintenance.edit');
@@ -69,9 +69,10 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::put('/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
     Route::delete('/rental/{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
 
-    Route::get('/inspection/create/{id}', [InspectionController::class, 'create'])->name('inspection.create');
+    Route::get('/inspection/create/{id}/{type}', [InspectionController::class, 'create'])->name('inspection.create');
+    // Route::post('/inspection', [InspectionController::class, 'store'])->name('inspection.store');
     Route::post('/inspection', [InspectionController::class, 'store'])->name('inspection.store');
-    Route::post('/inspection/{id}', [InspectionController::class, 'store'])->name('inspection.store');
+    Route::get('/inspection/{id}/{type}', [InspectionController::class, 'show'])->name('inspection.show');
 
     //Invoice
     Route::get('/invoice', [PaymentController::class, 'download'])->name('invoice.download');
@@ -87,14 +88,12 @@ Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
     Route::get('/autocomplete/customers', [CustomerController::class, 'autocomplete'])->name('customers.autocomplete');
 });
 
-    
-
         Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
         Route::get('/deposit/create', [DepositController::class, 'create'])->name('deposit.create');
         Route::post('/deposit/deposit', [DepositController::class, 'store'])->name('deposit.store');
         Route::get('/deposit/{id}', [DepositController::class, 'show'])->name('deposit.show');
         Route::get('/deposit/{id}/edit', [DepositController::class, 'edit'])->name('deposit.edit');
-        Route::put('/deposit/{id}', [DepositController::class, 'update'])->name('deposit.update');
+        Route::post('/deposit/{id}', [DepositController::class, 'update'])->name('deposit.update');
         Route::delete('/deposit/{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
 
     Route::middleware(['role:Admin|Manager'])->group(function () {

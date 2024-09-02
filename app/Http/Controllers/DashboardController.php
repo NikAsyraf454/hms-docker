@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Claim;
 use App\Models\Rental;
 use App\Models\Payment;
+use App\Models\Fleet;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -16,12 +18,29 @@ class DashboardController extends Controller
         $rental = Rental::count();
         $sales = Payment::sum('rental_amount');
 
+        $currentDate = Carbon::today()->toDateString();
+        // dd($currentDate);
+        $rentalToday = Rental::where('pickup_date','=',$currentDate)->get();
+        $returnToday = Rental::where('return_date','=',$currentDate)->get();
+        $car = Fleet::whereDoesntHave('rentals', function ($query) use ($currentDate) {
+            $query->where('pickup_date', '<=', $currentDate)
+                ->where('return_date', '>=', $currentDate);
+        })->get();
+
+        // return response()->json($availableCars);
+
         // return response()->json($rental_sum);
 
-        $data = ['customer'=>$customer,'claim'=>$claim,'rental'=>$rental,'sales'=>$sales];
+        $data = [
+            'customer'=>$customer,
+            'claim'=>$claim,
+            'rental'=>$rental,
+            'sales'=>$sales,
+            'returnToday'=>$returnToday,
+            'car'=>$car
+        ];
 
-
-        return view('dashboard', compact('data'));
+        return view('dashboard', compact('data','rentalToday'));
     }
 
     public function test(){

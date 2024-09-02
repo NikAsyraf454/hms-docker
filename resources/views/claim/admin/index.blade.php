@@ -116,14 +116,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($claims as $item)
-                                    {{-- @dd($item) --}}
+                                        {{-- @dd($item) --}}
                                         <tr>
-                                            <td>{{$loop->index+1}}</td>
+                                            <td>{{ $loop->index + 1 }}</td>
                                             {{-- <td>{{ $item->id }}</td> --}}
                                             <td>{{ $item->user_name }}</td>
                                             <td>
                                                 @if ($item->category == 'members')
-                                                        <span class="badge bg-success">Members Rental</span>
+                                                    <span class="badge bg-success">Members Rental</span>
                                                 @elseif($item->category == 'extra')
                                                     <span class="badge bg-secondary">Extra Job</span>
                                                 @elseif($item->category == 'depo')
@@ -134,7 +134,7 @@
                                             </td>
                                             <td>{{ $item->details }}</td>
                                             <td>{{ $item->plate_number }}</td>
-                                            <td>{{$item->date}}</td>
+                                            <td>{{ $item->date }}</td>
                                             <td>
                                                 @if ($item->status == 'approved')
                                                     <span class="badge bg-success">Approved</span>
@@ -147,18 +147,19 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <form action="{{ route('claims.updateStatus', $item->claim_id) }}" method="POST">
+                                                        <form action="{{ route('claims.updateStatus', $item->claim_id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PUT')
-                                                                @if ($item->status === 'approved')
-                                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                                        Decline
-                                                                    </button>
-                                                                @else
-                                                                    <button type="submit" class="btn btn-sm btn-primary">
-                                                                        Approve
-                                                                    </button>
-                                                                @endif
+                                                            @if ($item->status === 'approved')
+                                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                                    Decline
+                                                                </button>
+                                                            @else
+                                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                                    Approve
+                                                                </button>
+                                                            @endif
                                                         </form>
                                                         {{-- <form action="{{ route('claims.updateStatus', $item->claim_id) }}"
                                                             method="POST" class="claim-status-form">
@@ -180,10 +181,19 @@
                                                             class="btn btn-primary btn-sm">Edit</a>
                                                     </div> --}}
                                                     <div class="col">
-                                                        <a href="{{ route('claim.show', ['id'=>$item->claim_id,'category'=>$item->category]) }}"
-                                                            class="btn btn-primary btn-sm">View</a>
+                                                        <div class="btn-group">
+                                                            <a type="button"
+                                                                href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}"
+                                                                class="btn btn-primary"><i
+                                                                    class="bi bi-pencil-square"></i></a>
+                                                            <a type="button"
+                                                                href="{{ route('claim.destroy', $item->claim_id) }}"
+                                                                class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                                                        </div>
+                                                        {{-- <a href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}"
+                                                            class="btn btn-primary btn-sm">View</a> --}}
                                                     </div>
-                                                    <div class="col">
+                                                    {{-- <div class="col">
                                                         <form action="{{ route('claim.destroy', $item->claim_id) }}"
                                                             method="post">
                                                             @csrf
@@ -191,6 +201,7 @@
                                                             <button type="submit"
                                                                 class="btn btn-danger btn-sm">Delete</button>
                                                         </form>
+                                                    </div> --}}
                                             </td>
                                         </tr>
                                     @endforeach

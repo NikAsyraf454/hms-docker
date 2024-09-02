@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MaintenanceRecord;
+use App\Models\MaintenanceType;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
@@ -18,9 +19,11 @@ class MaintenanceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $type = MaintenanceType::get();
+        // return response()->json($type);
+        return view('maintenance.create', compact('type','id'));
     }
 
     /**
@@ -28,8 +31,22 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        $maintenance = new MaintenanceRecord;
+        $maintenance->user_id = $user->id;
+        $maintenance->fleet_id = $request->fleet_id;
+        $maintenance->maintenance_type_id = $request->maintenance_type; // corrected from $request->id
+        $maintenance->odometer_reading = $request->odometer;
+        $maintenance->date = $request->date;
+        $maintenance->cost = $request->cost;
+        $maintenance->notes = $request->notes;
+
+        // Save the maintenance record
+        $result = $maintenance->save(); // changed from $user->save() to $maintenance->save()
+        return redirect()->back()->with('success', 'Maintenance record saved successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -58,8 +75,11 @@ class MaintenanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MaintenanceRecord $maintenanceRecord)
+    public function destroy($id)
     {
-        //
+        $maintenance = MaintenanceRecord::find($id);
+        $maintenance->delete();
+        return redirect()->route('fleet.index')
+        ->with('success', 'Maintenance deleted successfully');
     }
 }

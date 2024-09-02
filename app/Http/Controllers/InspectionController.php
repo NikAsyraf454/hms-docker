@@ -24,9 +24,9 @@ class InspectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create($id, $type)
     {
-        return view('rental.inspection-form', compact('id'));
+        return view('rental.inspection.form', compact('id', 'type'));
     }
 
     /**
@@ -38,7 +38,7 @@ class InspectionController extends Controller
         // dd($data);
         $createdData = $this->inspectionService->addInspection($data);
         // dd($createdData);
-        return redirect()->route('rental.index')->with('success','Product Created');   
+        return redirect()->route('rental.index')->with('success','Inspection Created');   
     }
 
     /**
@@ -46,7 +46,11 @@ class InspectionController extends Controller
      */
     public function show($rentalId, $type)
     {
-        $inspection = $this->getInspectionById($rentalId, $type);
+        $inspection = $this->inspectionService->getInspectionById($rentalId, $type);
+        $id = $rentalId;
+
+        // dd($inspection);
+        return view('rental.inspection.show', compact('id','inspection','type'));
     }
 
     /**

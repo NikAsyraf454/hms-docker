@@ -15,7 +15,7 @@ class StoreRentalRequest extends FormRequest
     // }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the request.p
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
@@ -23,7 +23,6 @@ class StoreRentalRequest extends FormRequest
     {
         return [
             'fleet_id' => 'required|string|max:255',
-            // 'matric' => 'required',
             // 'pickup_date' => 'required|date|after_or_equal:today',
             'pickup_date' => 'required|date',
             // 'return_date' => 'required|date|after_or_equal:pickup_date',
@@ -32,11 +31,8 @@ class StoreRentalRequest extends FormRequest
             'return_time' => 'required',
             'pickup_location' => 'required|string|max:255',
             'return_location' => 'required|string|max:255',
-            // 'note' => 'required|string|max:255',
+            'note' => 'nullable|string|max:255',
             'destination' => 'required|string|max:255',
-            // 'payment_status' => 'required',
-            // 'rental_amount' => 'required',
-            // 'total_amount' => 'nullable',
             'staff_id' => 'required',
         ];
     }

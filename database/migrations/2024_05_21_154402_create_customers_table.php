@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('ic');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('college');
             $table->string('faculty');
             $table->string('bank');

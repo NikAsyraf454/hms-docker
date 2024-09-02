@@ -17,6 +17,7 @@ class ClaimService
     {
         $filename = time(). '.' . $file->getClientOriginalExtension();
         $file->move('receipts', $filename);
+        // $file->move('public/receipts', $filename); //for live server
 
         $claim = new Claim();
         $claim->staff_id = $data['staff_id'];

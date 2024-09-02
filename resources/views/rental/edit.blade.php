@@ -139,206 +139,592 @@
                                         <div class="col-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
                                             <select class="form-select" name="pickup_time" required="required"
-                                                id="pickup_time" value="{{ $rental->pickup_time }}">
-                                                <option value="12:00 AM">12:00 AM</option>
-                                                <option value="12:15 AM">12:15 AM</option>
-                                                <option value="12:30 AM">12:30 AM</option>
-                                                <option value="12:45 AM">12:45 AM</option>
-                                                <option value="1:00 AM">1:00 AM</option>
-                                                <option value="1:15 AM">1:15 AM</option>
-                                                <option value="1:30 AM">1:30 AM</option>
-                                                <option value="1:45 AM">1:45 AM</option>
-                                                <option value="2:00 AM">2:00 AM</option>
-                                                <option value="2:15 AM">2:15 AM</option>
-                                                <option value="2:30 AM">2:30 AM</option>
-                                                <option value="2:45 AM">2:45 AM</option>
-                                                <option value="3:00 AM">3:00 AM</option>
-                                                <option value="3:15 AM">3:15 AM</option>
-                                                <option value="3:30 AM">3:30 AM</option>
-                                                <option value="3:45 AM">3:45 AM</option>
-                                                <option value="4:00 AM">4:00 AM</option>
-                                                <option value="4:15 AM">4:15 AM</option>
-                                                <option value="4:30 AM">4:30 AM</option>
-                                                <option value="4:45 AM">4:45 AM</option>
-                                                <option value="5:00 AM">5:00 AM</option>
-                                                <option value="5:15 AM">5:15 AM</option>
-                                                <option value="5:30 AM">5:30 AM</option>
-                                                <option value="5:45 AM">5:45 AM</option>
-                                                <option value="6:00 AM">6:00 AM</option>
-                                                <option value="6:15 AM">6:15 AM</option>
-                                                <option value="6:30 AM">6:30 AM</option>
-                                                <option value="6:45 AM">6:45 AM</option>
-                                                <option value="7:00 AM">7:00 AM</option>
-                                                <option value="7:15 AM">7:15 AM</option>
-                                                <option value="7:30 AM">7:30 AM</option>
-                                                <option value="7:45 AM">7:45 AM</option>
-                                                <option value="8:00 AM">8:00 AM</option>
-                                                <option value="8:15 AM">8:15 AM</option>
-                                                <option value="8:30 AM">8:30 AM</option>
-                                                <option value="8:45 AM">8:45 AM</option>
-                                                <option value="9:00 AM" selected="selected">9:00 AM</option>
-                                                <option value="9:15 AM">9:15 AM</option>
-                                                <option value="9:30 AM">9:30 AM</option>
-                                                <option value="9:45 AM">9:45 AM</option>
-                                                <option value="10:00 AM">10:00 AM</option>
-                                                <option value="10:15 AM">10:15 AM</option>
-                                                <option value="10:30 AM">10:30 AM</option>
-                                                <option value="10:45 AM">10:45 AM</option>
-                                                <option value="11:00 AM">11:00 AM</option>
-                                                <option value="11:15 AM">11:15 AM</option>
-                                                <option value="11:30 AM">11:30 AM</option>
-                                                <option value="11:45 AM">11:45 AM</option>
-                                                <option value="12:00 PM">12:00 PM</option>
-                                                <option value="12:15 PM">12:15 PM</option>
-                                                <option value="12:30 PM">12:30 PM</option>
-                                                <option value="12:45 PM">12:45 PM</option>
-                                                <option value="1:00 PM">1:00 PM</option>
-                                                <option value="1:15 PM">1:15 PM</option>
-                                                <option value="1:30 PM">1:30 PM</option>
-                                                <option value="1:45 PM">1:45 PM</option>
-                                                <option value="2:00 PM">2:00 PM</option>
-                                                <option value="2:15 PM">2:15 PM</option>
-                                                <option value="2:30 PM">2:30 PM</option>
-                                                <option value="2:45 PM">2:45 PM</option>
-                                                <option value="3:00 PM">3:00 PM</option>
-                                                <option value="3:15 PM">3:15 PM</option>
-                                                <option value="3:30 PM">3:30 PM</option>
-                                                <option value="3:45 PM">3:45 PM</option>
-                                                <option value="4:00 PM">4:00 PM</option>
-                                                <option value="4:15 PM">4:15 PM</option>
-                                                <option value="4:30 PM">4:30 PM</option>
-                                                <option value="4:45 PM">4:45 PM</option>
-                                                <option value="5:00 PM">5:00 PM</option>
-                                                <option value="5:15 PM">5:15 PM</option>
-                                                <option value="5:30 PM">5:30 PM</option>
-                                                <option value="5:45 PM">5:45 PM</option>
-                                                <option value="6:00 PM">6:00 PM</option>
-                                                <option value="6:15 PM">6:15 PM</option>
-                                                <option value="6:30 PM">6:30 PM</option>
-                                                <option value="6:45 PM">6:45 PM</option>
-                                                <option value="7:00 PM">7:00 PM</option>
-                                                <option value="7:15 PM">7:15 PM</option>
-                                                <option value="7:30 PM">7:30 PM</option>
-                                                <option value="7:45 PM">7:45 PM</option>
-                                                <option value="8:00 PM">8:00 PM</option>
-                                                <option value="8:15 PM">8:15 PM</option>
-                                                <option value="8:30 PM">8:30 PM</option>
-                                                <option value="8:45 PM">8:45 PM</option>
-                                                <option value="9:00 PM">9:00 PM</option>
-                                                <option value="9:15 PM">9:15 PM</option>
-                                                <option value="9:30 PM">9:30 PM</option>
-                                                <option value="9:45 PM">9:45 PM</option>
-                                                <option value="10:00 PM">10:00 PM</option>
-                                                <option value="10:15 PM">10:15 PM</option>
-                                                <option value="10:30 PM">10:30 PM</option>
-                                                <option value="10:45 PM">10:45 PM</option>
-                                                <option value="11:00 PM">11:00 PM</option>
-                                                <option value="11:15 PM">11:15 PM</option>
-                                                <option value="11:30 PM">11:30 PM</option>
-                                                <option value="11:45 PM">11:45 PM</option>
+                                                id="pickup_time">
+                                                <option value="12:00 AM"
+                                                    {{ $rental->pickup_time == '12:00 AM' ? 'selected' : '' }}>12:00 AM
+                                                </option>
+                                                <option value="12:15 AM"
+                                                    {{ $rental->pickup_time == '12:15 AM' ? 'selected' : '' }}>12:15 AM
+                                                </option>
+                                                <option value="12:30 AM"
+                                                    {{ $rental->pickup_time == '12:30 AM' ? 'selected' : '' }}>12:30 AM
+                                                </option>
+                                                <option value="12:45 AM"
+                                                    {{ $rental->pickup_time == '12:45 AM' ? 'selected' : '' }}>12:45 AM
+                                                </option>
+                                                <option value="1:00 AM"
+                                                    {{ $rental->pickup_time == '1:00 AM' ? 'selected' : '' }}>1:00 AM
+                                                </option>
+                                                <option value="1:15 AM"
+                                                    {{ $rental->pickup_time == '1:15 AM' ? 'selected' : '' }}>1:15 AM
+                                                </option>
+                                                <option value="1:30 AM"
+                                                    {{ $rental->pickup_time == '1:30 AM' ? 'selected' : '' }}>1:30 AM
+                                                </option>
+                                                <option value="1:45 AM"
+                                                    {{ $rental->pickup_time == '1:45 AM' ? 'selected' : '' }}>1:45 AM
+                                                </option>
+                                                <option value="2:00 AM"
+                                                    {{ $rental->pickup_time == '2:00 AM' ? 'selected' : '' }}>2:00 AM
+                                                </option>
+                                                <option value="2:15 AM"
+                                                    {{ $rental->pickup_time == '2:15 AM' ? 'selected' : '' }}>2:15 AM
+                                                </option>
+                                                <option value="2:30 AM"
+                                                    {{ $rental->pickup_time == '2:30 AM' ? 'selected' : '' }}>2:30 AM
+                                                </option>
+                                                <option value="2:45 AM"
+                                                    {{ $rental->pickup_time == '2:45 AM' ? 'selected' : '' }}>2:45 AM
+                                                </option>
+                                                <option value="3:00 AM"
+                                                    {{ $rental->pickup_time == '3:00 AM' ? 'selected' : '' }}>3:00 AM
+                                                </option>
+                                                <option value="3:15 AM"
+                                                    {{ $rental->pickup_time == '3:15 AM' ? 'selected' : '' }}>3:15 AM
+                                                </option>
+                                                <option value="3:30 AM"
+                                                    {{ $rental->pickup_time == '3:30 AM' ? 'selected' : '' }}>3:30 AM
+                                                </option>
+                                                <option value="3:45 AM"
+                                                    {{ $rental->pickup_time == '3:45 AM' ? 'selected' : '' }}>3:45 AM
+                                                </option>
+                                                <option value="4:00 AM"
+                                                    {{ $rental->pickup_time == '4:00 AM' ? 'selected' : '' }}>4:00 AM
+                                                </option>
+                                                <option value="4:15 AM"
+                                                    {{ $rental->pickup_time == '4:15 AM' ? 'selected' : '' }}>4:15 AM
+                                                </option>
+                                                <option value="4:30 AM"
+                                                    {{ $rental->pickup_time == '4:30 AM' ? 'selected' : '' }}>4:30 AM
+                                                </option>
+                                                <option value="4:45 AM"
+                                                    {{ $rental->pickup_time == '4:45 AM' ? 'selected' : '' }}>4:45 AM
+                                                </option>
+                                                <option value="5:00 AM"
+                                                    {{ $rental->pickup_time == '5:00 AM' ? 'selected' : '' }}>5:00 AM
+                                                </option>
+                                                <option value="5:15 AM"
+                                                    {{ $rental->pickup_time == '5:15 AM' ? 'selected' : '' }}>5:15 AM
+                                                </option>
+                                                <option value="5:30 AM"
+                                                    {{ $rental->pickup_time == '5:30 AM' ? 'selected' : '' }}>5:30 AM
+                                                </option>
+                                                <option value="5:45 AM"
+                                                    {{ $rental->pickup_time == '5:45 AM' ? 'selected' : '' }}>5:45 AM
+                                                </option>
+                                                <option value="6:00 AM"
+                                                    {{ $rental->pickup_time == '6:00 AM' ? 'selected' : '' }}>6:00 AM
+                                                </option>
+                                                <option value="6:15 AM"
+                                                    {{ $rental->pickup_time == '6:15 AM' ? 'selected' : '' }}>6:15 AM
+                                                </option>
+                                                <option value="6:30 AM"
+                                                    {{ $rental->pickup_time == '6:30 AM' ? 'selected' : '' }}>6:30 AM
+                                                </option>
+                                                <option value="6:45 AM"
+                                                    {{ $rental->pickup_time == '6:45 AM' ? 'selected' : '' }}>6:45 AM
+                                                </option>
+                                                <option value="7:00 AM"
+                                                    {{ $rental->pickup_time == '7:00 AM' ? 'selected' : '' }}>7:00 AM
+                                                </option>
+                                                <option value="7:15 AM"
+                                                    {{ $rental->pickup_time == '7:15 AM' ? 'selected' : '' }}>7:15 AM
+                                                </option>
+                                                <option value="7:30 AM"
+                                                    {{ $rental->pickup_time == '7:30 AM' ? 'selected' : '' }}>7:30 AM
+                                                </option>
+                                                <option value="7:45 AM"
+                                                    {{ $rental->pickup_time == '7:45 AM' ? 'selected' : '' }}>7:45 AM
+                                                </option>
+                                                <option value="8:00 AM"
+                                                    {{ $rental->pickup_time == '8:00 AM' ? 'selected' : '' }}>8:00 AM
+                                                </option>
+                                                <option value="8:15 AM"
+                                                    {{ $rental->pickup_time == '8:15 AM' ? 'selected' : '' }}>8:15 AM
+                                                </option>
+                                                <option value="8:30 AM"
+                                                    {{ $rental->pickup_time == '8:30 AM' ? 'selected' : '' }}>8:30 AM
+                                                </option>
+                                                <option value="8:45 AM"
+                                                    {{ $rental->pickup_time == '8:45 AM' ? 'selected' : '' }}>8:45 AM
+                                                </option>
+                                                <option value="9:00 AM"
+                                                    {{ $rental->pickup_time == '9:00 AM' ? 'selected' : '' }}>9:00 AM
+                                                </option>
+                                                <option value="9:15 AM"
+                                                    {{ $rental->pickup_time == '9:15 AM' ? 'selected' : '' }}>9:15 AM
+                                                </option>
+                                                <option value="9:30 AM"
+                                                    {{ $rental->pickup_time == '9:30 AM' ? 'selected' : '' }}>9:30 AM
+                                                </option>
+                                                <option value="9:45 AM"
+                                                    {{ $rental->pickup_time == '9:45 AM' ? 'selected' : '' }}>9:45 AM
+                                                </option>
+                                                <option value="10:00 AM"
+                                                    {{ $rental->pickup_time == '10:00 AM' ? 'selected' : '' }}>10:00 AM
+                                                </option>
+                                                <option value="10:15 AM"
+                                                    {{ $rental->pickup_time == '10:15 AM' ? 'selected' : '' }}>10:15 AM
+                                                </option>
+                                                <option value="10:30 AM"
+                                                    {{ $rental->pickup_time == '10:30 AM' ? 'selected' : '' }}>10:30 AM
+                                                </option>
+                                                <option value="10:45 AM"
+                                                    {{ $rental->pickup_time == '10:45 AM' ? 'selected' : '' }}>10:45 AM
+                                                </option>
+                                                <option value="11:00 AM"
+                                                    {{ $rental->pickup_time == '11:00 AM' ? 'selected' : '' }}>11:00 AM
+                                                </option>
+                                                <option value="11:15 AM"
+                                                    {{ $rental->pickup_time == '11:15 AM' ? 'selected' : '' }}>11:15 AM
+                                                </option>
+                                                <option value="11:30 AM"
+                                                    {{ $rental->pickup_time == '11:30 AM' ? 'selected' : '' }}>11:30 AM
+                                                </option>
+                                                <option value="11:45 AM"
+                                                    {{ $rental->pickup_time == '11:45 AM' ? 'selected' : '' }}>11:45 AM
+                                                </option>
+                                                <option value="12:00 PM"
+                                                    {{ $rental->pickup_time == '12:00 PM' ? 'selected' : '' }}>12:00 PM
+                                                </option>
+                                                <option value="12:15 PM"
+                                                    {{ $rental->pickup_time == '12:15 PM' ? 'selected' : '' }}>12:15 PM
+                                                </option>
+                                                <option value="12:30 PM"
+                                                    {{ $rental->pickup_time == '12:30 PM' ? 'selected' : '' }}>12:30 PM
+                                                </option>
+                                                <option value="12:45 PM"
+                                                    {{ $rental->pickup_time == '12:45 PM' ? 'selected' : '' }}>12:45 PM
+                                                </option>
+                                                <option value="1:00 PM"
+                                                    {{ $rental->pickup_time == '1:00 PM' ? 'selected' : '' }}>1:00 PM
+                                                </option>
+                                                <option value="1:15 PM"
+                                                    {{ $rental->pickup_time == '1:15 PM' ? 'selected' : '' }}>1:15 PM
+                                                </option>
+                                                <option value="1:30 PM"
+                                                    {{ $rental->pickup_time == '1:30 PM' ? 'selected' : '' }}>1:30 PM
+                                                </option>
+                                                <option value="1:45 PM"
+                                                    {{ $rental->pickup_time == '1:45 PM' ? 'selected' : '' }}>1:45 PM
+                                                </option>
+                                                <option value="2:00 PM"
+                                                    {{ $rental->pickup_time == '2:00 PM' ? 'selected' : '' }}>2:00 PM
+                                                </option>
+                                                <option value="2:15 PM"
+                                                    {{ $rental->pickup_time == '2:15 PM' ? 'selected' : '' }}>2:15 PM
+                                                </option>
+                                                <option value="2:30 PM"
+                                                    {{ $rental->pickup_time == '2:30 PM' ? 'selected' : '' }}>2:30 PM
+                                                </option>
+                                                <option value="2:45 PM"
+                                                    {{ $rental->pickup_time == '2:45 PM' ? 'selected' : '' }}>2:45 PM
+                                                </option>
+                                                <option value="3:00 PM"
+                                                    {{ $rental->pickup_time == '3:00 PM' ? 'selected' : '' }}>3:00 PM
+                                                </option>
+                                                <option value="3:15 PM"
+                                                    {{ $rental->pickup_time == '3:15 PM' ? 'selected' : '' }}>3:15 PM
+                                                </option>
+                                                <option value="3:30 PM"
+                                                    {{ $rental->pickup_time == '3:30 PM' ? 'selected' : '' }}>3:30 PM
+                                                </option>
+                                                <option value="3:45 PM"
+                                                    {{ $rental->pickup_time == '3:45 PM' ? 'selected' : '' }}>3:45 PM
+                                                </option>
+                                                <option value="4:00 PM"
+                                                    {{ $rental->pickup_time == '4:00 PM' ? 'selected' : '' }}>4:00 PM
+                                                </option>
+                                                <option value="4:15 PM"
+                                                    {{ $rental->pickup_time == '4:15 PM' ? 'selected' : '' }}>4:15 PM
+                                                </option>
+                                                <option value="4:30 PM"
+                                                    {{ $rental->pickup_time == '4:30 PM' ? 'selected' : '' }}>4:30 PM
+                                                </option>
+                                                <option value="4:45 PM"
+                                                    {{ $rental->pickup_time == '4:45 PM' ? 'selected' : '' }}>4:45 PM
+                                                </option>
+                                                <option value="5:00 PM"
+                                                    {{ $rental->pickup_time == '5:00 PM' ? 'selected' : '' }}>5:00 PM
+                                                </option>
+                                                <option value="5:15 PM"
+                                                    {{ $rental->pickup_time == '5:15 PM' ? 'selected' : '' }}>5:15 PM
+                                                </option>
+                                                <option value="5:30 PM"
+                                                    {{ $rental->pickup_time == '5:30 PM' ? 'selected' : '' }}>5:30 PM
+                                                </option>
+                                                <option value="5:45 PM"
+                                                    {{ $rental->pickup_time == '5:45 PM' ? 'selected' : '' }}>5:45 PM
+                                                </option>
+                                                <option value="6:00 PM"
+                                                    {{ $rental->pickup_time == '6:00 PM' ? 'selected' : '' }}>6:00 PM
+                                                </option>
+                                                <option value="6:15 PM"
+                                                    {{ $rental->pickup_time == '6:15 PM' ? 'selected' : '' }}>6:15 PM
+                                                </option>
+                                                <option value="6:30 PM"
+                                                    {{ $rental->pickup_time == '6:30 PM' ? 'selected' : '' }}>6:30 PM
+                                                </option>
+                                                <option value="6:45 PM"
+                                                    {{ $rental->pickup_time == '6:45 PM' ? 'selected' : '' }}>6:45 PM
+                                                </option>
+                                                <option value="7:00 PM"
+                                                    {{ $rental->pickup_time == '7:00 PM' ? 'selected' : '' }}>7:00 PM
+                                                </option>
+                                                <option value="7:15 PM"
+                                                    {{ $rental->pickup_time == '7:15 PM' ? 'selected' : '' }}>7:15 PM
+                                                </option>
+                                                <option value="7:30 PM"
+                                                    {{ $rental->pickup_time == '7:30 PM' ? 'selected' : '' }}>7:30 PM
+                                                </option>
+                                                <option value="7:45 PM"
+                                                    {{ $rental->pickup_time == '7:45 PM' ? 'selected' : '' }}>7:45 PM
+                                                </option>
+                                                <option value="8:00 PM"
+                                                    {{ $rental->pickup_time == '8:00 PM' ? 'selected' : '' }}>8:00 PM
+                                                </option>
+                                                <option value="8:15 PM"
+                                                    {{ $rental->pickup_time == '8:15 PM' ? 'selected' : '' }}>8:15 PM
+                                                </option>
+                                                <option value="8:30 PM"
+                                                    {{ $rental->pickup_time == '8:30 PM' ? 'selected' : '' }}>8:30 PM
+                                                </option>
+                                                <option value="8:45 PM"
+                                                    {{ $rental->pickup_time == '8:45 PM' ? 'selected' : '' }}>8:45 PM
+                                                </option>
+                                                <option value="9:00 PM"
+                                                    {{ $rental->pickup_time == '9:00 PM' ? 'selected' : '' }}>9:00 PM
+                                                </option>
+                                                <option value="9:15 PM"
+                                                    {{ $rental->pickup_time == '9:15 PM' ? 'selected' : '' }}>9:15 PM
+                                                </option>
+                                                <option value="9:30 PM"
+                                                    {{ $rental->pickup_time == '9:30 PM' ? 'selected' : '' }}>9:30 PM
+                                                </option>
+                                                <option value="9:45 PM"
+                                                    {{ $rental->pickup_time == '9:45 PM' ? 'selected' : '' }}>9:45 PM
+                                                </option>
+                                                <option value="10:00 PM"
+                                                    {{ $rental->pickup_time == '10:00 PM' ? 'selected' : '' }}>10:00 PM
+                                                </option>
+                                                <option value="10:15 PM"
+                                                    {{ $rental->pickup_time == '10:15 PM' ? 'selected' : '' }}>10:15 PM
+                                                </option>
+                                                <option value="10:30 PM"
+                                                    {{ $rental->pickup_time == '10:30 PM' ? 'selected' : '' }}>10:30 PM
+                                                </option>
+                                                <option value="10:45 PM"
+                                                    {{ $rental->pickup_time == '10:45 PM' ? 'selected' : '' }}>10:45 PM
+                                                </option>
+                                                <option value="11:00 PM"
+                                                    {{ $rental->pickup_time == '11:00 PM' ? 'selected' : '' }}>11:00 PM
+                                                </option>
+                                                <option value="11:15 PM"
+                                                    {{ $rental->pickup_time == '11:15 PM' ? 'selected' : '' }}>11:15 PM
+                                                </option>
+                                                <option value="11:30 PM"
+                                                    {{ $rental->pickup_time == '11:30 PM' ? 'selected' : '' }}>11:30 PM
+                                                </option>
+                                                <option value="11:45 PM"
+                                                    {{ $rental->pickup_time == '11:45 PM' ? 'selected' : '' }}>11:45 PM
+                                                </option>
                                             </select>
+
                                         </div>
                                         <div class="col-6">
                                             <label for="return_time" class="form-label">Return Time</label>
                                             <select class="form-select" name="return_time" required="required"
-                                                id="return_time" value="{{ $rental->return_time }}">
-                                                <option value="12:00 AM">12:00 AM</option>
-                                                <option value="12:15 AM">12:15 AM</option>
-                                                <option value="12:30 AM">12:30 AM</option>
-                                                <option value="12:45 AM">12:45 AM</option>
-                                                <option value="1:00 AM">1:00 AM</option>
-                                                <option value="1:15 AM">1:15 AM</option>
-                                                <option value="1:30 AM">1:30 AM</option>
-                                                <option value="1:45 AM">1:45 AM</option>
-                                                <option value="2:00 AM">2:00 AM</option>
-                                                <option value="2:15 AM">2:15 AM</option>
-                                                <option value="2:30 AM">2:30 AM</option>
-                                                <option value="2:45 AM">2:45 AM</option>
-                                                <option value="3:00 AM">3:00 AM</option>
-                                                <option value="3:15 AM">3:15 AM</option>
-                                                <option value="3:30 AM">3:30 AM</option>
-                                                <option value="3:45 AM">3:45 AM</option>
-                                                <option value="4:00 AM">4:00 AM</option>
-                                                <option value="4:15 AM">4:15 AM</option>
-                                                <option value="4:30 AM">4:30 AM</option>
-                                                <option value="4:45 AM">4:45 AM</option>
-                                                <option value="5:00 AM">5:00 AM</option>
-                                                <option value="5:15 AM">5:15 AM</option>
-                                                <option value="5:30 AM">5:30 AM</option>
-                                                <option value="5:45 AM">5:45 AM</option>
-                                                <option value="6:00 AM">6:00 AM</option>
-                                                <option value="6:15 AM">6:15 AM</option>
-                                                <option value="6:30 AM">6:30 AM</option>
-                                                <option value="6:45 AM">6:45 AM</option>
-                                                <option value="7:00 AM">7:00 AM</option>
-                                                <option value="7:15 AM">7:15 AM</option>
-                                                <option value="7:30 AM">7:30 AM</option>
-                                                <option value="7:45 AM">7:45 AM</option>
-                                                <option value="8:00 AM">8:00 AM</option>
-                                                <option value="8:15 AM">8:15 AM</option>
-                                                <option value="8:30 AM">8:30 AM</option>
-                                                <option value="8:45 AM">8:45 AM</option>
-                                                <option value="9:00 AM" selected="selected">9:00 AM</option>
-                                                <option value="9:15 AM">9:15 AM</option>
-                                                <option value="9:30 AM">9:30 AM</option>
-                                                <option value="9:45 AM">9:45 AM</option>
-                                                <option value="10:00 AM">10:00 AM</option>
-                                                <option value="10:15 AM">10:15 AM</option>
-                                                <option value="10:30 AM">10:30 AM</option>
-                                                <option value="10:45 AM">10:45 AM</option>
-                                                <option value="11:00 AM">11:00 AM</option>
-                                                <option value="11:15 AM">11:15 AM</option>
-                                                <option value="11:30 AM">11:30 AM</option>
-                                                <option value="11:45 AM">11:45 AM</option>
-                                                <option value="12:00 PM">12:00 PM</option>
-                                                <option value="12:15 PM">12:15 PM</option>
-                                                <option value="12:30 PM">12:30 PM</option>
-                                                <option value="12:45 PM">12:45 PM</option>
-                                                <option value="1:00 PM">1:00 PM</option>
-                                                <option value="1:15 PM">1:15 PM</option>
-                                                <option value="1:30 PM">1:30 PM</option>
-                                                <option value="1:45 PM">1:45 PM</option>
-                                                <option value="2:00 PM">2:00 PM</option>
-                                                <option value="2:15 PM">2:15 PM</option>
-                                                <option value="2:30 PM">2:30 PM</option>
-                                                <option value="2:45 PM">2:45 PM</option>
-                                                <option value="3:00 PM">3:00 PM</option>
-                                                <option value="3:15 PM">3:15 PM</option>
-                                                <option value="3:30 PM">3:30 PM</option>
-                                                <option value="3:45 PM">3:45 PM</option>
-                                                <option value="4:00 PM">4:00 PM</option>
-                                                <option value="4:15 PM">4:15 PM</option>
-                                                <option value="4:30 PM">4:30 PM</option>
-                                                <option value="4:45 PM">4:45 PM</option>
-                                                <option value="5:00 PM">5:00 PM</option>
-                                                <option value="5:15 PM">5:15 PM</option>
-                                                <option value="5:30 PM">5:30 PM</option>
-                                                <option value="5:45 PM">5:45 PM</option>
-                                                <option value="6:00 PM">6:00 PM</option>
-                                                <option value="6:15 PM">6:15 PM</option>
-                                                <option value="6:30 PM">6:30 PM</option>
-                                                <option value="6:45 PM">6:45 PM</option>
-                                                <option value="7:00 PM">7:00 PM</option>
-                                                <option value="7:15 PM">7:15 PM</option>
-                                                <option value="7:30 PM">7:30 PM</option>
-                                                <option value="7:45 PM">7:45 PM</option>
-                                                <option value="8:00 PM">8:00 PM</option>
-                                                <option value="8:15 PM">8:15 PM</option>
-                                                <option value="8:30 PM">8:30 PM</option>
-                                                <option value="8:45 PM">8:45 PM</option>
-                                                <option value="9:00 PM">9:00 PM</option>
-                                                <option value="9:15 PM">9:15 PM</option>
-                                                <option value="9:30 PM">9:30 PM</option>
-                                                <option value="9:45 PM">9:45 PM</option>
-                                                <option value="10:00 PM">10:00 PM</option>
-                                                <option value="10:15 PM">10:15 PM</option>
-                                                <option value="10:30 PM">10:30 PM</option>
-                                                <option value="10:45 PM">10:45 PM</option>
-                                                <option value="11:00 PM">11:00 PM</option>
-                                                <option value="11:15 PM">11:15 PM</option>
-                                                <option value="11:30 PM">11:30 PM</option>
-                                                <option value="11:45 PM">11:45 PM</option>
+                                                id="return_time">
+                                                <option value="12:00 AM"
+                                                    {{ $rental->return_time == '12:00 AM' ? 'selected' : '' }}>12:00 AM
+                                                </option>
+                                                <option value="12:15 AM"
+                                                    {{ $rental->return_time == '12:15 AM' ? 'selected' : '' }}>12:15 AM
+                                                </option>
+                                                <option value="12:30 AM"
+                                                    {{ $rental->return_time == '12:30 AM' ? 'selected' : '' }}>12:30 AM
+                                                </option>
+                                                <option value="12:45 AM"
+                                                    {{ $rental->return_time == '12:45 AM' ? 'selected' : '' }}>12:45 AM
+                                                </option>
+                                                <option value="1:00 AM"
+                                                    {{ $rental->return_time == '1:00 AM' ? 'selected' : '' }}>1:00 AM
+                                                </option>
+                                                <option value="1:15 AM"
+                                                    {{ $rental->return_time == '1:15 AM' ? 'selected' : '' }}>1:15 AM
+                                                </option>
+                                                <option value="1:30 AM"
+                                                    {{ $rental->return_time == '1:30 AM' ? 'selected' : '' }}>1:30 AM
+                                                </option>
+                                                <option value="1:45 AM"
+                                                    {{ $rental->return_time == '1:45 AM' ? 'selected' : '' }}>1:45 AM
+                                                </option>
+                                                <option value="2:00 AM"
+                                                    {{ $rental->return_time == '2:00 AM' ? 'selected' : '' }}>2:00 AM
+                                                </option>
+                                                <option value="2:15 AM"
+                                                    {{ $rental->return_time == '2:15 AM' ? 'selected' : '' }}>2:15 AM
+                                                </option>
+                                                <option value="2:30 AM"
+                                                    {{ $rental->return_time == '2:30 AM' ? 'selected' : '' }}>2:30 AM
+                                                </option>
+                                                <option value="2:45 AM"
+                                                    {{ $rental->return_time == '2:45 AM' ? 'selected' : '' }}>2:45 AM
+                                                </option>
+                                                <option value="3:00 AM"
+                                                    {{ $rental->return_time == '3:00 AM' ? 'selected' : '' }}>3:00 AM
+                                                </option>
+                                                <option value="3:15 AM"
+                                                    {{ $rental->return_time == '3:15 AM' ? 'selected' : '' }}>3:15 AM
+                                                </option>
+                                                <option value="3:30 AM"
+                                                    {{ $rental->return_time == '3:30 AM' ? 'selected' : '' }}>3:30 AM
+                                                </option>
+                                                <option value="3:45 AM"
+                                                    {{ $rental->return_time == '3:45 AM' ? 'selected' : '' }}>3:45 AM
+                                                </option>
+                                                <option value="4:00 AM"
+                                                    {{ $rental->return_time == '4:00 AM' ? 'selected' : '' }}>4:00 AM
+                                                </option>
+                                                <option value="4:15 AM"
+                                                    {{ $rental->return_time == '4:15 AM' ? 'selected' : '' }}>4:15 AM
+                                                </option>
+                                                <option value="4:30 AM"
+                                                    {{ $rental->return_time == '4:30 AM' ? 'selected' : '' }}>4:30 AM
+                                                </option>
+                                                <option value="4:45 AM"
+                                                    {{ $rental->return_time == '4:45 AM' ? 'selected' : '' }}>4:45 AM
+                                                </option>
+                                                <option value="5:00 AM"
+                                                    {{ $rental->return_time == '5:00 AM' ? 'selected' : '' }}>5:00 AM
+                                                </option>
+                                                <option value="5:15 AM"
+                                                    {{ $rental->return_time == '5:15 AM' ? 'selected' : '' }}>5:15 AM
+                                                </option>
+                                                <option value="5:30 AM"
+                                                    {{ $rental->return_time == '5:30 AM' ? 'selected' : '' }}>5:30 AM
+                                                </option>
+                                                <option value="5:45 AM"
+                                                    {{ $rental->return_time == '5:45 AM' ? 'selected' : '' }}>5:45 AM
+                                                </option>
+                                                <option value="6:00 AM"
+                                                    {{ $rental->return_time == '6:00 AM' ? 'selected' : '' }}>6:00 AM
+                                                </option>
+                                                <option value="6:15 AM"
+                                                    {{ $rental->return_time == '6:15 AM' ? 'selected' : '' }}>6:15 AM
+                                                </option>
+                                                <option value="6:30 AM"
+                                                    {{ $rental->return_time == '6:30 AM' ? 'selected' : '' }}>6:30 AM
+                                                </option>
+                                                <option value="6:45 AM"
+                                                    {{ $rental->return_time == '6:45 AM' ? 'selected' : '' }}>6:45 AM
+                                                </option>
+                                                <option value="7:00 AM"
+                                                    {{ $rental->return_time == '7:00 AM' ? 'selected' : '' }}>7:00 AM
+                                                </option>
+                                                <option value="7:15 AM"
+                                                    {{ $rental->return_time == '7:15 AM' ? 'selected' : '' }}>7:15 AM
+                                                </option>
+                                                <option value="7:30 AM"
+                                                    {{ $rental->return_time == '7:30 AM' ? 'selected' : '' }}>7:30 AM
+                                                </option>
+                                                <option value="7:45 AM"
+                                                    {{ $rental->return_time == '7:45 AM' ? 'selected' : '' }}>7:45 AM
+                                                </option>
+                                                <option value="8:00 AM"
+                                                    {{ $rental->return_time == '8:00 AM' ? 'selected' : '' }}>8:00 AM
+                                                </option>
+                                                <option value="8:15 AM"
+                                                    {{ $rental->return_time == '8:15 AM' ? 'selected' : '' }}>8:15 AM
+                                                </option>
+                                                <option value="8:30 AM"
+                                                    {{ $rental->return_time == '8:30 AM' ? 'selected' : '' }}>8:30 AM
+                                                </option>
+                                                <option value="8:45 AM"
+                                                    {{ $rental->return_time == '8:45 AM' ? 'selected' : '' }}>8:45 AM
+                                                </option>
+                                                <option value="9:00 AM"
+                                                    {{ $rental->return_time == '9:00 AM' ? 'selected' : '' }}>9:00 AM
+                                                </option>
+                                                <option value="9:15 AM"
+                                                    {{ $rental->return_time == '9:15 AM' ? 'selected' : '' }}>9:15 AM
+                                                </option>
+                                                <option value="9:30 AM"
+                                                    {{ $rental->return_time == '9:30 AM' ? 'selected' : '' }}>9:30 AM
+                                                </option>
+                                                <option value="9:45 AM"
+                                                    {{ $rental->return_time == '9:45 AM' ? 'selected' : '' }}>9:45 AM
+                                                </option>
+                                                <option value="10:00 AM"
+                                                    {{ $rental->return_time == '10:00 AM' ? 'selected' : '' }}>10:00 AM
+                                                </option>
+                                                <option value="10:15 AM"
+                                                    {{ $rental->return_time == '10:15 AM' ? 'selected' : '' }}>10:15 AM
+                                                </option>
+                                                <option value="10:30 AM"
+                                                    {{ $rental->return_time == '10:30 AM' ? 'selected' : '' }}>10:30 AM
+                                                </option>
+                                                <option value="10:45 AM"
+                                                    {{ $rental->return_time == '10:45 AM' ? 'selected' : '' }}>10:45 AM
+                                                </option>
+                                                <option value="11:00 AM"
+                                                    {{ $rental->return_time == '11:00 AM' ? 'selected' : '' }}>11:00 AM
+                                                </option>
+                                                <option value="11:15 AM"
+                                                    {{ $rental->return_time == '11:15 AM' ? 'selected' : '' }}>11:15 AM
+                                                </option>
+                                                <option value="11:30 AM"
+                                                    {{ $rental->return_time == '11:30 AM' ? 'selected' : '' }}>11:30 AM
+                                                </option>
+                                                <option value="11:45 AM"
+                                                    {{ $rental->return_time == '11:45 AM' ? 'selected' : '' }}>11:45 AM
+                                                </option>
+                                                <option value="12:00 PM"
+                                                    {{ $rental->return_time == '12:00 PM' ? 'selected' : '' }}>12:00 PM
+                                                </option>
+                                                <option value="12:15 PM"
+                                                    {{ $rental->return_time == '12:15 PM' ? 'selected' : '' }}>12:15 PM
+                                                </option>
+                                                <option value="12:30 PM"
+                                                    {{ $rental->return_time == '12:30 PM' ? 'selected' : '' }}>12:30 PM
+                                                </option>
+                                                <option value="12:45 PM"
+                                                    {{ $rental->return_time == '12:45 PM' ? 'selected' : '' }}>12:45 PM
+                                                </option>
+                                                <option value="1:00 PM"
+                                                    {{ $rental->return_time == '1:00 PM' ? 'selected' : '' }}>1:00 PM
+                                                </option>
+                                                <option value="1:15 PM"
+                                                    {{ $rental->return_time == '1:15 PM' ? 'selected' : '' }}>1:15 PM
+                                                </option>
+                                                <option value="1:30 PM"
+                                                    {{ $rental->return_time == '1:30 PM' ? 'selected' : '' }}>1:30 PM
+                                                </option>
+                                                <option value="1:45 PM"
+                                                    {{ $rental->return_time == '1:45 PM' ? 'selected' : '' }}>1:45 PM
+                                                </option>
+                                                <option value="2:00 PM"
+                                                    {{ $rental->return_time == '2:00 PM' ? 'selected' : '' }}>2:00 PM
+                                                </option>
+                                                <option value="2:15 PM"
+                                                    {{ $rental->return_time == '2:15 PM' ? 'selected' : '' }}>2:15 PM
+                                                </option>
+                                                <option value="2:30 PM"
+                                                    {{ $rental->return_time == '2:30 PM' ? 'selected' : '' }}>2:30 PM
+                                                </option>
+                                                <option value="2:45 PM"
+                                                    {{ $rental->return_time == '2:45 PM' ? 'selected' : '' }}>2:45 PM
+                                                </option>
+                                                <option value="3:00 PM"
+                                                    {{ $rental->return_time == '3:00 PM' ? 'selected' : '' }}>3:00 PM
+                                                </option>
+                                                <option value="3:15 PM"
+                                                    {{ $rental->return_time == '3:15 PM' ? 'selected' : '' }}>3:15 PM
+                                                </option>
+                                                <option value="3:30 PM"
+                                                    {{ $rental->return_time == '3:30 PM' ? 'selected' : '' }}>3:30 PM
+                                                </option>
+                                                <option value="3:45 PM"
+                                                    {{ $rental->return_time == '3:45 PM' ? 'selected' : '' }}>3:45 PM
+                                                </option>
+                                                <option value="4:00 PM"
+                                                    {{ $rental->return_time == '4:00 PM' ? 'selected' : '' }}>4:00 PM
+                                                </option>
+                                                <option value="4:15 PM"
+                                                    {{ $rental->return_time == '4:15 PM' ? 'selected' : '' }}>4:15 PM
+                                                </option>
+                                                <option value="4:30 PM"
+                                                    {{ $rental->return_time == '4:30 PM' ? 'selected' : '' }}>4:30 PM
+                                                </option>
+                                                <option value="4:45 PM"
+                                                    {{ $rental->return_time == '4:45 PM' ? 'selected' : '' }}>4:45 PM
+                                                </option>
+                                                <option value="5:00 PM"
+                                                    {{ $rental->return_time == '5:00 PM' ? 'selected' : '' }}>5:00 PM
+                                                </option>
+                                                <option value="5:15 PM"
+                                                    {{ $rental->return_time == '5:15 PM' ? 'selected' : '' }}>5:15 PM
+                                                </option>
+                                                <option value="5:30 PM"
+                                                    {{ $rental->return_time == '5:30 PM' ? 'selected' : '' }}>5:30 PM
+                                                </option>
+                                                <option value="5:45 PM"
+                                                    {{ $rental->return_time == '5:45 PM' ? 'selected' : '' }}>5:45 PM
+                                                </option>
+                                                <option value="6:00 PM"
+                                                    {{ $rental->return_time == '6:00 PM' ? 'selected' : '' }}>6:00 PM
+                                                </option>
+                                                <option value="6:15 PM"
+                                                    {{ $rental->return_time == '6:15 PM' ? 'selected' : '' }}>6:15 PM
+                                                </option>
+                                                <option value="6:30 PM"
+                                                    {{ $rental->return_time == '6:30 PM' ? 'selected' : '' }}>6:30 PM
+                                                </option>
+                                                <option value="6:45 PM"
+                                                    {{ $rental->return_time == '6:45 PM' ? 'selected' : '' }}>6:45 PM
+                                                </option>
+                                                <option value="7:00 PM"
+                                                    {{ $rental->return_time == '7:00 PM' ? 'selected' : '' }}>7:00 PM
+                                                </option>
+                                                <option value="7:15 PM"
+                                                    {{ $rental->return_time == '7:15 PM' ? 'selected' : '' }}>7:15 PM
+                                                </option>
+                                                <option value="7:30 PM"
+                                                    {{ $rental->return_time == '7:30 PM' ? 'selected' : '' }}>7:30 PM
+                                                </option>
+                                                <option value="7:45 PM"
+                                                    {{ $rental->return_time == '7:45 PM' ? 'selected' : '' }}>7:45 PM
+                                                </option>
+                                                <option value="8:00 PM"
+                                                    {{ $rental->return_time == '8:00 PM' ? 'selected' : '' }}>8:00 PM
+                                                </option>
+                                                <option value="8:15 PM"
+                                                    {{ $rental->return_time == '8:15 PM' ? 'selected' : '' }}>8:15 PM
+                                                </option>
+                                                <option value="8:30 PM"
+                                                    {{ $rental->return_time == '8:30 PM' ? 'selected' : '' }}>8:30 PM
+                                                </option>
+                                                <option value="8:45 PM"
+                                                    {{ $rental->return_time == '8:45 PM' ? 'selected' : '' }}>8:45 PM
+                                                </option>
+                                                <option value="9:00 PM"
+                                                    {{ $rental->return_time == '9:00 PM' ? 'selected' : '' }}>9:00 PM
+                                                </option>
+                                                <option value="9:15 PM"
+                                                    {{ $rental->return_time == '9:15 PM' ? 'selected' : '' }}>9:15 PM
+                                                </option>
+                                                <option value="9:30 PM"
+                                                    {{ $rental->return_time == '9:30 PM' ? 'selected' : '' }}>9:30 PM
+                                                </option>
+                                                <option value="9:45 PM"
+                                                    {{ $rental->return_time == '9:45 PM' ? 'selected' : '' }}>9:45 PM
+                                                </option>
+                                                <option value="10:00 PM"
+                                                    {{ $rental->return_time == '10:00 PM' ? 'selected' : '' }}>10:00 PM
+                                                </option>
+                                                <option value="10:15 PM"
+                                                    {{ $rental->return_time == '10:15 PM' ? 'selected' : '' }}>10:15 PM
+                                                </option>
+                                                <option value="10:30 PM"
+                                                    {{ $rental->return_time == '10:30 PM' ? 'selected' : '' }}>10:30 PM
+                                                </option>
+                                                <option value="10:45 PM"
+                                                    {{ $rental->return_time == '10:45 PM' ? 'selected' : '' }}>10:45 PM
+                                                </option>
+                                                <option value="11:00 PM"
+                                                    {{ $rental->return_time == '11:00 PM' ? 'selected' : '' }}>11:00 PM
+                                                </option>
+                                                <option value="11:15 PM"
+                                                    {{ $rental->return_time == '11:15 PM' ? 'selected' : '' }}>11:15 PM
+                                                </option>
+                                                <option value="11:30 PM"
+                                                    {{ $rental->return_time == '11:30 PM' ? 'selected' : '' }}>11:30 PM
+                                                </option>
+                                                <option value="11:45 PM"
+                                                    {{ $rental->return_time == '11:45 PM' ? 'selected' : '' }}>11:45 PM
+                                                </option>
                                             </select>
+
                                         </div>
                                     </div>
                                     <div class="row">

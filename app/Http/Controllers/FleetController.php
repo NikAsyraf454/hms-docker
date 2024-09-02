@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Fleet;
+use App\Models\MaintenanceRecord;
 
 use Illuminate\Http\Request;
 
@@ -53,7 +54,9 @@ class FleetController extends Controller
 
     public function edit($id){
         $fleet = Fleet::find($id);
-        return view('fleet.edit', compact('fleet'));
+        $maintenance = MaintenanceRecord::where('fleet_id', $id)->get();
+
+        return view('fleet.edit', compact('fleet','maintenance'));
     }
 
     public function update(Request $request, $id){

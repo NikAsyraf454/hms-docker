@@ -14,10 +14,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href={{ route('claim.index') }}>Fleet</a>
+            <a class="navbar-brand h1" href={{ route('fleet.index') }}>Fleet</a>
             <div class="justify-end ">
                 <div class="col ">
-                    <a class="btn btn-sm btn-success" href={{ route('claim.create') }}>Add Fleet</a>
+                    <a class="btn btn-sm btn-success" href={{ route('fleet.create') }}>Add Fleet</a>
                 </div>
             </div>
     </nav>

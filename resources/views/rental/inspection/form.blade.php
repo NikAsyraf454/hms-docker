@@ -23,6 +23,7 @@
                             <input type="hidden" class="" name="staff_id" id="staff_id" value="{{ $userId }}">
                             <input type="hidden" class="" name="rental_id" id="rental_id"
                                 value="{{ $id }}">
+                            <input type="hidden" class="" name="type" id="type" value="{{ $type }}">
                             <div class="row">
                                 <div class="col">
                                     <div class="col-md-12">

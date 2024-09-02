@@ -38,6 +38,10 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col">
+                                                    <a href="{{ route('deposit.show', $item->depo_id) }}"
+                                                        class="btn btn-warning btn-sm">Deposit</a>
+                                                </div>
+                                                <div class="col">
                                                     <a href="{{ route('rental.edit', $item->id) }}"
                                                         class="btn btn-primary btn-sm">Edit</a>
                                                 </div>

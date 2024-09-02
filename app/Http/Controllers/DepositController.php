@@ -47,6 +47,7 @@ class DepositController extends Controller
 
     public function show($id){
         $depo = Deposit::find($id);
+        // return response()->json($depo);
         return view('deposit.show', compact('depo'));
     }
 
@@ -57,22 +58,22 @@ class DepositController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'brand' => 'required|max:255',
-            'model' => 'required|max:255',
-            'year' => 'required|max:255',
-            'plate_number' => 'required',
+            'fuel' => 'required|max:255',
+            'late' => 'required|max:255',
+            'extend' => 'required|max:255',
+            'return_date' => 'nullable',
         ]);
 
         $depo = Deposit::find($id);
         $depo->update($request->all());
-        return redirect()->route('depo.index')
+        return redirect()->route('deposit.index')
         ->with('success', 'depo updated successfully.');
     }
 
     public function destroy($id){
         $depo = Deposit::find($id);
         $depo->delete();
-        return redirect()->route('depo.index')
+        return redirect()->route('deposit.index')
         ->with('success', 'Fleet deleted successfully');
     }
 }

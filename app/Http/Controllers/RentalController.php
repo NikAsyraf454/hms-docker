@@ -16,6 +16,7 @@ use App\Services\CustomerService;
 use App\Services\RentalService;
 use App\Services\DepositService;
 use App\Services\PaymentService;
+use App\Services\InspectionService;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +25,12 @@ class RentalController extends Controller
 {
     protected $customerService;
 
-    public function __construct(CustomerService $customerService, RentalService $rentalService, DepositService $depositService, PaymentService $paymentService){
+    public function __construct(CustomerService $customerService, RentalService $rentalService, DepositService $depositService, PaymentService $paymentService, InspectionService $inspectionService){
         $this->customerService = $customerService;
         $this->rentalService = $rentalService;
         $this->depositService = $depositService;
         $this->paymentService = $paymentService;
+        $this->inspectionService = $inspectionService;
     }
 
     public function index(){
@@ -98,8 +100,10 @@ class RentalController extends Controller
 
     public function show($id){
         $rental = $this->rentalService->getRentalById($id);
-        // return response()->json($rental);
-        return view('rental.show', compact('rental'));
+        $pre = $this->inspectionService->getPreInspectionById($id);
+        $post = $this->inspectionService->getPostInspectionById($id);
+        // return response()->json($post);
+        return view('rental.show', compact('rental','pre','post'));
     }
 
     public function edit($id){

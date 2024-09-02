@@ -13,9 +13,13 @@ class Deposit extends Model
         'amount', 
         'date', 
         'status', 
+        'fuel', 
+        'late', 
+        'extend', 
+        'proof',
         'return_date', 
+        'return_amount', 
         'updated_by',
-        'proof'
     ];
 
     public function rentals()

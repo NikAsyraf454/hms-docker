@@ -114,13 +114,11 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
-                                            <input type="date" class="form-control" name="pickup_time"
-                                                id="pickup_time" value="{{ $rental->pickup_time }}" disabled>
+                                            <p>{{ $rental->pickup_time }}</p>
                                         </div>
                                         <div class="col-6">
                                             <label for="return_time" class="form-label">Return Time</label>
-                                            <input type="date" class="form-control" name="return_time"
-                                                id="return_time" value="{{ $rental->return_time }}" disabled>
+                                            <p>{{ $rental->return_time }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -152,8 +150,8 @@
                                         <div class="col-6">
                                             <label for="payment_status" class="form-label">Payment Status</label>
                                             <input type="text" class="form-control" name="payment_status"
-                                                id="payment_status" value="{{ $rental->payment->payment_status }}"
-                                                disabled>
+                                                id="payment_status"
+                                                value="{{ ucfirst($rental->payment->payment_status) }}" disabled>
                                         </div>
                                         <div class="col-6">
                                             <label for="rental_amount" class="form-label">Rental Amount</label>
@@ -199,17 +197,21 @@
                                         @endif
 
                                     </div>
-                                    <a href="{{ route('inspection.create', ['id' => $rental->id]) }}"
-                                        class="btn btn-primary mt-2">Pre Inspection Form</a>
+                                    @if (isset($pre))
+                                        <a href="{{ route('inspection.show', ['id' => $rental->id, 'type' => 'pre']) }}"
+                                            class="btn btn-success mt-2">Pre Inspection Form</a>
+                                    @else
+                                        <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
+                                            class="btn btn-primary mt-2">Pre Inspection Form</a>
+                                    @endif
 
-                                    <a href="{{ route('inspection.create', ['id' => $rental->id]) }}"
-                                        class="btn btn-primary mt-2">Post Inspection Form</a>
-
-                                    <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
-                                        class="btn btn-primary mt-2">Pre Inspection Form</a>
-
-                                    <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
-                                        class="btn btn-primary mt-2">Post Inspection Form</a>
+                                    @if (isset($post))
+                                        <a href="{{ route('inspection.show', ['id' => $rental->id, 'type' => 'post']) }}"
+                                            class="btn btn-success mt-2">Post Inspection Form</a>
+                                    @else
+                                        <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'post']) }}"
+                                            class="btn btn-primary mt-2">Pre Inspection Form</a>
+                                    @endif
                                 </div>
                                 {{-- Rental Detail --}}
 

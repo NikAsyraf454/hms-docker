@@ -46,7 +46,8 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="claim-tab" data-bs-toggle="tab" data-bs-target="#claim" type="button"
-                            role="tab" aria-controls="claim" aria-selected="false">Staff Claim</button>
+                            role="tab" aria-controls="claim" aria-selected="false">Staff
+                            Claim</button>
                     </li>
                 </ul>
                 <div class="tab-content pt-2" id="myTabContent">
