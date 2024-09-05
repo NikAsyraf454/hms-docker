@@ -17,3 +17,59 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- DataTables JS -->
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+  <script>
+      // Session timeout settings
+      const sessionLifetime = {{ config('session.lifetime') }}; // Lifetime in minutes
+      const warningTime = 5; // Time before session expires to show the warning (in minutes)
+      const sessionTimeout = (sessionLifetime - warningTime) * 60 * 1000; // Warning before session expiry in milliseconds
+
+      let warningTimer, sessionTimer;
+
+      // Function to show the session timeout modal
+      function showSessionTimeoutModal() {
+          $('#sessionTimeoutModal').modal('show');
+      }
+
+      // Function to refresh the session
+      function refreshSession() {
+          fetch("{{ route('session.refresh') }}", {
+                  method: 'POST',
+                  headers: {
+                      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                  }
+              })
+              .then(response => {
+                  if (response.ok) {
+                      resetTimers(); // Reset the timers if session is refreshed
+                  }
+              });
+      }
+
+      // Function to reset timers
+      function resetTimers() {
+          clearTimeout(warningTimer);
+          clearTimeout(sessionTimer);
+
+          warningTimer = setTimeout(showSessionTimeoutModal, sessionTimeout);
+          sessionTimer = setTimeout(() => {
+              window.location.href = "{{ route('logout') }}"; // Auto-logout after session expiry
+          }, sessionLifetime * 60 * 1000);
+      }
+
+      // Initialize the timers when the page loads
+      document.addEventListener('DOMContentLoaded', () => {
+          resetTimers();
+      });
+
+      // Event listener for 'Stay Logged In' button
+      document.getElementById('stayLoggedInButton').addEventListener('click', () => {
+          $('#sessionTimeoutModal').modal('hide');
+          refreshSession();
+      });
+
+      // Event listener for 'Logout' button
+      document.getElementById('logoutButton').addEventListener('click', () => {
+          window.location.href = "{{ route('logout') }}";
+      });
+  </script>

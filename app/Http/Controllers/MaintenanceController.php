@@ -47,7 +47,6 @@ class MaintenanceController extends Controller
         return redirect()->back()->with('success', 'Maintenance record saved successfully!');
     }
 
-
     /**
      * Display the specified resource.
      */

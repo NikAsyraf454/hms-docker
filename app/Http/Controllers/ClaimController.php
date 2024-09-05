@@ -69,7 +69,6 @@ class ClaimController extends Controller
 
             $data['category'] = 'members';
             $claim = $this->claimService->storeClaimMember($data);
-            // dd($claim);
 
         }
         if($id == 'extra'){
@@ -82,6 +81,14 @@ class ClaimController extends Controller
             $claim = $this->claimService->storeClaimMember($data);
         }
         if($id == 'depo'){
+             $request->validate([
+                'details' => 'required|max:255',
+                'amount' => 'required',
+                'plate_number' => 'required',
+                'date-claim' => 'required',
+                'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            ]);
+
             $data = $request->all();
             $data['category'] = 'depo';
             $claim = $this->claimService->storeClaimMember($data);

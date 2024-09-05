@@ -79,24 +79,26 @@ class ClaimService
     }
 
     public function getMember($id){
-         $claim = DB::table('claims')
-            ->join('rentals', 'claims.rental_id', '=', 'rentals.id')
-            ->where('rentals.id', '=', $id)
-            ->select(
-                'claims.id as claim_id',
-                'claims.details',
-                'claims.category',
-                'claims.amount',
-                'claims.plate_number',
-                'claims.status',
-                'claims.date',
-                'claims.payment_date',
-                'rentals.customer_id',
-                'rentals.pickup_date',
-                'rentals.return_date',
-                'rentals.rental_amount',
-            )
-            ->get();
+        $claim = DB::table('claims')
+        ->join('rentals', 'claims.rental_id', '=', 'rentals.id')
+        ->join('payments', 'rentals.payment_id', '=', 'payments.id') // Join rentals with payments
+        ->where('rentals.id', '=', $id)
+        ->select(
+            'claims.id as claim_id',
+            'claims.details',
+            'claims.category',
+            'claims.amount',
+            'claims.plate_number',
+            'claims.status',
+            'claims.date',
+            'claims.payment_date',
+            'rentals.customer_id',
+            'rentals.pickup_date',
+            'rentals.return_date',
+            'payments.rental_amount as rental_amount' // Select the rental amount from payments
+        )
+        ->get();
+
 
             return $claim;
     }   

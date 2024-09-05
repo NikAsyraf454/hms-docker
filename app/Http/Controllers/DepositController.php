@@ -10,7 +10,7 @@ class DepositController extends Controller
     
     public function index(){
         $depo = Deposit::paginate(5);
-        return response()->json($depo);
+        // return response()->json($depo);
         return view('deposit.index')->with('deposit', $depo);
     }
 
@@ -63,11 +63,12 @@ class DepositController extends Controller
             'extend' => 'required|max:255',
             'return_date' => 'nullable',
         ]);
-
+        // dd('hm');
         $depo = Deposit::find($id);
         $depo->update($request->all());
-        return redirect()->route('deposit.index')
-        ->with('success', 'depo updated successfully.');
+
+        return redirect()->route('deposit.show',$id)
+        ->with('success', 'Deposit updated successfully.');
     }
 
     public function destroy($id){

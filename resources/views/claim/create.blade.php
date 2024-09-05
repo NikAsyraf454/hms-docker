@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control date" name="date" id="date">
+                                <input type="date" class="form-control date" name="date" id="date-morning">
                             </div>
                             <div class="col-6">
                                 <label for="details" class="form-label">Remarks</label>
@@ -176,7 +176,7 @@
                                     @foreach ($fleet as $car)
                                         <option value="{{ $car->license_plate }}">{{ $car->license_plate }}</option>
                                     @endforeach
-                                    <option value="none">None</option>
+                                    <option value="None">None</option>
                                 </select>
                             </div>
                             <div class="col-md-6">

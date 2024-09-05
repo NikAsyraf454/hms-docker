@@ -98,6 +98,7 @@
                                                 <option value="FC">Civil Engineering</option>
                                                 <option value="FM">Mechanical Engineering</option>
                                                 <option value="FE">Electrical Engineering</option>
+                                                <option value="FE">Chemical Engineering</option>
                                                 <option value="FCS">Computing</option>
                                                 <option value="FS">Science</option>
                                                 <option value="FABU">FABU</option>
@@ -108,7 +109,7 @@
                                             </select>
                                         </div>
                                         <div class="col-6">
-                                            <label for="address" class="form-label">Address </label>
+                                            <label for="address" class="form-label">Block </label>
                                             <input type="text" class="form-control" name="address" id="address"
                                                 value="{{ old('address') }}">
                                             @error('address')
