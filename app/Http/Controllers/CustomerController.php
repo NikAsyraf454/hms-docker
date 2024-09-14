@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Services\CustomerService;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
@@ -27,8 +29,13 @@ class CustomerController extends Controller
         return view('customer.show', compact('customer'));
     }
 
-    public function autocomplete(Request $request)
-    {
+    public function edit($id){
+        $customer = $this->customerService->getCustomerById($id);
+        // return response()->json($customer);
+        return view('customer.edit', compact('customer'));
+    }
+
+    public function autocomplete(Request $request){
         $query = $request->get('query');
 
         $customers = Customer::where('name', 'LIKE', "%{$query}%")
@@ -61,4 +68,20 @@ class CustomerController extends Controller
         ->with('success', 'Customer updated successfully.');
     }
 
+    public function destroy($id){
+       try {
+            $customer = Customer::findOrFail($id);
+            $customer->delete();
+            return redirect()->route('customer.index')->with('success', 'Customer deleted successfully');
+        } catch (QueryException $e) {
+            Log::error('QueryException while deleting customer: ' . $e->getMessage());
+            if ($e->getCode() == "23000") {
+                return redirect()->back()->with('error', 'This customer cannot be deleted because they have existing rentals.');
+            }
+            return redirect()->back()->with('error', 'A database error occurred while deleting the customer.');
+        } catch (\Exception $e) {
+            Log::error('Exception while deleting customer: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An unexpected error occurred while deleting the customer.');
+        }
+    }
 }
