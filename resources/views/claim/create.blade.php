@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container">
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             {!! implode('', $errors->all('<div>:message</div>')) !!}
-        @endif
+        @endif --}}
         <!-- Alert -->
         @if ($message = Session::get('success'))
             <div class="alert alert-success" role="alert">
@@ -25,6 +25,15 @@
         <!-- End Alert -->
         <div class="card">
             <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <h5 class="card-title">Claims</h5>
                 @php
                     $userId = session('user_id');
@@ -86,20 +95,13 @@
 
                             <div class="col-6">
                                 <label for="rental_id" class="form-label">Rental ID</label>
-                                <input type="number" class="form-control" name="rental_id" id="rental_id">
+                                <input type="number" class="form-control" name="rental_id" id="rental_id"
+                                    value=" {{ old('rental_id') }}">
                             </div>
-                            {{-- <div class="col-6">
-                                <label for="plate_number" class="form-label">Plate</label>
-                                <select class="form-control" name="plate_number" id="plate_number">
-                                    @foreach ($fleet as $car)
-                                        <option value="{{ $car->license_plate }}">{{ $car->license_plate }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="col-6">
                                 <label for="amount" class="form-label">Deduction</label>
                                 <input type="number" class="form-control" placeholder="RM" name="amount"
-                                    id="amount">
+                                    id="amount" value=" {{ old('amount') }}">
                             </div>
                             <div class="col-6">
                                 <label for="date" class="form-label">Date</label>
@@ -107,7 +109,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="details" class="form-label">Remarks</label>
-                                <input type="text" class="form-control" name="details" id="details">
+                                <input type="text" class="form-control" name="details" id="details"
+                                    value="{{ old('details') }}">
                             </div>
                             <div class="pt-2">
                                 <button type="submit" class="btn btn-primary">Submit Claim</button>
@@ -151,7 +154,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="amount" class="form-label">Comission</label>
-                                <input type="number" class="form-control" name="amount" id="amount">
+                                <input type="number" placeholder="RM" class="form-control" name="amount"
+                                    id="amount">
                             </div>
                             <div class="pt-2">
                                 <button type="submit" class="btn btn-primary">Submit Claim</button>

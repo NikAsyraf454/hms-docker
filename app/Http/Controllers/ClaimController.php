@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Claim;
 use App\Models\ClaimType;
 use App\Models\Fleet;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Services\ClaimService;
+use Illuminate\Support\Facades\File;
 
 use Carbon\Carbon;
 
@@ -58,10 +58,10 @@ class ClaimController extends Controller
         // dd($claim_type_id);
 
         if($id == 'members'){
-            $data = $request->all();
-
+            // $data = $request->all();
+           
             $data = $request->validate([
-                'rental_id' => 'required',
+                'rental_id' => 'required|exists:rentals,id',
                 'details' => 'required',
                 'staff_id' => 'required',
                 'date' => 'required',
@@ -82,11 +82,10 @@ class ClaimController extends Controller
         }
         if($id == 'depo'){
              $request->validate([
-                'details' => 'required|max:255',
+                'rental_id' => 'required|exists:rentals,id',
                 'amount' => 'required',
-                'plate_number' => 'required',
-                'date-claim' => 'required',
-                'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'date' => 'required',
+                'details' => 'required',
             ]);
 
             $data = $request->all();
@@ -117,7 +116,7 @@ class ClaimController extends Controller
     }
 
     public function show($id,$category){
-        
+        // dd('show');
         $claim = Claim::find($id);
         $rental_id = $claim->rental_id;
         // return response()->json($claim);
@@ -128,11 +127,10 @@ class ClaimController extends Controller
                 $claim = $claim[0];
                 $customer_id = $claim->customer_id;
                 $customer = $this->claimService->getCustomer($customer_id);
-                // return response()->json($customer);
+                // return response()->json($claim);
                 return view('claim.show', compact('claim','customer','category'));
             }
             case 'claims':
-                // dd($claim);
                 return view('claim.show', compact('claim','category'));
             case 'extra':
                 return view('claim.show', compact('claim','category'));
@@ -149,10 +147,11 @@ class ClaimController extends Controller
         return view('claim.show', compact('claim'));
     }
 
-    public function edit($id){
-        $claim = Claim::find($id);
-        return view('claim.edit', compact('claim'));
-    }
+    // public function edit($id){
+    //     dd('hm');
+    //     $claim = Claim::find($id);
+    //     return view('claim.edit', compact('claim'));
+    // }
 
     public function update(Request $request, $id){
         $request->validate([
@@ -168,6 +167,17 @@ class ClaimController extends Controller
 
     public function destroy($id){
         $claim = Claim::find($id);
+
+        if ($claim->receipt) {
+            // Get the full path to the image
+            $imagePath = public_path($claim->receipt);
+
+            // Check if file exists before attempting to delete
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+        }
+
         $claim->delete();
         return redirect()->route('claim.index')
         ->with('success', 'Claim deleted successfully');

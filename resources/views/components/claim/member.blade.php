@@ -27,7 +27,5 @@
             @endif
         </li>
     </ul>
-    <div class="text-center pt-2">
-        <a href="{{ url()->previous() }}" class="btn btn-primary">Go Back</a>
-    </div>
+
 </div>
