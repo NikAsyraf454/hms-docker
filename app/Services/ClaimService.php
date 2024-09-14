@@ -84,7 +84,7 @@ class ClaimService
         ->join('payments', 'rentals.payment_id', '=', 'payments.id') // Join rentals with payments
         ->where('rentals.id', '=', $id)
         ->select(
-            'claims.id as claim_id',
+            'claims.id as id',
             'claims.details',
             'claims.category',
             'claims.amount',
