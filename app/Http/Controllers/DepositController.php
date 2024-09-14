@@ -73,6 +73,15 @@ class DepositController extends Controller
 
     public function destroy($id){
         $depo = Deposit::find($id);
+        if ($depo->receipt) {
+            // Get the full path to the image
+            $imagePath = public_path($claim->receipt);
+
+            // Check if file exists before attempting to delete
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+        }
         $depo->delete();
         return redirect()->route('deposit.index')
         ->with('success', 'Fleet deleted successfully');
