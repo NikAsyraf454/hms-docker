@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Models\Deposit;
-
+use App\Exports\ExportDeposit;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DepositController extends Controller
 {
     
     public function index(){
-        $depo = Deposit::paginate(5);
+        $depo = Deposit::get();
         // return response()->json($depo);
         return view('deposit.index')->with('deposit', $depo);
     }
@@ -20,7 +21,6 @@ class DepositController extends Controller
     }
 
     public function store(Request $request){
-
         // $request->validate([
         // 'details' => 'required|max:255',
         // 'amount' => 'required',
@@ -86,5 +86,10 @@ class DepositController extends Controller
         $depo->delete();
         return redirect()->route('deposit.index')
         ->with('success', 'Fleet deleted successfully');
+    }
+
+    public function export(){
+        // dd('hm');
+        return Excel::download(new ExportDeposit, 'deposit.xlsx');
     }
 }
