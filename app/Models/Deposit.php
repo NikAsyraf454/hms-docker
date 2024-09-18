@@ -16,6 +16,7 @@ class Deposit extends Model
         'fuel', 
         'late', 
         'extend', 
+        'extend_status', 
         'proof',
         'return_date', 
         'return_amount', 

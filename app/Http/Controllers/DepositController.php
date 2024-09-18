@@ -59,6 +59,7 @@ class DepositController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'fuel' => 'required|max:255',
+            'extend_status' => 'required',
             'late' => 'required|max:255',
             'extend' => 'required|max:255',
             'return_date' => 'nullable',

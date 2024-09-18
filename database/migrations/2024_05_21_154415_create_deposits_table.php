@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->integer('amount');
             $table->string('date');
-            $table->string('status');
+            $table->enum('status', ['Paid', 'Unpaid']);
             $table->string('fuel')->nullable();
             $table->string('late')->nullable();
             $table->string('extend')->nullable();
+            $table->enum('extend_status', ['Paid', 'Unpaid'])->nullable();
             $table->string('proof')->nullable();
             $table->string('return_date')->nullable();
             $table->integer('return_amount')->nullable();
