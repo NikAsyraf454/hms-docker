@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('matric')->unique();
             $table->string('email');
+            $table->string('race');
             $table->string('phone');
             $table->string('ic');
             $table->string('address')->nullable();
