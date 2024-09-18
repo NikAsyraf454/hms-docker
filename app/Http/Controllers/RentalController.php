@@ -77,6 +77,7 @@ class RentalController extends Controller
             $this->rentalService->storeRental($rentalRequest);
            
         }else{
+            // dd('masuk');
             //store rental and customer
             $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
             $payment = $this->paymentService->storePayment($paymentRequest, $filePay);
@@ -103,6 +104,7 @@ class RentalController extends Controller
         $pre = $this->inspectionService->getPreInspectionById($id);
         $post = $this->inspectionService->getPostInspectionById($id);
         // return response()->json($post);
+        // dd($rental->deposit->proof);
         return view('rental.show', compact('rental','pre','post'));
     }
 

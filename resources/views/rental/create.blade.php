@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        {{-- @if ($errors->any())
+                        @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -13,7 +13,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif --}}
+                        @endif
                         {{-- @dd($fleet) --}}
 
                         <h5 class="card-title">New Rental Form</h5>
@@ -28,7 +28,7 @@
                                     value="{{ $userId }}">
                                 <input type="hidden" class="" id="customer_id" name="customer_id" value="">
                                 {{-- Customer Detail --}}
-                                <div class="col-6">
+                                <div class="col-md-6">
                                     <h4>Customer Info</h4>
                                     <div class="col-12">
                                         <label for="name" class="form-label">Customer Name</label>
@@ -39,7 +39,7 @@
                                         @enderror
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-12 col-md-6">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="text" placeholder="email@gmail.com" class="form-control"
                                                 name="email" id="email" value="{{ old('email') }}">
@@ -47,7 +47,20 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
+                                            <label for="race" class="form-label">Race / Nationality</label>
+                                            <select class="form-control" name="race" id="race"
+                                                value="{{ old('race') }}">
+                                                <option value="Malay">Malay</option>
+                                                <option value="China">China</option>
+                                                <option value="India">India</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                            @error('race')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
                                             <input type="number" placeholder="000000110000" class="form-control"
                                                 name="ic" id="ic" value="{{ old('ic') }}">
@@ -55,7 +68,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="matric" class="form-label">Matric</label>
                                             <input type="text" placeholder="A24EC0021" class="form-control"
                                                 name="matric" id="matric" value="{{ old('matric') }}">
@@ -63,7 +76,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="phone" class="form-label">Mobile Number </label>
                                             <input type="number" placeholder="0123456789" class="form-control"
                                                 name="phone" id="phone" value="{{ old('phone') }}">
@@ -71,7 +84,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="college" class="form-label">College </label>
                                             <select class="form-control" name="college" id="college"
                                                 value="{{ old('college') }}">
@@ -91,7 +104,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="faculty" class="form-label">Faculty </label>
                                             <select class="form-control" name="faculty" id="faculty"
                                                 value="{{ old('faculty') }}">
@@ -108,7 +121,7 @@
                                                 <option value="MJIIT">MJIIT</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="address" class="form-label">Block </label>
                                             <input type="text" class="form-control" name="address" id="address"
                                                 value="{{ old('address') }}">
@@ -120,7 +133,7 @@
                                     </div>
                                     <div class="row pt-2">
                                         <h5>Bank Details</h5>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="bank" class="form-label">Bank</label>
                                             <select class="form-control" name="bank" id="bank"
                                                 value="{{ old('bank') }}">
@@ -141,7 +154,7 @@
                                                 <option value="TNG">TNG</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="acc_num" class="form-label"> Account Number</label>
                                             <input type="text" placeholder="" class="form-control" name="acc_num"
                                                 id="acc_num" value="{{ old('acc_num') }}">
@@ -149,7 +162,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="acc_num_name" class="form-label"> Account Owner</label>
                                             <input type="text" placeholder="" class="form-control"
                                                 name="acc_num_name" id="acc_num_name" value="{{ old('acc_num_name') }}">
@@ -160,7 +173,7 @@
                                     </div>
                                 </div>
                                 {{-- Rental Detail --}}
-                                <div class="col-6">
+                                <div class="col-md-6">
                                     <h4>Rental Info</h4>
                                     <div class="row">
                                         {{-- <div class="col-6">
@@ -171,7 +184,7 @@
                                                 @endforeach
                                             </select>
                                         </div> --}}
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="fleet_id" class="form-label">Plate Number</label>
                                             <select class="form-control" name="fleet_id" id="fleet_id" value="">
                                                 @foreach ($fleet as $car)
@@ -182,7 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="pickup_date" class="form-label">Pickup Date</label>
                                             <input type="date" class="form-control" name="pickup_date"
                                                 id="pickup_date" value="{{ old('pickup_date') }}">
@@ -190,7 +203,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="return_date" class="form-label">Return Date</label>
                                             <input type="date" class="form-control" name="return_date"
                                                 id="return_date" value="{{ old('return_date') }}">
@@ -198,7 +211,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
                                             <select class="form-select" name="pickup_time" required="required"
                                                 id="pickup_time" value="{{ old('pickup_time') }}">
@@ -300,7 +313,7 @@
                                                 <option value="11:45 PM">11:45 PM</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="return_time" class="form-label">Return Time</label>
                                             <select class="form-select" name="return_time" required="required"
                                                 id="return_time" value="{{ old('return_time') }}">
@@ -404,7 +417,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="pickup_location" class="form-label">Pickup Location</label>
                                             <input type="text" class="form-control" name="pickup_location"
                                                 id="pickup_location" value="{{ old('pickup_location') }}">
@@ -412,7 +425,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="return_location" class="form-label">Return Location</label>
                                             <input type="text" class="form-control" name="return_location"
                                                 id="return_location" value="{{ old('return_location') }}">
@@ -422,7 +435,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="note" class="form-label">Note</label>
                                             <textarea name="note" class="form-control" id="note" cols="30" rows="5"
                                                 value="{{ old('note') }}"></textarea>
@@ -430,7 +443,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="destination" class="form-label">Destination</label>
                                             <input type="text" class="form-control" name="destination"
                                                 id="destination" value="{{ old('destination') }}">
@@ -442,14 +455,7 @@
                                     <div class="row pt-2">
                                         <h5>Payment Details</h5>
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label for="payment_status" class="form-label">Payment Status</label>
-                                                <select class="form-control" name="payment_status" id="payment_status">
-                                                    <option value="unpaid">Unpaid</option>
-                                                    <option value="paid">Paid</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="rental_amount" class="form-label">Rental Amount</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">RM</span>
@@ -462,7 +468,30 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-6">
+                                                <label for="payment_date" class="form-label">Payment Date</label>
+                                                <input type="date" class="form-control" name="payment_date"
+                                                    id="payment_date" value="{{ old('payment_date') }}">
+                                                @error('payment_date')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="payment_status" class="form-label">Payment Status</label>
+                                                <select class="form-control" name="payment_status" id="payment_status">
+                                                    <option value="unpaid">Unpaid</option>
+                                                    <option value="paid">Paid</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="payment_method" class="form-label">Payment Status</label>
+                                                <select class="form-control" name="payment_method" id="payment_method">
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Transfer">Transfer</option>
+                                                    <option value="QR">QR</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
                                                 <label for="inputNumber" class="col-sm col-form-label">Payment
                                                     Proof</label>
                                                 <div class="col-sm-10">
@@ -475,7 +504,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="depo_amount" class="form-label">Depo Amount</label>
                                                 <input type="number" class="form-control" name="depo_amount"
                                                     id="depo_amount" value="{{ old('depo_amount') }}">
@@ -483,7 +512,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="depo_date" class="form-label">Depo Date</label>
                                                 <input type="date" class="form-control" name="depo_date"
                                                     id="depo_date" value="{{ old('depo_date') }}">
@@ -491,7 +520,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="depo_status" class="form-label">Deposit Status</label>
                                                 <select class="form-control" name="depo_status" id="depo_status">
                                                     <option value="Unpaid">Unpaid</option>
