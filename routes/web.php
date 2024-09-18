@@ -21,6 +21,8 @@ Route::get('/dashboard' , [DashboardController::class, 'dashboard'])->middleware
 // Route::get('/test' , [DashboardController::class, 'test'])->middleware(['auth', 'verified'])->name('test');
 
 Route::get('/home', [ClaimController::class, 'home'])->name('claim.home');
+Route::get('client/login', [UserController::class, 'login'])->name('client.login');
+Route::post('client/register', [UserController::class, 'register'])->name('client.register');
 
 // User Permission
 Route::get('user-profile',[UserController::class,'profile'])->name('profile');
@@ -33,7 +35,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::get('/fleet', [FleetController::class, 'index'])->name('fleet.index');
         Route::get('/fleet/create', [FleetController::class, 'create'])->name('fleet.create');
         Route::post('/fleet', [FleetController::class, 'store'])->name('fleet.store');
-        Route::get('/fleet/{id}', [FleetController::class, 'show'])->name('fleet.show');
+        Route::get('/fleet/view/{id}/', [FleetController::class, 'show'])->name('fleet.show');
         Route::get('/fleet/{id}/edit', [FleetController::class, 'edit'])->name('fleet.edit');
         Route::put('/fleet/{id}', [FleetController::class, 'update'])->name('fleet.update');
         Route::get('/fleet/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
@@ -72,7 +74,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
         Route::get('/rental/{id}/edit', [RentalController::class, 'edit'])->name('rental.edit');
         Route::put('/rental/{id}', [RentalController::class, 'update'])->name('rental.update');
-        Route::delete('/rental/{id}', [RentalController::class, 'destroy'])->name('rental.destroy');
+        Route::get('/rental/{id}/delete', [RentalController::class, 'destroy'])->name('rental.destroy');
 
         Route::get('/inspection/create/{id}/{type}', [InspectionController::class, 'create'])->name('inspection.create');
         // Route::post('/inspection', [InspectionController::class, 'store'])->name('inspection.store');
@@ -86,8 +88,9 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         //Customer
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
         Route::get('/customer/{id}', [CustomerController::class, 'show'])->name('customer.show');
+        Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::post('/customer/{id}', [CustomerController::class, 'update'])->name('customer.update');
-        Route::delete('/customer{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+        Route::get('/customer/{id}/delete', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
         Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
             Route::get('/deposit/create', [DepositController::class, 'create'])->name('deposit.create');

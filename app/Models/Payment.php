@@ -11,6 +11,8 @@ class Payment extends Model
 
     protected $fillable = [
         'invoice_id',
+        'payment_date',
+        'payment_method',
         'payment_status',
         'rental_amount',
         'proof',

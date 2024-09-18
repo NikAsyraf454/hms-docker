@@ -63,13 +63,13 @@
       });
 
       // Event listener for 'Stay Logged In' button
-      document.getElementById('stayLoggedInButton').addEventListener('click', () => {
-          $('#sessionTimeoutModal').modal('hide');
-          refreshSession();
-      });
+      //   document.getElementById('stayLoggedInButton').addEventListener('click', () => {
+      //       $('#sessionTimeoutModal').modal('hide');
+      //       refreshSession();
+      //   });
 
       // Event listener for 'Logout' button
-      document.getElementById('logoutButton').addEventListener('click', () => {
-          window.location.href = "{{ route('logout') }}";
-      });
+      //   document.getElementById('logoutButton').addEventListener('click', () => {
+      //       window.location.href = "{{ route('logout') }}";
+      //   });
   </script>

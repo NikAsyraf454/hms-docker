@@ -67,15 +67,15 @@
                             @csrf
                             <input type="hidden" class="" id="staff_id" name="staff_id" value="{{ $userId }}">
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="rental_id" class="form-label">Rental ID</label>
                                 <input type="number" class="form-control" name="rental_id" id="rental_id">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control date" name="date" id="date">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="details" class="form-label">Remarks</label>
                                 <input type="text" class="form-control" name="details" id="details">
                             </div>
@@ -93,21 +93,21 @@
                             <input type="hidden" class="" id="staff_id" name="staff_id"
                                 value="{{ $userId }}">
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="rental_id" class="form-label">Rental ID</label>
                                 <input type="number" class="form-control" name="rental_id" id="rental_id"
                                     value=" {{ old('rental_id') }}">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="amount" class="form-label">Deduction</label>
                                 <input type="number" class="form-control" placeholder="RM" name="amount"
                                     id="amount" value=" {{ old('amount') }}">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control date" name="date" id="date-morning">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="details" class="form-label">Remarks</label>
                                 <input type="text" class="form-control" name="details" id="details"
                                     value="{{ old('details') }}">
@@ -127,7 +127,7 @@
                                 value="{{ $userId }}">
                             {{-- <input type="hidden" class="" id="claim_type_id" name="claim_type_id" value={{$claimTypeIdE}}> --}}
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="plate_number" class="form-label">Plate</label>
                                 <select class="form-control" name="plate_number" id="plate_number">
                                     @foreach ($fleet as $car)
@@ -136,23 +136,23 @@
                                 </select>
                                 {{-- <input type="text" class="form-control" name="plate_number" id="plate_number" > --}}
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="details" class="form-label">Details</label>
                                 <input type="text" class="form-control" name="details" id="details">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="destination" class="form-label">Destination</label>
                                 <input type="text" class="form-control" name="destination" id="destination">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control" name="date-extra" id="date-extra">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="time" class="form-label">Time</label>
                                 <input type="time" class="form-control" name="time" id="time">
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="amount" class="form-label">Comission</label>
                                 <input type="number" placeholder="RM" class="form-control" name="amount"
                                     id="amount">

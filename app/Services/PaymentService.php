@@ -15,6 +15,7 @@ class PaymentService
      */
     public function storePayment($data, $file)
     {
+        // dd($data);
         if ($file) {
             $filename = 'payment/' . time() . '.' . $file->getClientOriginalExtension();
             $file->move('payment', $filename);
@@ -28,6 +29,8 @@ class PaymentService
 
         return Payment::create([
             'invoice_id' => $invoiceId,
+            'payment_date' => $data['payment_date'],
+            'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
             'rental_amount' => $data['rental_amount'],
             'proof' => $filename,

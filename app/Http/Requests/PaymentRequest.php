@@ -11,6 +11,8 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'payment_date' => 'required',
+            'payment_method' => 'required',
             'payment_status' => 'required',
             'rental_amount' => 'nullable',
             'proof' => 'nullable',

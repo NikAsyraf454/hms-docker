@@ -25,6 +25,7 @@ class StoreCustomerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'ic' => 'required',
+            'race' => 'required',
             'matric' => 'required|max:10',
             'phone' => 'required|numeric|digits_between:10,15',
             'college' => 'required|string|max:255',

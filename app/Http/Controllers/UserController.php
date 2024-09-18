@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +37,10 @@ class UserController extends Controller
 
         // You can also assign multiple roles to a user
         // $user->assignRole('Top', 'Staff');
+    }
+
+    public function createPermission(){
+        $permission = Permission::create(['name' => 'edit articles']);
     }
 
     public function profile(){
@@ -105,6 +110,21 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('user.index')
         ->with('success', 'User deleted successfully');
+    }
+
+    public function login(){
+        return view('client.login');
+    }
+
+     public function register(Request $request){
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|required',
+            'matric' => 'required',
+            'password' => 'required',
+        ]);
+        // dd($validated);
+        return view('client.register');
     }
     
 }
