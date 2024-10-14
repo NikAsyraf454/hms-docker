@@ -84,6 +84,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         //Invoice
         Route::get('/invoice', [PaymentController::class, 'download'])->name('invoice.download');
         Route::get('/invoice/{id}', [PaymentController::class, 'create'])->name('invoice.create');
+        Route::get('/agreement/{id}', [PaymentController::class, 'createAgreement'])->name('agreement.create');
 
         //Customer
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');

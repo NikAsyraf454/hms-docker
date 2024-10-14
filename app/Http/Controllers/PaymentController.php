@@ -47,6 +47,16 @@ class PaymentController extends Controller
 
     }
 
+    public function createAgreement($id)
+    {
+        $rental = $this->rentalService->getRentalById($id);
+        return view('rental.agreement-form');
+        // $pdf = Pdf::loadView('rental.agreement-form', ['rental' => $rental])->setPaper('a4', 'portrait');;
+        return $pdf->stream('invoice.pdf');
+
+        // return view('rental.invoice', ['rental' => $rental]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
