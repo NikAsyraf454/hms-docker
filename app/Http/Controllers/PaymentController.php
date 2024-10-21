@@ -31,16 +31,7 @@ class PaymentController extends Controller
     public function create($id)
     {
         $rental = $this->rentalService->getRentalById($id);
-        // dd($rental);
-
-        // $payment = [
-        //     'depo_amount'=>$rental, 
-        //     'rental_amount'=>$rental->rental_amount, 
-        //     'total_amount'=>$rental->total_amount, 
-        //     'payment_status'=>$rental->payment_status
-        // ];
-        // dd($payment);
-        // return response()->json($rental);
+      
         $pdf = Pdf::loadView('rental.invoice', ['rental' => $rental]);
         return $pdf->stream('invoice.pdf');
 

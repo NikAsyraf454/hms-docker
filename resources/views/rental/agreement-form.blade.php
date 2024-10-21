@@ -215,7 +215,7 @@
                 </tr>
                 <tr>
                     <td>Total Amount Before Tax</td>
-                    <td>{{ $rental->payment->rental_amount }}</td>
+                    <td>{{ number_format($rental->payment->rental_amount, 2, '.', ',') }}</td>
                 </tr>
             </table>
             <div class="total">
@@ -224,7 +224,7 @@
                 <p><strong>Rounding:</strong> MYR 0.00</p>
                 <p><strong>Refundable Deposit:</strong> MYR {{ number_format($rental->deposit->amount, 2, '.', ',') }}
                 </p>
-                <p><strong>Grand Total:</strong> MYR 60.00</p>
+                <p><strong>Grand Total:</strong> MYR {{ number_format($rental->deposit->amount, 2, '.', ',') }}</p>
             </div>
         </div>
     </div>
