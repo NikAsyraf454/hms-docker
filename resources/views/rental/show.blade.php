@@ -26,6 +26,8 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {{-- <a class="dropdown-item" href="claim/view/{{ $item->id }}">View</a> --}}
                                     <a class="dropdown-item" href="{{ route('invoice.create', $rental->id) }}">Invoice</a>
+                                    <a class="dropdown-item" href="{{ route('agreement.create', $rental->id) }}">Rental
+                                        Agreement</a>
                                 </div>
                             </div>
                             {{-- <a href="{{ route('invoice.create', $rental->id) }}" class="btn btn-primary btn-sm">Invoice</a> --}}

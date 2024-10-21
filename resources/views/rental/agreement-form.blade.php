@@ -21,6 +21,11 @@
             padding: 20px;
         }
 
+        .terms p {
+            font-size: 14px;
+            text-align: justify;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -138,42 +143,44 @@
 
             </div>
         </div>
-
-
         <div class="rental-details">
             <h3>Rental Details</h3>
             <table>
                 <tr>
                     <th>Vehicle</th>
-                    <td>PERODUA Axia (1st Gen)</td>
+                    <td>{{ $rental->fleet->model }}</td>
+                </tr>
+                <tr>
+                    <th>Plate Number</th>
+                    <td>{{ $rental->fleet->license_plate }}</td>
                 </tr>
                 <tr>
                     <th>Pick Up Location</th>
-                    <td>STUDENT MALL UTM</td>
+                    <td>{{ $rental->pickup_location }}</td>
                 </tr>
                 <tr>
                     <th>Return Location</th>
-                    <td>STUDENT MALL UTM</td>
+                    <td>{{ $rental->return_location }}</td>
                 </tr>
                 <tr>
                     <th>Pick Up Date</th>
-                    <td>22-09-2024</td>
+                    <td>{{ $rental->pickup_date }}</td>
                 </tr>
                 <tr>
                     <th>Return Date</th>
-                    <td>22-09-2024</td>
+                    <td>{{ $rental->return_date }}</td>
                 </tr>
                 <tr>
                     <th>Pick Up Time</th>
-                    <td>10:00 AM</td>
+                    <td>{{ $rental->pickup_time }}</td>
                 </tr>
                 <tr>
                     <th>Return Time</th>
-                    <td>05:00 PM</td>
+                    <td>{{ $rental->return_time }}</td>
                 </tr>
                 <tr>
                     <th>Duration</th>
-                    <td>0 day 7 hours 0 minute</td>
+                    <td>{{ $duration->days . ' days ' . $duration->h . ' hours ' . $duration->i . ' minutes ' }}</td>
                 </tr>
                 <tr>
                     <th>Note</th>
@@ -182,22 +189,15 @@
             </table>
         </div>
         <div class="customer-details">
+            <h3>Customer Details</h3>
             <table>
                 <tr>
-                    <th colspan="2">Customer Details</th>
-                    <th colspan="2">Car Information</th>
-                </tr>
-                <tr>
                     <th>Name</th>
-                    <td>MOHAMAD AQIL BIN MOHD SUKRI</td>
-                    <th>Plate Number</th>
-                    <td>CEB7458</td>
+                    <td>{{ $rental->customer->name }}</td>
                 </tr>
                 <tr>
                     <th>Mobile Number</th>
-                    <td>+60183701044</td>
-                    <th>Color</th>
-                    <td>GREY</td>
+                    <td>{{ $rental->customer->phone }}</td>
                 </tr>
             </table>
             <table>
@@ -206,7 +206,7 @@
                     <th>Price</th>
                 </tr>
                 <tr>
-                    <td>PERODUA Axia (1st Gen)</td>
+                    <td>{{ $rental->fleet->model }}</td>
                     <td>60.00</td>
                 </tr>
                 <tr>
@@ -215,19 +215,22 @@
                 </tr>
                 <tr>
                     <td>Total Amount Before Tax</td>
-                    <td>60.00</td>
+                    <td>{{ $rental->payment->rental_amount }}</td>
                 </tr>
             </table>
             <div class="total">
-                <p><strong>Total Amount:</strong> MYR 60.00</p>
+                <p><strong>Total Amount:</strong> MYR {{ number_format($rental->payment->rental_amount, 2, '.', ',') }}
+                </p>
                 <p><strong>Rounding:</strong> MYR 0.00</p>
-                <p><strong>Refundable Deposit:</strong> MYR 0.00</p>
+                <p><strong>Refundable Deposit:</strong> MYR {{ number_format($rental->deposit->amount, 2, '.', ',') }}
+                </p>
                 <p><strong>Grand Total:</strong> MYR 60.00</p>
             </div>
         </div>
     </div>
     <div class="page_break"></div>
-    {{-- <div class="terms">
+    {{-- Rental Agreement --}}
+    <div class="terms">
         <h1>RENTAL AGREEMENT</h1>
         <p>HASTA TRAVEL & TOURS SDN. BHD. 202001003057 (1359376T)<br>KPK/LN 10181</p>
 
@@ -311,7 +314,7 @@
             in the Rental Agreement, the renter's liability is limited to the Excess Fee. Excess Fee is used to cover
             loss of company sales for that particular car while repairing. Any extra charge of the repairing cost will
             be added if needed by the company. Receipt of any additional cost will be given to the customer.</p>
-
+        <br>
         <h2>Fuel</h2>
         <p>Our company does not provide full tank unless requested by the renter and must be returned the same fuel
             level. Otherwise the renter will be charged based on 1 bar RM10.</p>
@@ -335,7 +338,7 @@
         <p>The vehicles cannot be driven into Singapore, Thailand, Brunei and Indonesia. Subsequently the vehicles are
             prohibited from being loaded onto other modes of transportation via sea, river and air for usage from
             mainland to Langkawi, Tioman, Redang, Pangkor island etc.</p>
-
+        <br>
         <h2>Prohibited Odours</h2>
         <p>All items and goods discharging unpleasant odours are strictly forbidden from being carried in the vehicle
             (e.g. Durians, salted fish etc). The renter will be liable to reimburse on demand for all costs of
@@ -345,169 +348,14 @@
         <h2>Limitation Destination</h2>
         <p>All customer are limit to Johor state area only for 1 day rental. Minimum rental for 2 days for rental area
             outside Johor state area. If the customer fails to comply, penalty will be charge 1 day rental extra.</p>
-    </div> --}}
-    <div class="container">
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td style="width: 50%; padding:0%;">
-                        <div class="table-responsive">
-                            <table class="table table-borderless table-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight: bold">Rates</p>
-                                            <p style="text-align: justify">Rental rates are charged for minimum of
-                                                1-hour
-                                                RM30. Rental with more than 12
-                                                hours will be considered as
-                                                1-day rental. Extend hour will be calculated at its rate based on Table
-                                                1.
-                                                Rates include maximum mileage of
-                                                300 km per day and replace car breakdown (if car got problem on road
-                                                because
-                                                of car maintenance only). Rates
-                                                are in Ringgit Malaysia (RM).</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table>
-                                                <caption>Table 1: Price List Hasta</caption>
-                                                <tr>
-                                                    <th>HOUR</th>
-                                                    <th>1</th>
-                                                    <th>3</th>
-                                                    <th>5</th>
-                                                    <th>7</th>
-                                                    <th>9</th>
-                                                    <th>12</th>
-                                                    <th>24</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>RATE (RM)</th>
-                                                    <td>30</td>
-                                                    <td>50</td>
-                                                    <td>60</td>
-                                                    <td>65</td>
-                                                    <td>70</td>
-                                                    <td>80</td>
-                                                    <td>110</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight: bold">Driver's Age and License Requirements</p>
-                                            <p style="text-align:justify">The driver must be between 19 to 55 years old
-                                                for all car category
-                                                vehicles
-                                                and in possession of a valid
-                                                national or International Driving License. Probational license holders
-                                                will
-                                                not be accepted.</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight: bold">Terms of Payment & Deposit</p>
-                                            <p style="text-align:justify">All rentals are subjected to a compulsory
-                                                deposit of RM50.00 per car with
-                                                maximum rental of 5 days. For
-                                                weekly rental deposit will be RM150 and for one month is equal to one
-                                                month
-                                                rental. Our company only accepts
-                                                the online payment for deposits and rental. Cash is accepted as mode of
-                                                payment at the counter. Refundable
-                                                deposit depends on return car condition (fuel, late return, extend and
-                                                accident).</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight: bold">Cancellation Policy</p>
-                                            <p style="text-align:justify">All paid rental and deposit cannot be
-                                                cancelled, and payment made are
-                                                non-refundable.</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold; ">Excess Fee</span>
-                                            <p style="text-align:justify">The
-                                                renter shall be held responsible for
-                                                accidental damage to third party
-                                                property and bodily injuries.
-                                                However, the renter is always responsible for an amount equivalent to
-                                                the
-                                                excess fee based on Table 2. A
-                                                full responsible will be on the renter for damage as a result of
-                                                illegal,
-                                                negligence, careless actions, tyre
-                                                punctures, bust tyre, scratches and dent, lack of battery power because
-                                                of
-                                                forgotten turned off car
-                                                electrical devices, loss or damage to the vehicle and vehicle
-                                                accessories
-                                                and damages of windows, mirror and
-                                                undercarriage. In the event of any accident, the renter must agree to
-                                                accept
-                                                the Excess Fee and inform our
-                                                company first before taking any action and make a police report within
-                                                24
-                                                hours from the time of the
-                                                accident or theft. Our company shall be entitled to charge the renter an
-                                                excess fee which is in accordance
-                                                with the following Table 2. Upon the renter's acceptance and subject to
-                                                the
-                                                terms and conditions stipulated
-                                                in the Rental Agreement, the renter's liability is limited to the Excess
-                                                Fee. Excess Fee is used to cover
-                                                loss of company sales for that particular car while repairing. Any extra
-                                                charge of the repairing cost will
-                                                be added if needed by the company. Receipt of any additional cost will
-                                                be
-                                                given to the customer.</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                    <td style="width: 50%; padding:0%;">
-                        <div class="table-responsive">
-                            <table class="table table-borderless table-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Office #1, Floor #1, Building #11, Ibn Seena St #10, Al Muntazah #1
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Doha
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            (+974) 4444 4444
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            info@example.com
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+    <div class="">
+        <p style="font-size: 14px">I have read Terms & Conditions of this agreement and agree here to</p>
+        <br><br>
+        <h4>__________________________</h4>
+        ({{ $rental->customer->name }})
 
+    </div>
 </body>
 
 </html>

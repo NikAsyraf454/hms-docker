@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Rental;
+use DateTime;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Services\RentalService;
+use Spatie\Browsershot\Browsershot;
 
 class PaymentController extends Controller
 {
@@ -50,8 +52,15 @@ class PaymentController extends Controller
     public function createAgreement($id)
     {
         $rental = $this->rentalService->getRentalById($id);
-        return view('rental.agreement-form');
-        // $pdf = Pdf::loadView('rental.agreement-form', ['rental' => $rental])->setPaper('a4', 'portrait');;
+        // return view('rental.agreement-form');
+
+        $pickupDateTime = new DateTime($rental->pickup_date . $rental->pickup_time);  // Pickup time
+        $returnDateTime = new DateTime($rental->return_date . $rental->return_time);  // Return time
+        $interval = $pickupDateTime->diff($returnDateTime);
+
+        // dd($interval->h);
+
+        $pdf = Pdf::loadView('rental.agreement-form', ['rental' => $rental, 'duration' => $interval])->setPaper('a4', 'portrait');;
         return $pdf->stream('invoice.pdf');
 
         // return view('rental.invoice', ['rental' => $rental]);
