@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([
-            RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            FleetSeeder::class,
-            CustomerSeeder::class,
-            ClaimTypeSeeder::class,
+            // RolesTableSeeder::class,
+            // UsersTableSeeder::class,
+            // FleetSeeder::class,
+            // CustomerSeeder::class,
+            // ClaimTypeSeeder::class,
+            // MaintenanceTypeSeeder::class,
             // Add other seeders here
         ]);
         
