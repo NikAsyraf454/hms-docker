@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger("payment_id");
             $table->date('pickup_date');
             $table->date('return_date');
-            $table->string('pickup_time');
-            $table->string('return_time');
+            $table->time('pickup_time');
+            $table->time('return_time');
             $table->string('pickup_location');
             $table->string('return_location');
             $table->string('destination');
@@ -34,6 +34,16 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+    // public function up()
+    // {
+    //     Schema::table('rentals', function (Blueprint $table) {
+    //         $table->date('pickup_date')->change();
+    //         $table->time('pickup_time')->change();
+    //         $table->date('return_date')->change();
+    //         $table->time('return_time')->change();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.

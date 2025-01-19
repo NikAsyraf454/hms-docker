@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
+
 use App\Models\Fleet;
 use App\Models\MaintenanceRecord;
-
 use Illuminate\Http\Request;
 
 class FleetController extends Controller
@@ -79,4 +80,116 @@ class FleetController extends Controller
         return redirect()->route('fleet.index')
         ->with('success', 'Fleet deleted successfully');
     }
+
+    // public function getAvailableVehicles(Request $request)
+    // {
+    //     $date = $request->query('date');
+    //     $time = $request->query('time');
+
+    //     // Logic to get available vehicles based on the date and time
+    //     $availableVehicles = Fleet::whereDoesntHave('rentals', function ($query) use ($date, $time) {
+    //         $query->where('pickup_date', $date)
+    //               ->where('pickup_time', $time);
+    //     })->get();
+
+    //     return response()->json($availableVehicles);
+    // }
+
+    // public function getAvailableVehicles(Request $request)
+    // {
+    //     $pickupDate = $request->query('date');
+    //     $pickupTime = $request->query('time');
+    //     $pickupDateTime = $pickupDate . ' ' . $pickupTime;
+
+    //     try {
+    //         // Logic to get available vehicles based on the date and time
+    //         $availableVehicles = Fleet::whereDoesntHave('rentals', function ($query) use ($pickupDateTime) {
+    //             $query->where(function ($query) use ($pickupDateTime) {
+    //                 $query->where('pickup_date', '<=', $pickupDateTime)
+    //                       ->where('return_date', '>=', $pickupDateTime);
+    //             });
+    //         })->get();
+
+    //         return response()->json($availableVehicles);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // public function getAvailableVehicles(Request $request)
+    // {
+    //     $pickupDate = $request->query('date');
+    //     $pickupTime = $request->query('time');
+
+    //     try {
+    //         $availableVehicles = Fleet::whereDoesntHave('rentals', function ($query) use ($pickupDate, $pickupTime) {
+    //             $query->where(function ($q) use ($pickupDate, $pickupTime) {
+    //                 $q->where(function ($subQuery) use ($pickupDate, $pickupTime) {
+    //                     $subQuery->where('pickup_date', '=', $pickupDate)
+    //                             ->where('pickup_time', '<=', $pickupTime)
+    //                             ->where('return_date', '>=', $pickupDate);
+    //                 })
+    //                 ->orWhere(function ($subQuery) use ($pickupDate, $pickupTime) {
+    //                     $subQuery->where('pickup_date', '<', $pickupDate)
+    //                             ->where('return_date', '>=', $pickupDate);
+    //                 });
+    //             });
+    //         })->get();
+
+    //         return response()->json($availableVehicles);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // public function getAvailableVehicles(Request $request){
+    //     $pickupDate = $request->query('date');
+    //     $pickupTime = $request->query('time');
+    //     $returnDate = $request->query('return_date');
+    //     $returnTime = $request->query('return_time');
+        
+    //     try {
+    //         $availableVehicles = Fleet::whereDoesntHave('rentals', function ($query) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //             $query->where(function ($q) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //                 $q->where(function ($dateOverlap) use ($pickupDate, $returnDate) {
+    //                     // Check if the requested dates overlap with existing rental dates
+    //                     $dateOverlap->where('pickup_date', '<=', $returnDate)
+    //                                 ->where('return_date', '>=', $pickupDate);
+    //                 })->where(function ($timeOverlap) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //                     $timeOverlap->where(function ($sameDayCheck) use ($pickupDate, $pickupTime, $returnTime) {
+    //                         // Handle rentals on the same day
+    //                         $sameDayCheck->where('pickup_date', '=', $pickupDate)
+    //                                      ->where('return_date', '=', $pickupDate)
+    //                                      ->where(function ($timeCheck) use ($pickupTime, $returnTime) {
+    //                                          $timeCheck->where('pickup_time', '<=', $returnTime)
+    //                                                    ->where('return_time', '>=', $pickupTime);
+    //                                      });
+    //                     })->orWhere(function ($multiDayCheck) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //                         // Handle rentals spanning multiple days
+    //                         $multiDayCheck->where(function ($startWithin) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //                             // Requested rental starts during an existing rental
+    //                             $startWithin->where('pickup_date', '<=', $pickupDate)
+    //                                         ->where('return_date', '>=', $pickupDate)
+    //                                         ->whereRaw('? >= pickup_time', [$pickupTime]);
+    //                         })->orWhere(function ($endWithin) use ($pickupDate, $pickupTime, $returnDate, $returnTime) {
+    //                             // Requested rental ends during an existing rental
+    //                             $endWithin->where('pickup_date', '<=', $returnDate)
+    //                                       ->where('return_date', '>=', $returnDate)
+    //                                       ->whereRaw('? <= return_time', [$returnTime]);
+    //                         })->orWhere(function ($fullyContained) use ($pickupDate, $returnDate) {
+    //                             // Requested rental fully contains an existing rental
+    //                             $fullyContained->where('pickup_date', '>=', $pickupDate)
+    //                                            ->where('return_date', '<=', $returnDate);
+    //                         });
+    //                     });
+    //                 });
+    //             });
+    //         })->get();
+            
+    //         return response()->json($availableVehicles);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }        
+
+    // }
 }

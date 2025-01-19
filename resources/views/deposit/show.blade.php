@@ -28,8 +28,8 @@
                         <li class="list-group-item">Amount : {{ $depo->amount }}</li>
                         <li class="list-group-item">Date : {{ $depo->date }}</li>
                         <li class="list-group-item">Status : {{ $depo->status }}</li>
-                        <li class="list-group-item">Fuel : <input type="number" name="fuel" id="fuel"
-                                value="{{ $depo->fuel }}">
+                        <li class="list-group-item">Fuel : <input class="form-control" type="number" name="fuel"
+                                id="fuel" value="{{ $depo->fuel }}">
                         </li>
                         <li class="list-group-item">Late Return : <input type="number" name="late" id="late"
                                 value="{{ $depo->late }}"></li>

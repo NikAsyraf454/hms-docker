@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
+use App\Exports\ExportDeposit;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -39,7 +41,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::get('/fleet/{id}/edit', [FleetController::class, 'edit'])->name('fleet.edit');
         Route::put('/fleet/{id}', [FleetController::class, 'update'])->name('fleet.update');
         Route::get('/fleet/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
-
+        Route::get('/available-vehicles', [FleetController::class, 'getAvailableVehicles']);
         // Claim Module
         Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
         Route::get('/claim/create', [ClaimController::class, 'create'])->name('claim.create');
@@ -100,7 +102,10 @@ Route::get('role-assign',[UserController::class,'assignRole']);
             Route::get('/deposit/{id}/edit', [DepositController::class, 'edit'])->name('deposit.edit');
             Route::post('/deposit/{id}', [DepositController::class, 'update'])->name('deposit.update');
             Route::delete('/deposit/{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
-    
+        
+        
+        Route::get('/export-deposit')->name('export.deposits');
+        Route::get('/export', [ExportController::class, 'export'])->name('export.users');
         // web.php
         Route::get('/autocomplete/customers', [CustomerController::class, 'autocomplete'])->name('customers.autocomplete');
     });

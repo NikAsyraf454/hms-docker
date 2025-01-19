@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< Updated upstream
     "content-hash": "79c03703943ee698b0b489354678a332",
+=======
+    "content-hash": "04817cfb32a5e004fb2add886307baae",
+>>>>>>> Stashed changes
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -732,20 +736,20 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.17.0",
+            "version": "v4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "bbc513d79acf6691fa9cf10f192c90dd2957f18c"
+                "reference": "cb56001e54359df7ae76dc522d08845dc741621b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/bbc513d79acf6691fa9cf10f192c90dd2957f18c",
-                "reference": "bbc513d79acf6691fa9cf10f192c90dd2957f18c",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/cb56001e54359df7ae76dc522d08845dc741621b",
+                "reference": "cb56001e54359df7ae76dc522d08845dc741621b",
                 "shasum": ""
             },
             "require": {
-                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
+                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
                 "cerdic/css-tidy": "^1.7 || ^2.0",
@@ -787,9 +791,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.17.0"
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
             },
-            "time": "2023-11-17T15:01:25+00:00"
+            "time": "2024-11-01T03:51:45+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1052,6 +1056,7 @@
         },
         {
             "name": "guzzlehttp/promises",
+<<<<<<< Updated upstream
             "version": "2.0.3",
             "source": {
                 "type": "git",
@@ -1062,6 +1067,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
                 "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+=======
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -1115,7 +1132,11 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
+<<<<<<< Updated upstream
                 "source": "https://github.com/guzzle/promises/tree/2.0.3"
+=======
+                "source": "https://github.com/guzzle/promises/tree/2.0.4"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -1131,7 +1152,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2024-07-18T10:29:17+00:00"
+=======
+            "time": "2024-10-17T10:06:22+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1337,6 +1362,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< Updated upstream
             "version": "v11.27.2",
             "source": {
                 "type": "git",
@@ -1347,6 +1373,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/a51d1f2b771c542324a3d9b76a98b1bbc75c0ee9",
                 "reference": "a51d1f2b771c542324a3d9b76a98b1bbc75c0ee9",
+=======
+            "version": "v11.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "425054512c362835ba9c0307561973c8eeac7385"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/425054512c362835ba9c0307561973c8eeac7385",
+                "reference": "425054512c362835ba9c0307561973c8eeac7385",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -1542,6 +1580,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< Updated upstream
             "time": "2024-10-09T04:17:35+00:00"
         },
         {
@@ -1556,6 +1595,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/prompts/zipball/ea57a2261093986721d4a5f4f9524d76f21f9fa0",
                 "reference": "ea57a2261093986721d4a5f4f9524d76f21f9fa0",
+=======
+            "time": "2024-10-22T14:13:31+00:00"
+        },
+        {
+            "name": "laravel/prompts",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/prompts.git",
+                "reference": "0f3848a445562dac376b27968f753c65e7e1036e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/0f3848a445562dac376b27968f753c65e7e1036e",
+                "reference": "0f3848a445562dac376b27968f753c65e7e1036e",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -1599,9 +1654,15 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
+<<<<<<< Updated upstream
                 "source": "https://github.com/laravel/prompts/tree/v0.3.0"
             },
             "time": "2024-09-30T14:27:51+00:00"
+=======
+                "source": "https://github.com/laravel/prompts/tree/v0.3.1"
+            },
+            "time": "2024-10-09T19:42:26+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "laravel/serializable-closure",
@@ -2108,16 +2169,16 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.58",
+            "version": "3.1.62",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
-                "reference": "18495a71b112f43af8ffab35111a58b4e4ba4a4d"
+                "reference": "decfb9140161fcc117571e47e35ddf27983189ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/18495a71b112f43af8ffab35111a58b4e4ba4a4d",
-                "reference": "18495a71b112f43af8ffab35111a58b4e4ba4a4d",
+                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/decfb9140161fcc117571e47e35ddf27983189ce",
+                "reference": "decfb9140161fcc117571e47e35ddf27983189ce",
                 "shasum": ""
             },
             "require": {
@@ -2125,7 +2186,7 @@
                 "ext-json": "*",
                 "illuminate/support": "5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0",
                 "php": "^7.0||^8.0",
-                "phpoffice/phpspreadsheet": "^1.29.1",
+                "phpoffice/phpspreadsheet": "^1.29.7",
                 "psr/simple-cache": "^1.0||^2.0||^3.0"
             },
             "require-dev": {
@@ -2136,12 +2197,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Maatwebsite\\Excel\\ExcelServiceProvider"
-                    ],
                     "aliases": {
                         "Excel": "Maatwebsite\\Excel\\Facades\\Excel"
-                    }
+                    },
+                    "providers": [
+                        "Maatwebsite\\Excel\\ExcelServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -2173,7 +2234,7 @@
             ],
             "support": {
                 "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
-                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.58"
+                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.62"
             },
             "funding": [
                 {
@@ -2185,7 +2246,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-07T13:53:36+00:00"
+            "time": "2025-01-04T12:14:36+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -2853,6 +2914,7 @@
         },
         {
             "name": "nunomaduro/termwind",
+<<<<<<< Updated upstream
             "version": "v2.1.0",
             "source": {
                 "type": "git",
@@ -2863,14 +2925,27 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/e5f21eade88689536c0cdad4c3cd75f3ed26e01a",
                 "reference": "e5f21eade88689536c0cdad4c3cd75f3ed26e01a",
+=======
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/termwind.git",
+                "reference": "42c84e4e8090766bbd6445d06cd6e57650626ea3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/42c84e4e8090766bbd6445d06cd6e57650626ea3",
+                "reference": "42c84e4e8090766bbd6445d06cd6e57650626ea3",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": "^8.2",
-                "symfony/console": "^7.0.4"
+                "symfony/console": "^7.1.5"
             },
             "require-dev": {
+<<<<<<< Updated upstream
                 "ergebnis/phpstan-rules": "^2.2.0",
                 "illuminate/console": "^11.1.1",
                 "laravel/pint": "^1.15.0",
@@ -2879,6 +2954,15 @@
                 "phpstan/phpstan": "^1.10.66",
                 "phpstan/phpstan-strict-rules": "^1.5.2",
                 "symfony/var-dumper": "^7.0.4",
+=======
+                "illuminate/console": "^11.28.0",
+                "laravel/pint": "^1.18.1",
+                "mockery/mockery": "^1.6.12",
+                "pestphp/pest": "^2.36.0",
+                "phpstan/phpstan": "^1.12.6",
+                "phpstan/phpstan-strict-rules": "^1.6.1",
+                "symfony/var-dumper": "^7.1.5",
+>>>>>>> Stashed changes
                 "thecodingmachine/phpstan-strict-rules": "^1.0.0"
             },
             "type": "library",
@@ -2921,7 +3005,11 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
+<<<<<<< Updated upstream
                 "source": "https://github.com/nunomaduro/termwind/tree/v2.1.0"
+=======
+                "source": "https://github.com/nunomaduro/termwind/tree/v2.2.0"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -2937,7 +3025,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2024-09-05T15:25:50+00:00"
+=======
+            "time": "2024-10-15T16:15:16+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "phenx/php-font-lib",
@@ -3031,6 +3123,7 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
+<<<<<<< Updated upstream
             "version": "1.29.2",
             "source": {
                 "type": "git",
@@ -3041,6 +3134,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/3a5a818d7d3e4b5bd2e56fb9de44dbded6eae07f",
                 "reference": "3a5a818d7d3e4b5bd2e56fb9de44dbded6eae07f",
+=======
+            "version": "1.29.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
+                "reference": "089ffdfc04b5fcf25a3503d81a4e589f247e20e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/089ffdfc04b5fcf25a3503d81a4e589f247e20e3",
+                "reference": "089ffdfc04b5fcf25a3503d81a4e589f247e20e3",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -3068,7 +3173,7 @@
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "dev-main",
-                "dompdf/dompdf": "^1.0 || ^2.0",
+                "dompdf/dompdf": "^1.0 || ^2.0 || ^3.0",
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "mitoteam/jpgraph": "^10.3",
                 "mpdf/mpdf": "^8.1.1",
@@ -3130,9 +3235,15 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
+<<<<<<< Updated upstream
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.2"
             },
             "time": "2024-09-29T07:04:47+00:00"
+=======
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.8"
+            },
+            "time": "2025-01-12T03:16:27+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "phpoption/phpoption",
@@ -3991,6 +4102,7 @@
             "time": "2024-07-01T07:33:21+00:00"
         },
         {
+<<<<<<< Updated upstream
             "name": "spatie/browsershot",
             "version": "4.3.0",
             "source": {
@@ -4068,6 +4180,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "spatie/laravel-permission",
+            "version": "6.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "fe973a58b44380d0e8620107259b7bda22f70408"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> Stashed changes
                 "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/fe973a58b44380d0e8620107259b7bda22f70408",
                 "reference": "fe973a58b44380d0e8620107259b7bda22f70408",
                 "shasum": ""
@@ -4141,6 +4264,7 @@
             "time": "2024-06-22T23:04:52+00:00"
         },
         {
+<<<<<<< Updated upstream
             "name": "spatie/temporary-directory",
             "version": "2.2.1",
             "source": {
@@ -4211,6 +4335,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "symfony/clock",
+            "version": "v7.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/clock.git",
+                "reference": "3dfc8b084853586de51dd1441c6242c76a28cbe7"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> Stashed changes
                 "url": "https://api.github.com/repos/symfony/clock/zipball/3dfc8b084853586de51dd1441c6242c76a28cbe7",
                 "reference": "3dfc8b084853586de51dd1441c6242c76a28cbe7",
                 "shasum": ""
@@ -6885,6 +7020,7 @@
         },
         {
             "name": "laravel/breeze",
+<<<<<<< Updated upstream
             "version": "v2.2.2",
             "source": {
                 "type": "git",
@@ -6895,6 +7031,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/breeze/zipball/1dd612eb9e1c2632a39e6aa6df4e69cd45129dca",
                 "reference": "1dd612eb9e1c2632a39e6aa6df4e69cd45129dca",
+=======
+            "version": "v2.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "94981851d20837901552a250387280063eac83ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/94981851d20837901552a250387280063eac83ac",
+                "reference": "94981851d20837901552a250387280063eac83ac",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -6941,7 +7089,11 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
+<<<<<<< Updated upstream
             "time": "2024-10-06T21:13:27+00:00"
+=======
+            "time": "2024-10-17T16:02:32+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "laravel/pint",
@@ -7011,6 +7163,7 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< Updated upstream
             "version": "v1.35.0",
             "source": {
                 "type": "git",
@@ -7021,6 +7174,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/992bc2d9e52174c79515967f30849d21daa334d8",
                 "reference": "992bc2d9e52174c79515967f30849d21daa334d8",
+=======
+            "version": "v1.37.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/5d385f2e698f0f774cdead82aff5d989fb95309b",
+                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -7070,7 +7235,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< Updated upstream
             "time": "2024-10-08T14:45:26+00:00"
+=======
+            "time": "2024-10-21T17:13:38+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "mockery/mockery",
@@ -7217,6 +7386,7 @@
         },
         {
             "name": "nunomaduro/collision",
+<<<<<<< Updated upstream
             "version": "v8.4.0",
             "source": {
                 "type": "git",
@@ -7227,13 +7397,29 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nunomaduro/collision/zipball/e7d1aa8ed753f63fa816932bbc89678238843b4a",
                 "reference": "e7d1aa8ed753f63fa816932bbc89678238843b4a",
+=======
+            "version": "v8.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/collision.git",
+                "reference": "f5c101b929c958e849a633283adff296ed5f38f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/f5c101b929c958e849a633283adff296ed5f38f5",
+                "reference": "f5c101b929c958e849a633283adff296ed5f38f5",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
-                "filp/whoops": "^2.15.4",
-                "nunomaduro/termwind": "^2.0.1",
+                "filp/whoops": "^2.16.0",
+                "nunomaduro/termwind": "^2.1.0",
                 "php": "^8.2.0",
+<<<<<<< Updated upstream
                 "symfony/console": "^7.1.3"
+=======
+                "symfony/console": "^7.1.5"
+>>>>>>> Stashed changes
             },
             "conflict": {
                 "laravel/framework": "<11.0.0 || >=12.0.0",
@@ -7241,6 +7427,7 @@
             },
             "require-dev": {
                 "larastan/larastan": "^2.9.8",
+<<<<<<< Updated upstream
                 "laravel/framework": "^11.19.0",
                 "laravel/pint": "^1.17.1",
                 "laravel/sail": "^1.31.0",
@@ -7249,6 +7436,16 @@
                 "orchestra/testbench-core": "^9.2.3",
                 "pestphp/pest": "^2.35.0 || ^3.0.0",
                 "sebastian/environment": "^6.1.0 || ^7.0.0"
+=======
+                "laravel/framework": "^11.28.0",
+                "laravel/pint": "^1.18.1",
+                "laravel/sail": "^1.36.0",
+                "laravel/sanctum": "^4.0.3",
+                "laravel/tinker": "^2.10.0",
+                "orchestra/testbench-core": "^9.5.3",
+                "pestphp/pest": "^2.36.0 || ^3.4.0",
+                "sebastian/environment": "^6.1.0 || ^7.2.0"
+>>>>>>> Stashed changes
             },
             "type": "library",
             "extra": {
@@ -7310,7 +7507,11 @@
                     "type": "patreon"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2024-08-03T15:32:23+00:00"
+=======
+            "time": "2024-10-15T16:06:32+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "phar-io/manifest",
@@ -7755,6 +7956,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< Updated upstream
             "version": "11.4.1",
             "source": {
                 "type": "git",
@@ -7765,6 +7967,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7875627f15f4da7e7f0823d1f323f7295a77334e",
                 "reference": "7875627f15f4da7e7f0823d1f323f7295a77334e",
+=======
+            "version": "11.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "1863643c3f04ad03dcb9c6996c294784cdda4805"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1863643c3f04ad03dcb9c6996c294784cdda4805",
+                "reference": "1863643c3f04ad03dcb9c6996c294784cdda4805",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -7778,21 +7992,33 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.2",
+<<<<<<< Updated upstream
                 "phpunit/php-code-coverage": "^11.0.6",
+=======
+                "phpunit/php-code-coverage": "^11.0.7",
+>>>>>>> Stashed changes
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-invoker": "^5.0.1",
                 "phpunit/php-text-template": "^4.0.1",
                 "phpunit/php-timer": "^7.0.1",
                 "sebastian/cli-parser": "^3.0.2",
                 "sebastian/code-unit": "^3.0.1",
+<<<<<<< Updated upstream
                 "sebastian/comparator": "^6.1.0",
+=======
+                "sebastian/comparator": "^6.1.1",
+>>>>>>> Stashed changes
                 "sebastian/diff": "^6.0.2",
                 "sebastian/environment": "^7.2.0",
                 "sebastian/exporter": "^6.1.3",
                 "sebastian/global-state": "^7.0.2",
                 "sebastian/object-enumerator": "^6.0.1",
                 "sebastian/type": "^5.1.0",
+<<<<<<< Updated upstream
                 "sebastian/version": "^5.0.1"
+=======
+                "sebastian/version": "^5.0.2"
+>>>>>>> Stashed changes
             },
             "suggest": {
                 "ext-soap": "To be able to generate mocks based on WSDL files"
@@ -7835,7 +8061,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< Updated upstream
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.4.1"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.4.2"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -7851,7 +8081,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2024-10-08T15:38:37+00:00"
+=======
+            "time": "2024-10-19T13:05:19+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "sebastian/cli-parser",
@@ -8025,6 +8259,7 @@
         },
         {
             "name": "sebastian/comparator",
+<<<<<<< Updated upstream
             "version": "6.1.0",
             "source": {
                 "type": "git",
@@ -8035,6 +8270,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa37b9e2ca618cb051d71b60120952ee8ca8b03d",
                 "reference": "fa37b9e2ca618cb051d71b60120952ee8ca8b03d",
+=======
+            "version": "6.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "5ef523a49ae7a302b87b2102b72b1eda8918d686"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/5ef523a49ae7a302b87b2102b72b1eda8918d686",
+                "reference": "5ef523a49ae7a302b87b2102b72b1eda8918d686",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -8090,7 +8337,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
+<<<<<<< Updated upstream
                 "source": "https://github.com/sebastianbergmann/comparator/tree/6.1.0"
+=======
+                "source": "https://github.com/sebastianbergmann/comparator/tree/6.1.1"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -8098,7 +8349,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2024-09-11T15:42:56+00:00"
+=======
+            "time": "2024-10-18T15:00:48+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "sebastian/complexity",
@@ -9287,5 +9542,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

@@ -27,7 +27,6 @@ class Rental extends Model
         'rental_amount',
         'addon_amount',
         'total_amount',
-        'staff',
         'note',
     ];
 

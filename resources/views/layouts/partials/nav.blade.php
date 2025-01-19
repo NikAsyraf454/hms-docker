@@ -195,12 +195,15 @@
               <span>Claims</span>
               </a>
           </li><!-- End Profile Page Nav -->
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('fleet.index') }}">
-                  <i class="bi bi-car-front"></i>
-                  <span>Fleet</span>
-              </a>
-          </li><!-- End F.A.Q Page Nav -->
+          @if ($role == 'Admin')
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('fleet.index') }}">
+                      <i class="bi bi-car-front"></i>
+                      <span>Fleet</span>
+                  </a>
+              </li>
+          @endif
+
           <li class="nav-item">
               <a class="nav-link collapsed" href="{{ route('rental.index') }}">
                   <i class="bi bi-card-list"></i>

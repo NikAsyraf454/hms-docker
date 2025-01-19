@@ -176,25 +176,6 @@
                                 <div class="col-md-6">
                                     <h4>Rental Info</h4>
                                     <div class="row">
-                                        {{-- <div class="col-6">
-                                            <label for="plate_number" class="form-label">Vehicle Name</label>
-                                            <select class="form-control" name="fleet_id" id="fleet_id">
-                                                @foreach ($fleet as $car)
-                                                    <option value="{{ $car->id }}">{{ $car->model }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div> --}}
-                                        <div class="col-md-6">
-                                            <label for="fleet_id" class="form-label">Plate Number</label>
-                                            <select class="form-control" name="fleet_id" id="fleet_id" value="">
-                                                @foreach ($fleet as $car)
-                                                    <option value="{{ $car->id }}">{{ $car->model }}
-                                                        {{ $car->license_plate }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="pickup_date" class="form-label">Pickup Date</label>
                                             <input type="date" class="form-control" name="pickup_date"
@@ -213,6 +194,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
+                                            {{-- <input type="time" class="form-control" id="pickup_time"
+                                                name="pickup_time"> --}}
                                             <select class="form-select" name="pickup_time" required="required"
                                                 id="pickup_time" value="{{ old('pickup_time') }}">
                                                 <option value="12:00 AM">12:00 AM</option>
@@ -315,6 +298,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="return_time" class="form-label">Return Time</label>
+                                            {{-- <input type="time" class="form-control" id="return_time"
+                                                name="return_time"> --}}
                                             <select class="form-select" name="return_time" required="required"
                                                 id="return_time" value="{{ old('return_time') }}">
                                                 <option value="12:00 AM">12:00 AM</option>
@@ -416,6 +401,18 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="fleet_id" class="form-label">Plate Number</label>
+                                            <select class="form-control" name="fleet_id" id="fleet_id" value="">
+                                                @foreach ($fleet as $car)
+                                                    <option value="{{ $car->id }}">{{ $car->model }}
+                                                        {{ $car->license_plate }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="pickup_location" class="form-label">Pickup Location</label>
@@ -617,6 +614,63 @@
             });
         });
     </script>
+    {{-- <script>
+        document.getElementById('pickup_date').addEventListener('change', fetchAvailableVehicles);
+        document.getElementById('pickup_time').addEventListener('change', fetchAvailableVehicles);
+        document.getElementById('return_date').addEventListener('change', fetchAvailableVehicles);
+        document.getElementById('return_time').addEventListener('change', fetchAvailableVehicles);
+
+        function fetchAvailableVehicles() {
+            const date = document.getElementById('pickup_date').value;
+            const time = document.getElementById('pickup_time').value;
+            const return_date = document.getElementById('return_date').value;
+            const return_time = document.getElementById('return_time').value;
+
+            console.log(date, time, return_date, return_time);
+
+            if (date && time) {
+                fetch(`/available-vehicles?date=${date}&time=${time}&return_date=${return_date}&return_time=${return_time}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Available vehicles:', data);
+                        const fleetSelect = document.getElementById('fleet_id');
+                        fleetSelect.innerHTML = ''; // Clear previous options
+
+                        // Check if the data is an array
+                        if (Array.isArray(data) && data.length > 0) {
+                            data.forEach(car => {
+                                const option = document.createElement('option');
+                                option.value = car.id;
+                                option.textContent = `${car.model} ${car.license_plate}`;
+                                fleetSelect.appendChild(option);
+                            });
+                        } else {
+                            // Handle case when no cars are available
+                            const option = document.createElement('option');
+                            option.value = '';
+                            option.textContent = 'No vehicles available';
+                            fleetSelect.appendChild(option);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching available vehicles:', error);
+
+                        // Handle network errors or invalid responses
+                        const fleetSelect = document.getElementById('fleet_id');
+                        fleetSelect.innerHTML = ''; // Clear previous options
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'Error fetching vehicles';
+                        fleetSelect.appendChild(option);
+                    });
+            }
+        }
+    </script> --}}
     <script>
         console.log('hehe');
     </script>
