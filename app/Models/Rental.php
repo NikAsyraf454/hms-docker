@@ -59,4 +59,13 @@ class Rental extends Model
     {
         return $this->hasMany(Inspection::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($rental) {
+            $rental->deposit()->delete();
+        });
+    }
 }

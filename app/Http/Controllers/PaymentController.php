@@ -32,7 +32,7 @@ class PaymentController extends Controller
     {
         $rental = $this->rentalService->getRentalById($id);
       
-        $pdf = Pdf::loadView('rental.invoice', ['rental' => $rental]);
+        $pdf = Pdf::loadView('rental.invoice', ['rental' => $rental])->setPaper('a4', 'portrait');;
         return $pdf->stream('invoice.pdf');
 
         // return view('rental.invoice', ['rental' => $rental]);
@@ -43,15 +43,15 @@ class PaymentController extends Controller
     public function createAgreement($id)
     {
         $rental = $this->rentalService->getRentalById($id);
-        // return view('rental.agreement-form');
 
         $pickupDateTime = new DateTime($rental->pickup_date . $rental->pickup_time);  // Pickup time
         $returnDateTime = new DateTime($rental->return_date . $rental->return_time);  // Return time
         $interval = $pickupDateTime->diff($returnDateTime);
 
         // dd($interval->h);
+        // return view('rental.agreement-form', ['rental' => $rental, 'duration' => $interval]);
 
-        $pdf = Pdf::loadView('rental.agreement-form', ['rental' => $rental, 'duration' => $interval])->setPaper('a4', 'portrait');;
+        $pdf = Pdf::loadView('rental.agreement-form', ['rental' => $rental, 'duration' => $interval])->setPaper('a4', 'portrait');
         return $pdf->stream('invoice.pdf');
 
         // return view('rental.invoice', ['rental' => $rental]);

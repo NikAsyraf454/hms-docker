@@ -24,6 +24,9 @@ class RentalService
         if (!isset($data['note'])) {
             $data['note'] = null;
         }
+
+        $data['pickup_time'] = date("H:i:s", strtotime($data['pickup_time']));
+        $data['return_time'] = date("H:i:s", strtotime($data['return_time']));
       
         return Rental::create([
             'customer_id' => $data['customer_id'],

@@ -32,8 +32,10 @@
                                         <td>{{ $item->fleet->license_plate }}</td>
                                         <td>{{ $item->customer->name }}</td>
                                         <td>{{ $item->customer->phone }}</td>
-                                        <td>{{ $item->pickup_date }} <br> {{ $item->pickup_time }}</td>
-                                        <td>{{ $item->return_date }} <br> {{ $item->return_time }}</td>
+                                        <td>{{ date('d M Y', strtotime($item->pickup_date)) }} <br>
+                                            {{ date('g:i A', strtotime($item->pickup_time)) }}</td>
+                                        <td>{{ $item->return_date }} <br> {{ date('g:i A', strtotime($item->return_time)) }}
+                                        </td>
                                         <td>{{ $item->payment->rental_amount }}</td>
                                         <td>
                                             <div class="dropdown">
