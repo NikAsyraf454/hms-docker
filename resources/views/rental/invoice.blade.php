@@ -14,14 +14,14 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            /* background-color: #f4f4f4; */
             height: 100%;
         }
 
         .invoice-container {
             max-width: 800px;
             margin: 30px auto;
-            background-color: #fff;
+            /* background-color: #fff; */
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -5,6 +5,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
 use App\Exports\ExportDeposit;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Artisan;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -104,7 +106,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
             Route::delete('/deposit/{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
         
         
-        Route::get('/export-deposit')->name('export.deposits');
+        Route::get('/export-deposit', [ExportController::class, 'exportDeposit'])->name('export.deposits');
         Route::get('/export', [ExportController::class, 'export'])->name('export.users');
         // web.php
         Route::get('/autocomplete/customers', [CustomerController::class, 'autocomplete'])->name('customers.autocomplete');
@@ -130,5 +132,19 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
+
+    route::get('optimize', function(){
+        Artisan::call('optimize:clear');
+        return response()->json('Cache Cleared');
+        return 'Cache Cleared';
+    });
+
+    // Route::get('/run-migrations', function () {
+    //     if (request()->input('key') !== 'secure-key') {
+    //         abort(403, 'Unauthorized');
+    //     }
+    //     // Artisan::call('migrate', ['--force' => true]);
+    //     return 'Migrations ran successfully!';
+    // });
 
 require __DIR__.'/auth.php';

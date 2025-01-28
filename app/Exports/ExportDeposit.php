@@ -18,6 +18,7 @@ class ExportDeposit implements FromCollection, WithHeadings
             ->join('customers', 'rentals.customer_id', '=', 'customers.id')
             ->join('deposits', 'rentals.depo_id', '=', 'deposits.id')
             ->select(
+                'deposits.date',
                 'customers.name as customer_name',
                 'customers.acc_num',
                 'customers.acc_num_name',
@@ -32,6 +33,7 @@ class ExportDeposit implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Date',
             'Customer Name',
             'Account Number',
             'Account Owner',

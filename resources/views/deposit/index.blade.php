@@ -16,22 +16,31 @@
                     <table id="tableData" class="datatable table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Invoice No.</th>
                                 <th>Status</th>
                                 <th>Payment Date</th>
+                                <th>Return Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
-                                dd($deposit);
-                            @endphp --}}
+                            @php
+                                // dd($deposit);
+                            @endphp
                             @foreach ($deposit as $item)
+                                {{-- @php
+                                    dd($item->rentals);
+                                @endphp --}}
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    @if ($item->rentals)
+                                        <td>{{ $item->rentals->payment->invoice_id }}</td>
+                                    @else
+                                        <td>-</td>
+                                    @endif
                                     <td>
                                         {{ $item->status }}
                                     </td>
-                                    <td>{{ $item->payment }}</td>
+                                    <td>{{ $item->date }}</td>
+                                    <td>{{ $item->return_date }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -43,11 +52,11 @@
         </div>
     </div>
 @endsection
-
+{{-- 
 @push('scripts')
-    {{-- <script>
-    $(document).ready(function() {
-        $('#tableData').DataTable();
-    });
-</script> --}}
-@endpush
+    <script>
+        $(document).ready(function() {
+            $('#tableData').DataTable();
+        });
+    </script>
+@endpush --}}

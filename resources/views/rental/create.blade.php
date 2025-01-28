@@ -459,7 +459,7 @@
                                                     <input type="number" name="rental_amount" id="rental_amount"
                                                         class="form-control" placeholder="Rental Amount"
                                                         aria-label="Rental Amount" aria-describedby="basic-addon1"
-                                                        required>
+                                                        value="{{ old('rental_amount') }}" required>
                                                 </div>
                                                 @error('rental_amount')
                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -481,7 +481,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="payment_method" class="form-label">Payment Status</label>
+                                                <label for="payment_method" class="form-label">Payment Method</label>
                                                 <select class="form-control" name="payment_method" id="payment_method">
                                                     <option value="Cash">Cash</option>
                                                     <option value="Transfer">Transfer</option>
@@ -541,7 +541,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- Rental Detail --}}
+                                {{-- End Rental Detail --}}
                             </div>
 
                             <div class="pt-2">

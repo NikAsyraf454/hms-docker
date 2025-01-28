@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('transmission');
             $table->string('status');
+            $table->string('calendar');
             $table->timestamps();
         });
     }

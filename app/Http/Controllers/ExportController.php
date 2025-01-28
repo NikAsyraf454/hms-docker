@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
+use App\Exports\ExportDeposit;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller

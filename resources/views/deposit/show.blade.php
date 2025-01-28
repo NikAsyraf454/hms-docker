@@ -25,32 +25,58 @@
                 <input type="hidden" name="updated_by" value="{{ $userId }}">
                 <div class="col-md-6">
                     <ul class="list-group">
-                        <li class="list-group-item">Amount : {{ $depo->amount }}</li>
-                        <li class="list-group-item">Date : {{ $depo->date }}</li>
-                        <li class="list-group-item">Status : {{ $depo->status }}</li>
-                        <li class="list-group-item">Fuel : <input class="form-control" type="number" name="fuel"
-                                id="fuel" value="{{ $depo->fuel }}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Amount:</strong>
+                            <span>{{ $depo->amount }}</span>
                         </li>
-                        <li class="list-group-item">Late Return : <input type="number" name="late" id="late"
-                                value="{{ $depo->late }}"></li>
-                        <li class="list-group-item">Extend Rental :
-                            <input type="number" name="extend" value="{{ $depo->extend }}" id="extend">
-                            <select name="extend_status" id="extend_status">
-                                <option value="Paid" {{ $depo->extend_status == 'Paid' ? 'selected' : '' }}>Paid</option>
-                                <option value="Unpaid" {{ $depo->extend_status == 'Unpaid' ? 'selected' : '' }}>Unpaid
-                                </option>
-                            </select>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Date:</strong>
+                            <span>{{ $depo->date }}</span>
                         </li>
-                        <li class="list-group-item">Return Date : <input type="date" name="return_date"
-                                value="{{ $depo->return_date }}"></li>
-                        <li class="list-group-item">Return Amount : <input type="number" name="return_amount"
-                                id="return_amount" value="{{ $depo->return_amount }}" readonly></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Status:</strong>
+                            <span class="badge bg-{{ $depo->status === 'Paid' ? 'success' : 'danger' }}">
+                                {{ $depo->status }}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fuel:</strong>
+                            <input type="number" name="fuel" id="fuel" class="form-control mt-2"
+                                value="{{ $depo->fuel }}">
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Late Return:</strong>
+                            <input type="number" name="late" id="late" class="form-control mt-2"
+                                value="{{ $depo->late }}">
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Extend Rental:</strong>
+                            <div class="d-flex mt-2">
+                                <input type="number" name="extend" id="extend" class="form-control me-2"
+                                    value="{{ $depo->extend }}">
+                                <select name="extend_status" id="extend_status" class="form-select">
+                                    <option value="Paid" {{ $depo->extend_status == 'Paid' ? 'selected' : '' }}>Paid
+                                    </option>
+                                    <option value="Unpaid" {{ $depo->extend_status == 'Unpaid' ? 'selected' : '' }}>Unpaid
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Return Date:</strong>
+                            <input type="date" name="return_date" class="form-control mt-2"
+                                value="{{ $depo->return_date }}">
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Return Amount:</strong>
+                            <input type="number" name="return_amount" id="return_amount" class="form-control mt-2"
+                                value="{{ $depo->return_amount }}" readonly>
+                        </li>
                     </ul>
                     @if (isset($depo->proof))
                         {{-- @dd($rental->deposit->proof) --}}
-
-                        <div class="col-4 d-flex align-items-end">
-                            <a class="btn btn-warning" href="{{ asset($depo->proof) }}" target="_blank">View</a>
+                        <div class="col-4 d-flex align-items-end mt-2">
+                            <a class="btn btn-primary" href="{{ asset($depo->proof) }}" target="_blank">View</a>
                         </div>
                     @else
                         {{-- Add Proof Logic --}}
