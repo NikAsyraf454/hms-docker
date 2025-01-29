@@ -7,6 +7,7 @@ use App\Models\Fleet;
 use App\Models\Rental;
 use App\Models\MaintenanceRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FleetController extends Controller
 {
@@ -83,31 +84,31 @@ class FleetController extends Controller
     }
 
     public function getAvailableVehicles(Request $request)
-    {   
+    {
         // Validate the request
         $request->validate([
             'pickup_date' => 'required|date',
             'return_date' => 'required|date|after_or_equal:pickup_date',
-            'pickup_time' => 'required|string',
-            'return_time' => 'required|string',
+            'pickup_time' => 'required|date_format:H:i', // Ensure time is in HH:MM format
+            'return_time' => 'required|date_format:H:i', // Ensure time is in HH:MM format
         ]);
 
-        // Parse the dates and times
+        // Parse the input date and time
         $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->pickup_date . ' ' . $request->pickup_time);
         $returnDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->return_date . ' ' . $request->return_time);
+
+        // Log the parsed datetime values for debugging
+        // Log::info('Pickup DateTime: ' . $pickupDateTime);
+        // Log::info('Return DateTime: ' . $returnDateTime);
 
         // Get all fleets
         $allFleets = Fleet::pluck('license_plate', 'id');
 
         // Get rented fleet IDs within the selected time range
         $rentedFleetIds = Rental::where(function ($query) use ($pickupDateTime, $returnDateTime) {
-            $query->whereBetween('pickup_date', [$pickupDateTime, $returnDateTime])
-                ->orWhereBetween('return_date', [$pickupDateTime, $returnDateTime])
-                ->orWhere(function ($query) use ($pickupDateTime, $returnDateTime) {
-                    $query->where('pickup_date', '<=', $pickupDateTime)
-                            ->where('return_date', '>=', $returnDateTime);
-                });
-        })->pluck('fleet_id'); // Correctly querying the `rentals` table
+            $query->whereRaw("CONCAT(pickup_date, ' ', pickup_time) <= ?", [$returnDateTime->format('Y-m-d H:i:s')])
+                ->whereRaw("CONCAT(return_date, ' ', return_time) >= ?", [$pickupDateTime->format('Y-m-d H:i:s')]);
+        })->pluck('fleet_id');
 
         // Filter out rented fleets
         $availableFleets = $allFleets->except($rentedFleetIds->toArray());

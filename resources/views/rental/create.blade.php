@@ -442,13 +442,15 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-            $('#rentalForm').on('change', 'input', function() {
+        let debounceTimer;
+        $('#rentalForm').on('change', '#pickup_date, #pickup_time, #return_date, #return_time', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function() {
                 const pickupDate = $('#pickup_date').val();
                 const pickupTime = $('#pickup_time').val();
                 const returnDate = $('#return_date').val();
                 const returnTime = $('#return_time').val();
-                console.log("1st step");
+
                 if (pickupDate && pickupTime && returnDate && returnTime) {
                     $.ajax({
                         url: '/available-vehicles',
@@ -460,7 +462,6 @@
                             return_time: returnTime
                         },
                         success: function(response) {
-                            console.log(response);
                             $('#fleet_id').empty();
                             $('#fleet_id').append('<option value="">-- Select a Vehicle --</option>');
                             $.each(response, function(id, licensePlate) {
@@ -472,7 +473,7 @@
                         }
                     });
                 }
-            });
+            }, 300); // 300ms debounce delay
         });
     </script>
     <script>
