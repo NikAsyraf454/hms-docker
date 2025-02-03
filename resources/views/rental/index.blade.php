@@ -34,7 +34,9 @@
                                         <td>{{ $item->customer->phone }}</td>
                                         <td>{{ date('d M Y', strtotime($item->pickup_date)) }} <br>
                                             {{ date('g:i A', strtotime($item->pickup_time)) }}</td>
-                                        <td>{{ $item->return_date }} <br> {{ date('g:i A', strtotime($item->return_time)) }}
+                                        <td>{{ date('d M Y', strtotime($item->return_date)) }} <br>
+                                            {{ date('g:i A', strtotime($item->return_time)) }}</td>
+                                        {{-- <td>{{ $item->return_date }} <br> {{ date('g:i A', strtotime($item->return_time)) }} --}}
                                         </td>
                                         <td>{{ $item->payment->rental_amount }}</td>
                                         <td>
