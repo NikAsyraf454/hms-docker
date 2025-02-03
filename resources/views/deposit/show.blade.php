@@ -42,18 +42,18 @@
                         <li class="list-group-item">
                             <strong>Fuel:</strong>
                             <input type="number" name="fuel" id="fuel" class="form-control mt-2"
-                                value="{{ $depo->fuel }}">
+                                value="{{ $depo->fuel ?? 0 }}">
                         </li>
                         <li class="list-group-item">
                             <strong>Late Return:</strong>
                             <input type="number" name="late" id="late" class="form-control mt-2"
-                                value="{{ $depo->late }}">
+                                value="{{ $depo->late ?? 0 }}">
                         </li>
                         <li class="list-group-item">
                             <strong>Extend Rental:</strong>
                             <div class="d-flex mt-2">
                                 <input type="number" name="extend" id="extend" class="form-control me-2"
-                                    value="{{ $depo->extend }}">
+                                    value="{{ $depo->extend ?? 0 }}">
                                 <select name="extend_status" id="extend_status" class="form-select">
                                     <option value="Paid" {{ $depo->extend_status == 'Paid' ? 'selected' : '' }}>Paid
                                     </option>
@@ -61,6 +61,11 @@
                                     </option>
                                 </select>
                             </div>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Remarks:</strong>
+                            <input type="text" name="remarks" id="remarks" class="form-control mt-2"
+                                value="{{ $depo->remarks }}">
                         </li>
                         <li class="list-group-item">
                             <strong>Return Date:</strong>
@@ -76,13 +81,13 @@
                     @if (isset($depo->proof))
                         {{-- @dd($rental->deposit->proof) --}}
                         <div class="col-4 d-flex align-items-end mt-2">
-                            <a class="btn btn-primary" href="{{ asset($depo->proof) }}" target="_blank">View</a>
+                            <a class="btn btn-primary" href="{{ asset($depo->proof) }}" target="_blank">View Receipt</a>
                         </div>
                     @else
                         {{-- Add Proof Logic --}}
                     @endif
                     <div class="text-center pt-2">
-                        <button type="submit" class="btn btn-primary">Submit Deduction</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('rental.index') }}" class="btn btn-warning">Back</a>
                     </div>
                 </div>

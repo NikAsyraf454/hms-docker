@@ -186,16 +186,12 @@
           <li class="nav-heading">Pages</li>
 
           <li class="nav-item">
-              @if ($role == 'Staff')
-                  <a class="nav-link collapsed" href="{{ route('claim.index') }}">
-                  @else
-                      <a class="nav-link collapsed" href="{{ route('claim.indexAdmin') }}">
-              @endif
-              <i class="bi bi-person"></i>
-              <span>Claims</span>
+              <a class="nav-link collapsed" href="{{ route('claim.index') }}">
+                  <i class="bi bi-person"></i>
+                  <span>Claims</span>
               </a>
           </li><!-- End Profile Page Nav -->
-          @if ($role == 'Admin')
+          @if ($role == 'Admin' || $role == 'Management')
               <li class="nav-item">
                   <a class="nav-link collapsed" href="{{ route('fleet.index') }}">
                       <i class="bi bi-car-front"></i>

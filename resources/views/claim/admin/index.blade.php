@@ -96,8 +96,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Claims</h5>
-                        <a href="{{ route('claim.create') }}" class="btn btn-primary">New Claim</a>
+                        <h5 class="card-title">Manage Staff Claims</h5>
+                        {{-- <a href="{{ route('claim.create') }}" class="btn btn-primary">New Claim</a> --}}
 
                         <div class="table-responsive">
                             <table id="tableData" class="datatable table">

@@ -99,6 +99,7 @@
                                                 <option value="K10">K10</option>
                                                 <option value="KDSE">KDSE</option>
                                                 <option value="KDOJ">KDOJ</option>
+                                                <option value="KDOJ">Others</option>
                                             </select>
                                             @error('college')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -122,7 +123,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="address" class="form-label">Block </label>
+                                            <label for="address" class="form-label">Address </label>
                                             <input type="text" class="form-control" name="address" id="address"
                                                 value="{{ old('address') }}">
                                             @error('address')

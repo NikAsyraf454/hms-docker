@@ -11,6 +11,13 @@
                 <div class="card-body">
                     <h5 class="card-title">Claims</h5>
                     <a href="{{ route('claim.create') }}" class="btn btn-primary">New Claim</a>
+                    @php
+                        $user = Auth::user();
+                        $role = $user ? $user->getRoleNames()->first() : 'No role assigned';
+                    @endphp
+                    @if ($role == 'Admin' || $role == 'Management')
+                        <a href="{{ route('claim.indexAdmin') }}" class="btn btn-primary">Manage Claim</a>
+                    @endif
 
                     <table id="tableData" class="datatable table">
                         <thead>

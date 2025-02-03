@@ -33,7 +33,7 @@ Route::get('user-profile',[UserController::class,'profile'])->name('profile');
 Route::get('role',[UserController::class,'createRole']);
 Route::get('role-assign',[UserController::class,'assignRole']);
 
-    Route::middleware(['role:Admin|Manager|Staff'])->group(function () {
+    Route::middleware(['role:Admin|Management|Staff'])->group(function () {
         // Routes accessible only to users with the Admin role
         // Fleet 
         Route::get('/fleet', [FleetController::class, 'index'])->name('fleet.index');
@@ -112,7 +112,7 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::get('/autocomplete/customers', [CustomerController::class, 'autocomplete'])->name('customers.autocomplete');
     });
 
-    Route::middleware(['role:Admin|Manager'])->group(function () {
+    Route::middleware(['role:Admin|Management'])->group(function () {
         Route::prefix('manage')->group(function () {
             Route::get('/claim', [ClaimController::class, 'indexAdmin'])->name('claim.indexAdmin');
             Route::put('/claims/{claim}/update-status',[ClaimController::class, 'updateStatus'])->name('claims.updateStatus');
