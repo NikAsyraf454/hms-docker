@@ -131,6 +131,7 @@ class RentalController extends Controller
             'note' => 'nullable|string|max:500',
             'destination' => 'required|string|max:255',
             'payment_status' => 'required|in:paid,unpaid',
+            'payment_proof' => 'nullable',
             'rental_amount' => 'required|numeric|min:0',
             'depo_amount' => 'required|numeric|min:0',
             'depo_date' => 'required|date',
@@ -154,15 +155,25 @@ class RentalController extends Controller
         $payment->payment_status = $request->input('payment_status');
         $payment->rental_amount = $request->input('rental_amount');
 
-        $deposit->depo_amount = $request->input('depo_amount');
-        $deposit->depo_date = $request->input('depo_date');
-        $deposit->depo_status = $request->input('depo_status');
+        $file = $request->file('payment_proof');
+        // dd($file);
+        if ($file) {
+            $filename = 'payment/' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move('payment', $filename);
+        } else {
+            $filename = null;
+        }
+
+        $payment->proof = $filename;
+
+        $deposit->amount = $request->input('depo_amount');
+        $deposit->date = $request->input('depo_date');
+        $deposit->status = $request->input('depo_status');
 
         $rental->save();
         $payment->save();
+        $deposit->save();
 
-        // dd($request->all());
-        // $rental->update($request->all());
         return redirect()->route('rental.index')
         ->with('success', 'Rental updated successfully.');
     }

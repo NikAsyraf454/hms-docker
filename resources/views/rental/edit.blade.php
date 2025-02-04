@@ -21,7 +21,7 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form action="{{ route('rental.update', $rental->id) }}" method="post">
+                        <form action="{{ route('rental.update', $rental->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -30,89 +30,6 @@
                                     value="{{ $userId }}">
                                 <input type="hidden" class="" id="customer_id" name="customer_id"
                                     value="{{ $rental->customer_id }}">
-                                {{-- Customer Detail --}}
-                                {{-- <div class="col-6">
-                                    <h4>Customer Info</h4>
-                                    <div class="col-12">
-                                        <label for="name" class="form-label">Customer Name</label>
-                                        <input type="text" placeholder="Ahmad Irfan" class="form-control" name="name"
-                                            id="name" value="{{ $rental->customer->name }}">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="text" placeholder="ahmad@graduate.utm.my" class="form-control"
-                                                name="email" id="email" value="{{ $rental->customer->email }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="ic" class="form-label">IC Number/Passport </label>
-                                            <input type="number" placeholder="000627101198" class="form-control"
-                                                name="ic" id="ic" value="{{ $rental->customer->ic }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="matric" class="form-label">Matric</label>
-                                            <input type="text" placeholder="A24EC0021" class="form-control"
-                                                name="matric" id="matric" value="{{ $rental->customer->matric }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="phone" class="form-label">Mobile Number </label>
-                                            <input type="number" class="form-control" name="phone" id="phone"
-                                                value="{{ $rental->customer->phone }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="college" class="form-label">College </label>
-                                            <select class="form-control" name="college" id="college"
-                                                value="{{ $rental->customer->college }}">
-                                                <option value="KRP">KRP</option>
-                                                <option value="KTF">KTF</option>
-                                                <option value="KTC">KTC</option>
-                                                <option value="KP">KP</option>
-                                                <option value="KTHO">KTHO</option>
-                                                <option value="KTR">KTR</option>
-                                                <option value="KTDI">KTDI</option>
-                                                <option value="K9">K9</option>
-                                                <option value="K10">K10</option>
-                                                <option value="KDSE">KDSE</option>
-                                                <option value="KDOJ">KDOJ</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="faculty" class="form-label">Faculty </label>
-                                            <select class="form-control" name="faculty" id="faculty"
-                                                value="{{ $rental->customer->faculty }}">
-                                                <option value="FC">Civil Engineering</option>
-                                                <option value="FM">Mechanical Engineering</option>
-                                                <option value="FE">Electrical Engineering</option>
-                                                <option value="FCS">Computing</option>
-                                                <option value="FS">Science</option>
-                                                <option value="FABU">FABU</option>
-                                                <option value="FSSH">FSSH</option>
-                                                <option value="Management">Management</option>
-                                                <option value="AHIBS">AHIBS</option>
-                                                <option value="MJIIT">MJIIT</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="address" class="form-label">Address </label>
-                                            <input type="text" class="form-control" name="address" id="address"
-                                                value="{{ $rental->customer->address }}">
-                                        </div>
-
-                                    </div>
-                                    <div class="row pt-2">
-                                        <h5>Bank Details</h5>
-                                        <div class="col-6">
-                                            <label for="bank" class="form-label">Bank</label>
-                                            <input type="text" class="form-control" name="bank" id="bank"
-                                                value="{{ $rental->customer->bank }}">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="acc_num" class="form-label"> Account Number</label>
-                                            <input type="text" placeholder="" class="form-control" name="acc_num"
-                                                id="acc_num" value="{{ $rental->customer->acc_num }}">
-                                        </div>
-                                    </div>
-                                </div> --}}
                                 {{-- Rental Detail --}}
                                 <div class="col-6">
                                     <h4>Rental Info</h4>
@@ -153,7 +70,8 @@
                                             <select class="form-select" name="pickup_time" required="required"
                                                 id="pickup_time">
                                                 @foreach ($times as $time)
-                                                    <option value="{{ $time['value'] }}" {{ $rental->pickup_time == $time['value'] ? 'selected' : '' }}>
+                                                    <option value="{{ $time['value'] }}"
+                                                        {{ $rental->pickup_time == $time['value'] ? 'selected' : '' }}>
                                                         {{ $time['display'] }}
                                                     </option>
                                                 @endforeach
@@ -165,7 +83,8 @@
                                             <select class="form-select" name="return_time" required="required"
                                                 id="return_time">
                                                 @foreach ($times as $time)
-                                                    <option value="{{ $time['value'] }}" {{ $rental->return_time == $time['value'] ? 'selected' : '' }}>
+                                                    <option value="{{ $time['value'] }}"
+                                                        {{ $rental->return_time == $time['value'] ? 'selected' : '' }}>
                                                         {{ $time['display'] }}
                                                     </option>
                                                 @endforeach
@@ -187,8 +106,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="note" class="form-label">Note</label>
-                                            <textarea name="note" class="form-control" id="note" cols="30" rows="5"
-                                                value="{{ $rental->note }}"></textarea>
+                                            <textarea name="note" class="form-control" id="note" cols="30" rows="5" value="{{ $rental->note }}"></textarea>
                                         </div>
                                         <div class="col-6">
                                             <label for="destination" class="form-label">Destination</label>
@@ -216,10 +134,22 @@
                                             <input type="number" class="form-control" name="total_amount"
                                                 id="total_amount" value="{{ $rental->total_amount }}">
                                         </div> --}}
-                                        @if (isset($rental->deposit->proof))
+                                        @if (isset($rental->payment->proof))
                                             <div class="col-4 d-flex align-items-end pt-2">
                                                 <a class="btn btn-light" href="{{ asset($rental->payment->proof) }}"
                                                     target="_blank">View</a>
+                                            </div>
+                                        @else
+                                            <div class="col-md-12">
+                                                <label for="inputNumber" class="col-sm col-form-label">Payment
+                                                    Proof</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" name="payment_proof" id="payment_proof"
+                                                        type="file" id="formFile">
+                                                </div>
+                                                @error('payment_proof')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         @endif
                                     </div>

@@ -19,6 +19,7 @@ class PaymentService
         if ($file) {
             $filename = 'payment/' . time() . '.' . $file->getClientOriginalExtension();
             $file->move('payment', $filename);
+            // $file->move('public/payment', $filename);
         } else {
             $filename = null;
         }
@@ -40,18 +41,18 @@ class PaymentService
     function generateInvoiceNumber()
     {
         $year = Carbon::now()->year; // Get the current year
-        $prefix = 'RENTAL-MY'; // Fixed prefix
+        $prefix = 'Hasta'; // Fixed prefix
 
         // Get the last created payment to determine the next incremental number
         $lastPayment = Payment::orderBy('id', 'desc')->first();
         // dd($lastPayment->invoice_id);
 
         // If there is no last payment, start from 1
-        $lastInvoiceNumber = $lastPayment ? intval(substr($lastPayment->invoice_id, -6)) : 0;
+        $lastInvoiceNumber = $lastPayment ? intval(substr($lastPayment->invoice_id, -4)) : 0;
         // dd($lastInvoiceNumber);
 
         // Increment the number
-        $nextInvoiceNumber = str_pad($lastInvoiceNumber + 1, 6, '0', STR_PAD_LEFT); // Zero pad to 6 digits
+        $nextInvoiceNumber = str_pad($lastInvoiceNumber + 1, 4, '0', STR_PAD_LEFT); // Zero pad to 6 digits
         // dd($nextInvoiceNumber);
 
         // Combine everything to form the invoice number
