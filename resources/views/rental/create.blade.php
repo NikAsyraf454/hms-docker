@@ -21,7 +21,7 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form action="{{ route('rental.store') }}" method="post" enctype="multipart/form-data">
+                        <form id="rentalForm" action="{{ route('rental.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="" id="staff_id" name="staff_id"
@@ -193,108 +193,29 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        @php
+                                            // Generate times from 12:00 AM to 11:45 PM in 15-minute intervals
+                                            $times = [];
+                                            $startTime = strtotime('00:00'); // Start at midnight
+                                            $endTime = strtotime('23:45'); // End at 11:45 PM
+                                            while ($startTime <= $endTime) {
+                                                $value = date('H:i', $startTime); // Value in 24-hour format
+                                                $display = date('h:i A', $startTime); // Display in 12-hour format
+                                                $times[] = ['value' => $value, 'display' => $display];
+                                                $startTime = strtotime('+15 minutes', $startTime);
+                                            }
+                                        @endphp
                                         <div class="col-md-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
                                             {{-- <input type="time" class="form-control" id="pickup_time"
                                                 name="pickup_time"> --}}
                                             <select class="form-select" name="pickup_time" required="required"
                                                 id="pickup_time" value="{{ old('pickup_time') }}">
-                                                <option value="12:00 AM">12:00 AM</option>
-                                                <option value="12:15 AM">12:15 AM</option>
-                                                <option value="12:30 AM">12:30 AM</option>
-                                                <option value="12:45 AM">12:45 AM</option>
-                                                <option value="1:00 AM">1:00 AM</option>
-                                                <option value="1:15 AM">1:15 AM</option>
-                                                <option value="1:30 AM">1:30 AM</option>
-                                                <option value="1:45 AM">1:45 AM</option>
-                                                <option value="2:00 AM">2:00 AM</option>
-                                                <option value="2:15 AM">2:15 AM</option>
-                                                <option value="2:30 AM">2:30 AM</option>
-                                                <option value="2:45 AM">2:45 AM</option>
-                                                <option value="3:00 AM">3:00 AM</option>
-                                                <option value="3:15 AM">3:15 AM</option>
-                                                <option value="3:30 AM">3:30 AM</option>
-                                                <option value="3:45 AM">3:45 AM</option>
-                                                <option value="4:00 AM">4:00 AM</option>
-                                                <option value="4:15 AM">4:15 AM</option>
-                                                <option value="4:30 AM">4:30 AM</option>
-                                                <option value="4:45 AM">4:45 AM</option>
-                                                <option value="5:00 AM">5:00 AM</option>
-                                                <option value="5:15 AM">5:15 AM</option>
-                                                <option value="5:30 AM">5:30 AM</option>
-                                                <option value="5:45 AM">5:45 AM</option>
-                                                <option value="6:00 AM">6:00 AM</option>
-                                                <option value="6:15 AM">6:15 AM</option>
-                                                <option value="6:30 AM">6:30 AM</option>
-                                                <option value="6:45 AM">6:45 AM</option>
-                                                <option value="7:00 AM">7:00 AM</option>
-                                                <option value="7:15 AM">7:15 AM</option>
-                                                <option value="7:30 AM">7:30 AM</option>
-                                                <option value="7:45 AM">7:45 AM</option>
-                                                <option value="8:00 AM">8:00 AM</option>
-                                                <option value="8:15 AM">8:15 AM</option>
-                                                <option value="8:30 AM">8:30 AM</option>
-                                                <option value="8:45 AM">8:45 AM</option>
-                                                <option value="9:00 AM" selected="selected">9:00 AM</option>
-                                                <option value="9:15 AM">9:15 AM</option>
-                                                <option value="9:30 AM">9:30 AM</option>
-                                                <option value="9:45 AM">9:45 AM</option>
-                                                <option value="10:00 AM">10:00 AM</option>
-                                                <option value="10:15 AM">10:15 AM</option>
-                                                <option value="10:30 AM">10:30 AM</option>
-                                                <option value="10:45 AM">10:45 AM</option>
-                                                <option value="11:00 AM">11:00 AM</option>
-                                                <option value="11:15 AM">11:15 AM</option>
-                                                <option value="11:30 AM">11:30 AM</option>
-                                                <option value="11:45 AM">11:45 AM</option>
-                                                <option value="12:00 PM">12:00 PM</option>
-                                                <option value="12:15 PM">12:15 PM</option>
-                                                <option value="12:30 PM">12:30 PM</option>
-                                                <option value="12:45 PM">12:45 PM</option>
-                                                <option value="1:00 PM">1:00 PM</option>
-                                                <option value="1:15 PM">1:15 PM</option>
-                                                <option value="1:30 PM">1:30 PM</option>
-                                                <option value="1:45 PM">1:45 PM</option>
-                                                <option value="2:00 PM">2:00 PM</option>
-                                                <option value="2:15 PM">2:15 PM</option>
-                                                <option value="2:30 PM">2:30 PM</option>
-                                                <option value="2:45 PM">2:45 PM</option>
-                                                <option value="3:00 PM">3:00 PM</option>
-                                                <option value="3:15 PM">3:15 PM</option>
-                                                <option value="3:30 PM">3:30 PM</option>
-                                                <option value="3:45 PM">3:45 PM</option>
-                                                <option value="4:00 PM">4:00 PM</option>
-                                                <option value="4:15 PM">4:15 PM</option>
-                                                <option value="4:30 PM">4:30 PM</option>
-                                                <option value="4:45 PM">4:45 PM</option>
-                                                <option value="5:00 PM">5:00 PM</option>
-                                                <option value="5:15 PM">5:15 PM</option>
-                                                <option value="5:30 PM">5:30 PM</option>
-                                                <option value="5:45 PM">5:45 PM</option>
-                                                <option value="6:00 PM">6:00 PM</option>
-                                                <option value="6:15 PM">6:15 PM</option>
-                                                <option value="6:30 PM">6:30 PM</option>
-                                                <option value="6:45 PM">6:45 PM</option>
-                                                <option value="7:00 PM">7:00 PM</option>
-                                                <option value="7:15 PM">7:15 PM</option>
-                                                <option value="7:30 PM">7:30 PM</option>
-                                                <option value="7:45 PM">7:45 PM</option>
-                                                <option value="8:00 PM">8:00 PM</option>
-                                                <option value="8:15 PM">8:15 PM</option>
-                                                <option value="8:30 PM">8:30 PM</option>
-                                                <option value="8:45 PM">8:45 PM</option>
-                                                <option value="9:00 PM">9:00 PM</option>
-                                                <option value="9:15 PM">9:15 PM</option>
-                                                <option value="9:30 PM">9:30 PM</option>
-                                                <option value="9:45 PM">9:45 PM</option>
-                                                <option value="10:00 PM">10:00 PM</option>
-                                                <option value="10:15 PM">10:15 PM</option>
-                                                <option value="10:30 PM">10:30 PM</option>
-                                                <option value="10:45 PM">10:45 PM</option>
-                                                <option value="11:00 PM">11:00 PM</option>
-                                                <option value="11:15 PM">11:15 PM</option>
-                                                <option value="11:30 PM">11:30 PM</option>
-                                                <option value="11:45 PM">11:45 PM</option>
+                                                @foreach ($times as $time)
+                                                    <option value="{{ $time['value'] }}" {{ $time['value'] == '09:00' ? 'selected' : '' }}>
+                                                        {{ $time['display'] }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
@@ -303,102 +224,11 @@
                                                 name="return_time"> --}}
                                             <select class="form-select" name="return_time" required="required"
                                                 id="return_time" value="{{ old('return_time') }}">
-                                                <option value="12:00 AM">12:00 AM</option>
-                                                <option value="12:15 AM">12:15 AM</option>
-                                                <option value="12:30 AM">12:30 AM</option>
-                                                <option value="12:45 AM">12:45 AM</option>
-                                                <option value="1:00 AM">1:00 AM</option>
-                                                <option value="1:15 AM">1:15 AM</option>
-                                                <option value="1:30 AM">1:30 AM</option>
-                                                <option value="1:45 AM">1:45 AM</option>
-                                                <option value="2:00 AM">2:00 AM</option>
-                                                <option value="2:15 AM">2:15 AM</option>
-                                                <option value="2:30 AM">2:30 AM</option>
-                                                <option value="2:45 AM">2:45 AM</option>
-                                                <option value="3:00 AM">3:00 AM</option>
-                                                <option value="3:15 AM">3:15 AM</option>
-                                                <option value="3:30 AM">3:30 AM</option>
-                                                <option value="3:45 AM">3:45 AM</option>
-                                                <option value="4:00 AM">4:00 AM</option>
-                                                <option value="4:15 AM">4:15 AM</option>
-                                                <option value="4:30 AM">4:30 AM</option>
-                                                <option value="4:45 AM">4:45 AM</option>
-                                                <option value="5:00 AM">5:00 AM</option>
-                                                <option value="5:15 AM">5:15 AM</option>
-                                                <option value="5:30 AM">5:30 AM</option>
-                                                <option value="5:45 AM">5:45 AM</option>
-                                                <option value="6:00 AM">6:00 AM</option>
-                                                <option value="6:15 AM">6:15 AM</option>
-                                                <option value="6:30 AM">6:30 AM</option>
-                                                <option value="6:45 AM">6:45 AM</option>
-                                                <option value="7:00 AM">7:00 AM</option>
-                                                <option value="7:15 AM">7:15 AM</option>
-                                                <option value="7:30 AM">7:30 AM</option>
-                                                <option value="7:45 AM">7:45 AM</option>
-                                                <option value="8:00 AM">8:00 AM</option>
-                                                <option value="8:15 AM">8:15 AM</option>
-                                                <option value="8:30 AM">8:30 AM</option>
-                                                <option value="8:45 AM">8:45 AM</option>
-                                                <option value="9:00 AM" selected="selected">9:00 AM</option>
-                                                <option value="9:15 AM">9:15 AM</option>
-                                                <option value="9:30 AM">9:30 AM</option>
-                                                <option value="9:45 AM">9:45 AM</option>
-                                                <option value="10:00 AM">10:00 AM</option>
-                                                <option value="10:15 AM">10:15 AM</option>
-                                                <option value="10:30 AM">10:30 AM</option>
-                                                <option value="10:45 AM">10:45 AM</option>
-                                                <option value="11:00 AM">11:00 AM</option>
-                                                <option value="11:15 AM">11:15 AM</option>
-                                                <option value="11:30 AM">11:30 AM</option>
-                                                <option value="11:45 AM">11:45 AM</option>
-                                                <option value="12:00 PM">12:00 PM</option>
-                                                <option value="12:15 PM">12:15 PM</option>
-                                                <option value="12:30 PM">12:30 PM</option>
-                                                <option value="12:45 PM">12:45 PM</option>
-                                                <option value="1:00 PM">1:00 PM</option>
-                                                <option value="1:15 PM">1:15 PM</option>
-                                                <option value="1:30 PM">1:30 PM</option>
-                                                <option value="1:45 PM">1:45 PM</option>
-                                                <option value="2:00 PM">2:00 PM</option>
-                                                <option value="2:15 PM">2:15 PM</option>
-                                                <option value="2:30 PM">2:30 PM</option>
-                                                <option value="2:45 PM">2:45 PM</option>
-                                                <option value="3:00 PM">3:00 PM</option>
-                                                <option value="3:15 PM">3:15 PM</option>
-                                                <option value="3:30 PM">3:30 PM</option>
-                                                <option value="3:45 PM">3:45 PM</option>
-                                                <option value="4:00 PM">4:00 PM</option>
-                                                <option value="4:15 PM">4:15 PM</option>
-                                                <option value="4:30 PM">4:30 PM</option>
-                                                <option value="4:45 PM">4:45 PM</option>
-                                                <option value="5:00 PM">5:00 PM</option>
-                                                <option value="5:15 PM">5:15 PM</option>
-                                                <option value="5:30 PM">5:30 PM</option>
-                                                <option value="5:45 PM">5:45 PM</option>
-                                                <option value="6:00 PM">6:00 PM</option>
-                                                <option value="6:15 PM">6:15 PM</option>
-                                                <option value="6:30 PM">6:30 PM</option>
-                                                <option value="6:45 PM">6:45 PM</option>
-                                                <option value="7:00 PM">7:00 PM</option>
-                                                <option value="7:15 PM">7:15 PM</option>
-                                                <option value="7:30 PM">7:30 PM</option>
-                                                <option value="7:45 PM">7:45 PM</option>
-                                                <option value="8:00 PM">8:00 PM</option>
-                                                <option value="8:15 PM">8:15 PM</option>
-                                                <option value="8:30 PM">8:30 PM</option>
-                                                <option value="8:45 PM">8:45 PM</option>
-                                                <option value="9:00 PM">9:00 PM</option>
-                                                <option value="9:15 PM">9:15 PM</option>
-                                                <option value="9:30 PM">9:30 PM</option>
-                                                <option value="9:45 PM">9:45 PM</option>
-                                                <option value="10:00 PM">10:00 PM</option>
-                                                <option value="10:15 PM">10:15 PM</option>
-                                                <option value="10:30 PM">10:30 PM</option>
-                                                <option value="10:45 PM">10:45 PM</option>
-                                                <option value="11:00 PM">11:00 PM</option>
-                                                <option value="11:15 PM">11:15 PM</option>
-                                                <option value="11:30 PM">11:30 PM</option>
-                                                <option value="11:45 PM">11:45 PM</option>
+                                                @foreach ($times as $time)
+                                                    <option value="{{ $time['value'] }}" {{ $time['value'] == '09:00' ? 'selected' : '' }}>
+                                                        {{ $time['display'] }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -406,10 +236,7 @@
                                         <div class="col-md-6">
                                             <label for="fleet_id" class="form-label">Plate Number</label>
                                             <select class="form-control" name="fleet_id" id="fleet_id" value="">
-                                                @foreach ($fleet as $car)
-                                                    <option value="{{ $car->id }}">{{ $car->model }}
-                                                        {{ $car->license_plate }}</option>
-                                                @endforeach
+                                                <option value="">-- Select a Vehicle --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -567,7 +394,7 @@
             $('#name').autocomplete({
                 source: function(request, response) {
                     $.ajax({
-                        url: '{{ route('customers.autocomplete') }}',
+                        url: "{{ route('customers.autocomplete') }}",
                         dataType: 'json',
                         data: {
                             query: request.term
@@ -615,63 +442,41 @@
             });
         });
     </script>
-    {{-- <script>
-        document.getElementById('pickup_date').addEventListener('change', fetchAvailableVehicles);
-        document.getElementById('pickup_time').addEventListener('change', fetchAvailableVehicles);
-        document.getElementById('return_date').addEventListener('change', fetchAvailableVehicles);
-        document.getElementById('return_time').addEventListener('change', fetchAvailableVehicles);
+    <script>
+        let debounceTimer;
+        $('#rentalForm').on('change', '#pickup_date, #pickup_time, #return_date, #return_time', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function() {
+                const pickupDate = $('#pickup_date').val();
+                const pickupTime = $('#pickup_time').val();
+                const returnDate = $('#return_date').val();
+                const returnTime = $('#return_time').val();
 
-        function fetchAvailableVehicles() {
-            const date = document.getElementById('pickup_date').value;
-            const time = document.getElementById('pickup_time').value;
-            const return_date = document.getElementById('return_date').value;
-            const return_time = document.getElementById('return_time').value;
-
-            console.log(date, time, return_date, return_time);
-
-            if (date && time) {
-                fetch(`/available-vehicles?date=${date}&time=${time}&return_date=${return_date}&return_time=${return_time}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Available vehicles:', data);
-                        const fleetSelect = document.getElementById('fleet_id');
-                        fleetSelect.innerHTML = ''; // Clear previous options
-
-                        // Check if the data is an array
-                        if (Array.isArray(data) && data.length > 0) {
-                            data.forEach(car => {
-                                const option = document.createElement('option');
-                                option.value = car.id;
-                                option.textContent = `${car.model} ${car.license_plate}`;
-                                fleetSelect.appendChild(option);
+                if (pickupDate && pickupTime && returnDate && returnTime) {
+                    $.ajax({
+                        url: '/available-vehicles',
+                        method: 'GET',
+                        data: {
+                            pickup_date: pickupDate,
+                            pickup_time: pickupTime,
+                            return_date: returnDate,
+                            return_time: returnTime
+                        },
+                        success: function(response) {
+                            $('#fleet_id').empty();
+                            $('#fleet_id').append('<option value="">-- Select a Vehicle --</option>');
+                            $.each(response, function(id, licensePlate) {
+                                $('#fleet_id').append(`<option value="${id}">${licensePlate}</option>`);
                             });
-                        } else {
-                            // Handle case when no cars are available
-                            const option = document.createElement('option');
-                            option.value = '';
-                            option.textContent = 'No vehicles available';
-                            fleetSelect.appendChild(option);
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching available vehicles:', error);
-
-                        // Handle network errors or invalid responses
-                        const fleetSelect = document.getElementById('fleet_id');
-                        fleetSelect.innerHTML = ''; // Clear previous options
-                        const option = document.createElement('option');
-                        option.value = '';
-                        option.textContent = 'Error fetching vehicles';
-                        fleetSelect.appendChild(option);
                     });
-            }
-        }
-    </script> --}}
+                }
+            }, 300); // 300ms debounce delay
+        });
+    </script>
     <script>
         console.log('hehe');
     </script>
