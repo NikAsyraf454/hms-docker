@@ -116,4 +116,10 @@ class FleetController extends Controller
         // Return the available fleets as JSON
         return response()->json($availableFleets);
     }
+
+    public function getFleetDetails($id)
+    {
+        $fleet = Fleet::findOrFail($id);
+        return response()->json($fleet);
+    }
 }

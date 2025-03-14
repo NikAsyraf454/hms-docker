@@ -18,8 +18,8 @@ class DashboardController extends Controller
         $rental = Rental::count();
         $sales = Payment::sum('rental_amount');
 
-        $currentDate = Carbon::today()->toDateString();
-        // dd($currentDate);
+        // $currentDate = Carbon::today()->toDateString();
+        $currentDate = Carbon::now('Asia/Kuala_Lumpur')->toDateString();
         $rentalToday = Rental::where('pickup_date','=',$currentDate)->get();
         $returnToday = Rental::where('return_date','=',$currentDate)->get();
         $car = Fleet::whereDoesntHave('rentals', function ($query) use ($currentDate) {

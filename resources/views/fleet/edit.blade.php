@@ -2,9 +2,12 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="ratio ratio-16x9">
-                {!! $fleet->calendar !!}
-            </div>
+            @if ($fleet->calendar)
+                <div class="ratio ratio-16x9">
+                    {!! $fleet->calendar !!}
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     {{-- <div class="row h-100 justify-content-center align-items-center"> --}}
