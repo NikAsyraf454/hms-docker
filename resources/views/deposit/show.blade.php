@@ -88,7 +88,7 @@
                     @endif
                     <div class="text-center pt-2">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('rental.index') }}" class="btn btn-warning">Back</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             </form>

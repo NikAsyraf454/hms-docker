@@ -12,35 +12,53 @@
                     <h5 class="card-title">Deposits</h5>
                     {{-- <a href="{{ route('claim.create') }}" class="btn btn-primary">New Deposit</a> --}}
                     <a href="{{ route('export.deposits') }}" class="btn btn-primary">Export</a>
-
                     <table id="tableData" class="datatable table">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>Invoice No.</th>
+                                <th>Fleet</th>
+                                <th>Customer</th>
                                 <th>Status</th>
                                 <th>Payment Date</th>
                                 <th>Return Date</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                // dd($deposit);
-                            @endphp
                             @foreach ($deposit as $item)
-                                {{-- @php
-                                    dd($item->rentals);
-                                @endphp --}}
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
+
                                     @if ($item->rentals)
                                         <td>{{ $item->rentals->payment->invoice_id }}</td>
                                     @else
                                         <td>-</td>
                                     @endif
+                                    <td>{{ $item->rentals ? $item->rentals->fleet->license_plate : '-' }}</td>
+                                    <td>{{ $item->rentals->customer->name ?? '-' }}</td>
+
                                     <td>
                                         {{ $item->status }}
                                     </td>
                                     <td>{{ $item->date }}</td>
                                     <td>{{ $item->return_date }}</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="{{ route('deposit.show', $item->id) }}"
+                                                    class="btn btn-primary btn-sm">Show</a>
+                                            </div>
+                                            <div class="col">
+                                                <form action="{{ route('deposit.destroy', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
