@@ -21,7 +21,8 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form id="rentalForm" action="{{ route('rental.store') }}" method="post" enctype="multipart/form-data">
+                        <form id="rentalForm" action="{{ route('rental.store') }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="" id="staff_id" name="staff_id"
@@ -32,8 +33,9 @@
                                     <h4>Customer Info</h4>
                                     <div class="col-12">
                                         <label for="name" class="form-label">Customer Name</label>
-                                        <input type="text" placeholder="Customer Name" class="form-control"
-                                            name="name" id="name" value="{{ old('name') }}">
+                                        <input type="text" placeholder="Customer Name"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            id="name" value="{{ old('name') }}">
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -62,8 +64,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="ic" class="form-label">IC Number/Passport </label>
-                                            <input type="number" placeholder="000000110000" class="form-control"
-                                                name="ic" id="ic" value="{{ old('ic') }}">
+                                            <input type="text" placeholder="000000110000"
+                                                class="form-control @error('ic') is-invalid @enderror" name="ic"
+                                                id="ic" value="{{ old('ic') }}">
                                             @error('ic')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -88,39 +91,22 @@
                                             <label for="college" class="form-label">College </label>
                                             <select class="form-control" name="college" id="college"
                                                 value="{{ old('college') }}">
-                                                <option value="KRP">KRP</option>
-                                                <option value="KTF">KTF</option>
-                                                <option value="KTC">KTC</option>
-                                                <option value="KP">KP</option>
-                                                <option value="KTHO">KTHO</option>
-                                                <option value="KTR">KTR</option>
-                                                <option value="KTDI">KTDI</option>
-                                                <option value="K9">K9</option>
-                                                <option value="K10">K10</option>
-                                                <option value="KDSE">KDSE</option>
-                                                <option value="KDOJ">KDOJ</option>
-                                                <option value="KDOJ">Others</option>
+                                                @foreach ($colleges as $college)
+                                                    <option value="{{ $college }}">{{ $college }}</option>
+                                                @endforeach
                                             </select>
                                             @error('college')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="col-md-6">
                                             <label for="faculty" class="form-label">Faculty </label>
                                             <select class="form-control" name="faculty" id="faculty"
                                                 value="{{ old('faculty') }}">
-                                                <option value="FC">Civil Engineering</option>
-                                                <option value="FM">Mechanical Engineering</option>
-                                                <option value="FE">Electrical Engineering</option>
-                                                <option value="FE">Chemical Engineering</option>
-                                                <option value="FCS">Computing</option>
-                                                <option value="FS">Science</option>
-                                                <option value="FABU">FABU</option>
-                                                <option value="FSSH">FSSH</option>
-                                                <option value="Management">Management</option>
-                                                <option value="AHIBS">AHIBS</option>
-                                                <option value="MJIIT">MJIIT</option>
-                                                <option value="SPACE">SPACE</option>
+                                                @foreach ($faculties as $item)
+                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
@@ -139,21 +125,9 @@
                                             <label for="bank" class="form-label">Bank</label>
                                             <select class="form-control" name="bank" id="bank"
                                                 value="{{ old('bank') }}">
-                                                <option value="Maybank">Maybank</option>
-                                                <option value="Bank Islam">Bank Islam</option>
-                                                <option value="Bank Rakyat">Bank Rakyat</option>
-                                                <option value="Bank Muamalat">Bank Muamalat</option>
-                                                <option value="Public Bank">Public Bank</option>
-                                                <option value="RHB Bank">RHB Bank</option>
-                                                <option value="Hong Leong">Hong Leong</option>
-                                                <option value="Ambank">Ambank</option>
-                                                <option value="CIMB Bank">CIMB Bank</option>
-                                                <option value="Affin Bank">Affin Bank</option>
-                                                <option value="UOB">UOB</option>
-                                                <option value="OCBC">OCBC</option>
-                                                <option value="Rize">Rize</option>
-                                                <option value="GXBank">GXBank</option>
-                                                <option value="TNG">TNG</option>
+                                                @foreach ($banks as $item)
+                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
@@ -213,7 +187,8 @@
                                             <select class="form-select" name="pickup_time" required="required"
                                                 id="pickup_time" value="{{ old('pickup_time') }}">
                                                 @foreach ($times as $time)
-                                                    <option value="{{ $time['value'] }}" {{ $time['value'] == '09:00' ? 'selected' : '' }}>
+                                                    <option value="{{ $time['value'] }}"
+                                                        {{ $time['value'] == '09:00' ? 'selected' : '' }}>
                                                         {{ $time['display'] }}
                                                     </option>
                                                 @endforeach
@@ -226,7 +201,8 @@
                                             <select class="form-select" name="return_time" required="required"
                                                 id="return_time" value="{{ old('return_time') }}">
                                                 @foreach ($times as $time)
-                                                    <option value="{{ $time['value'] }}" {{ $time['value'] == '09:00' ? 'selected' : '' }}>
+                                                    <option value="{{ $time['value'] }}"
+                                                        {{ $time['value'] == '09:00' ? 'selected' : '' }}>
                                                         {{ $time['display'] }}
                                                     </option>
                                                 @endforeach
@@ -307,6 +283,7 @@
                                                 <select class="form-control" name="payment_status" id="payment_status">
                                                     <option value="unpaid">Unpaid</option>
                                                     <option value="paid">Paid</option>
+                                                    <option value="partially_paid">Partially Paid</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
@@ -465,9 +442,12 @@
                         },
                         success: function(response) {
                             $('#fleet_id').empty();
-                            $('#fleet_id').append('<option value="">-- Select a Vehicle --</option>');
+                            $('#fleet_id').append(
+                                '<option value="">-- Select a Vehicle --</option>');
                             $.each(response, function(id, licensePlate) {
-                                $('#fleet_id').append(`<option value="${id}">${licensePlate}</option>`);
+                                $('#fleet_id').append(
+                                    `<option value="${id}">${licensePlate}</option>`
+                                );
                             });
                         },
                         error: function(xhr) {

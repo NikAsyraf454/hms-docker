@@ -10,43 +10,73 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Rental</h5>
-                    <a href="{{ route('rental.create') }}" class="btn btn-primary">New Rental</a>
+                    <a href="{{ route('rental.create') }}" class="btn btn-primary mb-3">New Rental</a>
                     <div class="table-responsive">
+                        {{-- <div class="d-none d-md-block table-responsive"> --}}
                         <table id="tableData" class="datatable table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Car</th>
                                     <th>Name</th>
-                                    <th>Phone</th>
                                     <th>Pickup</th>
                                     <th>Return</th>
-                                    <th>Amount (RM)</th>
+                                    <th>Duration</th>
+                                    <th>Payment</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($rentals as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->fleet->license_plate }}</td>
-                                        <td>{{ $item->customer->name }}</td>
-                                        <td>{{ $item->customer->phone }}</td>
+                                        <td>{{ $item->customer->name }} <br>
+                                            <div style="font-size: 12px">{{ $item->customer->phone }}</div>
+                                        </td>
                                         <td>{{ date('d M Y', strtotime($item->pickup_date)) }} <br>
                                             {{ date('g:i A', strtotime($item->pickup_time)) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->return_date)) }} <br>
                                             {{ date('g:i A', strtotime($item->return_time)) }}</td>
-                                        {{-- <td>{{ $item->return_date }} <br> {{ date('g:i A', strtotime($item->return_time)) }} --}}
+                                        <td>
+                                            @php
+                                                $pickup = \Carbon\Carbon::parse(
+                                                    $item->pickup_date . ' ' . $item->pickup_time,
+                                                );
+                                                $return = \Carbon\Carbon::parse(
+                                                    $item->return_date . ' ' . $item->return_time,
+                                                );
+                                                $duration = $pickup->diffInDays($return);
+                                            @endphp
+                                            @php
+                                                $durationHours = $pickup->diffInHours($return);
+                                                $days = floor($durationHours / 24);
+                                                $hours = $durationHours % 24;
+                                            @endphp
+                                            @if ($days == 0)
+                                                {{ $hours }} hours
+                                            @else
+                                                {{ $days }} @if ($days > 1)
+                                                    days
+                                                @else
+                                                    day
+                                                @endif
+                                                {{ $hours }} hours
+                                            @endif
                                         </td>
-                                        <td>{{ $item->payment->rental_amount }}</td>
+                                        <td>MYR {{ $item->payment->rental_amount }} <br>
+                                            @if ($item->payment->payment_status == 'paid')
+                                                <span class="badge bg-success">Paid</span>
+                                            @elseif($item->payment->payment_status == 'unpaid')
+                                                <span class="badge bg-danger">Unpaid</span>
+                                            @else
+                                                <span class="badge bg-warning">Partially Paid</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-primary " type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-primary" type="button" data-toggle="dropdown">
                                                     <i class="bi bi-grip-vertical"></i>
                                                 </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    {{-- <a class="dropdown-item" href="claim/view/{{ $item->id }}">View</a> --}}
+                                                <div class="dropdown-menu">
                                                     <a class="dropdown-item"
                                                         href="{{ route('deposit.show', $item->depo_id) }}">Deposit</a>
                                                     <a class="dropdown-item"
@@ -57,27 +87,6 @@
                                                         href="{{ route('rental.destroy', $item->id) }}">Delete</a>
                                                 </div>
                                             </div>
-                                            {{-- <div class="row">
-                                                <div class="col">
-                                                    <a href="{{ route('deposit.show', $item->depo_id) }}"
-                                                        class="btn btn-warning btn-sm">Deposit</a>
-                                                </div>
-                                                <div class="col">
-                                                    <a href="{{ route('rental.edit', $item->id) }}"
-                                                        class="btn btn-primary btn-sm">Edit</a>
-                                                </div>
-                                                <div class="col">
-                                                    <a href="{{ route('rental.show', $item->id) }}"
-                                                        class="btn btn-primary btn-sm">Show</a>
-                                                </div>
-                                                <div class="col">
-                                                    <form action="{{ route('rental.destroy', $item->id) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -85,10 +94,8 @@
                         </table>
                     </div>
 
-
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

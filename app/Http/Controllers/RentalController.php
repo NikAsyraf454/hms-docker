@@ -24,6 +24,58 @@ use Illuminate\Support\Facades\DB;
 class RentalController extends Controller
 {
     protected $customerService;
+    protected $faculties = [
+        'Others',
+        'CIVIL/FKA',
+        'MEKANIKAL/FKM',
+        'ELECTRIC/FKE',
+        'KIMIA/FKT',
+        'KOMPUTER/FK',
+        'PENDIDIKAN/SOE',
+        'SAINS',
+        'FABU',
+        'FSSH/FSSK',
+        'MANAGEMENT',
+        'AHIBS',
+        'MJIIT',
+        'SPACE',
+    ];
+
+    protected $banks = [
+        'Maybank',
+        'Bank Islam',
+        'Bank Rakyat',
+        'Bank Muamalat',
+        'Public Bank',
+        'RHB Bank',
+        'Hong Leong',
+        'Ambank',
+        'CIMB Bank',
+        'Affin Bank',
+        'BSN',
+        'Ambank',
+        'UOB',
+        'OCBC',
+        'Rize',
+        'GXBank',
+        'TNG',
+    ];
+
+    protected $colleges = [
+        'KRP',
+        'KTF',
+        'KTC',
+        'KP',
+        'KTHO',
+        'KTR',
+        'KTDI',
+        'K9',
+        'K10',
+        'KDSE',
+        'KDOJ',
+        'KLG',
+        'Others',
+    ];
 
     public function __construct(CustomerService $customerService, RentalService $rentalService, DepositService $depositService, PaymentService $paymentService, InspectionService $inspectionService){
         $this->customerService = $customerService;
@@ -34,7 +86,9 @@ class RentalController extends Controller
     }
 
     public function index(){
-        $rentals = Rental::with(['customer', 'staff', 'fleet'])->get();
+        $rentals = Rental::with(['customer', 'staff', 'fleet'])
+                ->orderBy('pickup_date', 'desc') // Sort by latest created_at
+                ->get();
 
         return view('rental.index')->with('rentals', $rentals);
     }
@@ -42,12 +96,14 @@ class RentalController extends Controller
     public function create(){
         // $fleet = $this->rentalService->listRental();
         $fleet = Fleet::get();
-        // dd($fleet);
-        return view('rental.create', compact('fleet'));
+        $faculties = $this->faculties;
+        $banks = $this->banks;
+        $colleges = $this->colleges;
+
+        return view('rental.create', compact('fleet','faculties','banks','colleges'));
     }
 
     public function store(Request $request,StoreRentalRequest $rrequest, storeCustomerRequest $crequest, DepositRequest $drequest, PaymentRequest $prequest){
-        
         $user_id = session('user_id');
         
         $customerRequest = $crequest->validated();
@@ -110,13 +166,20 @@ class RentalController extends Controller
 
     public function edit($id){
         $rental = Rental::find($id);
-        return view('rental.edit', compact('rental'));
+        $fleet = Fleet::get();
+
+        $faculties = $this->faculties;
+        $banks = $this->banks;
+        $colleges = $this->colleges;
+
+        return view('rental.edit', compact('rental','faculties','banks','colleges','fleet'));
     }
 
     public function update(Request $request, $id){
         $rental = Rental::find($id);
         $payment = Payment::find($rental->payment_id);
         $deposit = Deposit::find($rental->depo_id);
+        $customer = Customer::find($rental->customer_id);
 
         $data = $request->validate([
             'staff_id' => 'required|exists:users,id',
@@ -136,13 +199,26 @@ class RentalController extends Controller
             'depo_amount' => 'required|numeric|min:0',
             'depo_date' => 'required|date',
             'depo_status' => 'required|in:paid,unpaid',
+
+            // Add customer validation
+            'name' => 'required|string|max:255',
+            'matric' => 'nullable|string|unique:customers,matric,' . $customer->id,
+            'email' => 'required|email',
+            'race' => 'required|string',
+            'phone' => 'required|string',
+            'ic' => 'required|string',
+            'address' => 'nullable|string',
+            'college' => 'nullable|string',
+            'faculty' => 'required|string',
+            'bank' => 'required|string',
+            'acc_num' => 'required|string',
+            'acc_num_name' => 'required|string',
         ]);
         
-        // dd($data);
-
+    
         $rental->staff_id = $request->input('staff_id');
         $rental->customer_id = $request->input('customer_id');
-        // $rental->fleet_id = $request->input('fleet_id');
+        $rental->fleet_id = $request->input('fleet_id');
         $rental->pickup_date = $request->input('pickup_date');
         $rental->return_date = $request->input('return_date');
         $rental->pickup_time = $request->input('pickup_time');
@@ -166,13 +242,29 @@ class RentalController extends Controller
 
         $payment->proof = $filename;
 
+        // Update deposit data
         $deposit->amount = $request->input('depo_amount');
         $deposit->date = $request->input('depo_date');
         $deposit->status = $request->input('depo_status');
 
+         // Update customer data
+        $customer->name = $request->input('name');
+        $customer->matric = $request->input('matric');
+        $customer->email = $request->input('email');
+        $customer->race = $request->input('race');
+        $customer->phone = $request->input('phone');
+        $customer->ic = $request->input('ic');
+        $customer->address = $request->input('address');
+        $customer->college = $request->input('college');
+        $customer->faculty = $request->input('faculty');
+        $customer->bank = $request->input('bank');
+        $customer->acc_num = $request->input('acc_num');
+        $customer->acc_num_name = $request->input('acc_num_name');
+
         $rental->save();
         $payment->save();
         $deposit->save();
+        $customer->save();
 
         return redirect()->route('rental.index')
         ->with('success', 'Rental updated successfully.');

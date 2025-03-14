@@ -128,11 +128,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="pickup_time" class="form-label">Pickup Time</label>
-                                            <p>{{ $rental->pickup_time }}</p>
+                                            <input class="form-control" type="time" name="pickup_time"
+                                                id="pickup_time" value="{{ $rental->pickup_time }}" disabled>
+                                            {{-- <p>{{ $rental->pickup_time }}</p> --}}
                                         </div>
                                         <div class="col-md-6">
                                             <label for="return_time" class="form-label">Return Time</label>
-                                            <p>{{ $rental->return_time }}</p>
+                                            <input class="form-control" type="time" name="return_time"
+                                                id="return_time" value="{{ $rental->return_time }}" disabled>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -150,8 +153,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="note" class="form-label">Note</label>
-                                            <textarea name="note" class="form-control" disabled id="note" cols="30" rows="5"
-                                                value="{{ $rental->note }}"></textarea>
+                                            <textarea name="note" class="form-control" disabled id="note" cols="30" rows="5">{{ $rental->note }}</textarea>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="destination" class="form-label">Destination</label>
@@ -203,7 +205,6 @@
                                         </div>
                                         @if (isset($rental->deposit->proof))
                                             {{-- @dd($rental->deposit->proof) --}}
-
                                             <div class="col-4 d-flex align-items-end">
                                                 <a class="btn btn-warning" href="{{ asset($rental->deposit->proof) }}"
                                                     target="_blank">View</a>
