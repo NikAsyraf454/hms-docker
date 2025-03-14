@@ -93,13 +93,13 @@ class ClaimController extends Controller
             $claim = $this->claimService->storeClaimMember($data);
         }
         if($id == 'claim'){
-           
+
             $request->validate([
                 'details' => 'required|max:255',
                 'amount' => 'required',
                 'plate_number' => 'required',
                 'date-claim' => 'required',
-                'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ]);
 
             $data = $request->all();
@@ -115,43 +115,43 @@ class ClaimController extends Controller
         ->with('success', 'Claim created successfully.');
     }
 
-    public function show($id,$category){
-        // dd('show');
-        $claim = Claim::find($id);
-        $rental_id = $claim->rental_id;
-        // return response()->json($claim);
-
-        switch($category){
-            case 'members':{
-                $claim = $this->claimService->getMember($rental_id);
-                $claim = $claim[0];
-                $customer_id = $claim->customer_id;
-                $customer = $this->claimService->getCustomer($customer_id);
-                // return response()->json($claim);
-                return view('claim.show', compact('claim','customer','category'));
-            }
-            case 'claims':
-                return view('claim.show', compact('claim','category'));
-            case 'extra':
-                return view('claim.show', compact('claim','category'));
-            case 'depo':
-                return view('claim.show', compact('claim','category'));
-        };
-       
-        // dd($claim);
-        // $fileUrl = asset($claim->receipt);
-        // $extension = pathinfo($claim->receipt, PATHINFO_EXTENSION);
-
-        // $claim->extension = $extension;
-
-        return view('claim.show', compact('claim'));
-    }
-
-    // public function edit($id){
-    //     dd('hm');
+    // public function show($id,$category){
+    //     dd('show');
     //     $claim = Claim::find($id);
-    //     return view('claim.edit', compact('claim'));
+    //     $rental_id = $claim->rental_id;
+    //     // return response()->json($claim);
+
+    //     switch($category){
+    //         case 'members':{
+    //             $claim = $this->claimService->getMember($rental_id);
+    //             $claim = $claim[0];
+    //             $customer_id = $claim->customer_id;
+    //             $customer = $this->claimService->getCustomer($customer_id);
+    //             // return response()->json($claim);
+    //             return view('claim.show', compact('claim','customer','category'));
+    //         }
+    //         case 'claims':
+    //             return view('claim.show', compact('claim','category'));
+    //         case 'extra':
+    //             return view('claim.show', compact('claim','category'));
+    //         case 'depo':
+    //             return view('claim.show', compact('claim','category'));
+    //     };
+       
+    //     // dd($claim);
+    //     // $fileUrl = asset($claim->receipt);
+    //     // $extension = pathinfo($claim->receipt, PATHINFO_EXTENSION);
+
+    //     // $claim->extension = $extension;
+
+    //     // return view('claim.show', compact('claim'));
     // }
+
+    public function edit($id){
+        // dd('hm');
+        $claim = Claim::find($id);
+        return view('claim.edit', compact('claim'));
+    }
 
     public function update(Request $request, $id){
         $request->validate([

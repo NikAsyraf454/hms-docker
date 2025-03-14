@@ -110,6 +110,7 @@
                                         <th>Details</th>
                                         <th>Plate Number</th>
                                         <th>Claim Date</th>
+                                        <th>Amount</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -135,6 +136,7 @@
                                             <td>{{ $item->details }}</td>
                                             <td>{{ $item->plate_number }}</td>
                                             <td>{{ $item->date }}</td>
+                                            <td>{{ $item->amount }}</td>
                                             <td>
                                                 @if ($item->status == 'approved')
                                                     <span class="badge bg-success">Approved</span>
@@ -151,30 +153,19 @@
                                                             method="POST">
                                                             @csrf
                                                             @method('PUT')
-                                                            @if ($item->status === 'approved')
-                                                                <button type="submit" class="btn btn-sm btn-danger">
-                                                                    Decline
-                                                                </button>
-                                                            @else
-                                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                            <div class="btn-group">
+                                                                <button type="submit" name="status" value="approved"
+                                                                    class="btn btn-sm btn-success"
+                                                                    {{ $item->status === 'approved' ? 'disabled' : '' }}>
                                                                     Approve
                                                                 </button>
-                                                            @endif
+                                                                <button type="submit" name="status" value="declined"
+                                                                    class="btn btn-sm btn-danger"
+                                                                    {{ $item->status === 'declined' ? 'disabled' : '' }}>
+                                                                    Decline
+                                                                </button>
+                                                            </div>
                                                         </form>
-                                                        {{-- <form action="{{ route('claims.updateStatus', $item->claim_id) }}"
-                                                            method="POST" class="claim-status-form">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <label class="switch">
-                                                                <input type="checkbox" class="tog-btn"
-                                                                    value="{{ $item->status === 'approved' ? 'declined' : 'approved' }}"
-                                                                    {{ $item->status === 'approved' ? 'checked' : '' }}>
-                                                                <div class="slider round">
-                                                                    <span class="on"></span>
-                                                                    <span class="off"></span>
-                                                                </div>
-                                                            </label>
-                                                        </form> --}}
                                                     </div>
                                                     {{-- <div class="col">
                                                         <a href="{{ routinye('claim.edit', $item->claim_id) }}"
@@ -186,9 +177,10 @@
                                                                 href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}"
                                                                 class="btn btn-primary"><i
                                                                     class="bi bi-pencil-square"></i></a>
-                                                            <a type="button"
-                                                                href="{{ route('claim.destroy', $item->claim_id) }}"
-                                                                class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                                                            <a type="button" class="btn btn-primary delete-btn"
+                                                                data-url="{{ route('claim.destroy', $item->claim_id) }}">
+                                                                <i class="bi bi-trash"></i>
+                                                            </a>
                                                         </div>
                                                         {{-- <a href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}"
                                                             class="btn btn-primary btn-sm">View</a> --}}
@@ -217,11 +209,28 @@
 @endsection
 
 @section('script')
-    {{-- <script>
-    $(document).ready(function() {
-        $('#tableData').DataTable();
-    });
-</script> --}}
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                let url = this.getAttribute('data-url');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url; // Redirect to delete route
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         // $('#example').DataTable();
 

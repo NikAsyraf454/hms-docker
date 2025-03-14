@@ -24,6 +24,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Category</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                                 <th>Payment Date</th>
                                 <th>Actions</th>
@@ -47,6 +48,7 @@
                                             <span class="badge bg-dark">Staff Claims</span>
                                         @endif
                                     </td>
+                                    <td>{{ $item->amount }}</td>
                                     <td>
                                         @if ($item->status == 'approved')
                                             <span class="badge bg-success">Approved</span>
@@ -65,8 +67,10 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 {{-- <a class="dropdown-item" href="claim/view/{{ $item->id }}">View</a> --}}
+                                                {{-- <a class="dropdown-item"
+                                                    href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}">View</a> --}}
                                                 <a class="dropdown-item"
-                                                    href="{{ route('claim.show', ['id' => $item->claim_id, 'category' => $item->category]) }}">View</a>
+                                                    href="{{ route('claim.edit', ['id' => $item->claim_id]) }}">Edit</a>
                                                 <a class="dropdown-item"
                                                     href="{{ route('claim.destroy', $item->claim_id) }}">Delete</a>
                                             </div>

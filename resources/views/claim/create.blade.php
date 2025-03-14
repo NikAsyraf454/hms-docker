@@ -189,7 +189,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="amount" class="form-label">Amount</label>
-                                <input type="number" class="form-control" name="amount" id="amount">
+                                <input type="number" class="form-control" name="amount" id="amount"
+                                    step="0.01">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" for="file">Proof Receipt</label><br>
