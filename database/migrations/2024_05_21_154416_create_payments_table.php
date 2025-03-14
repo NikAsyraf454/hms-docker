@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('invoice_id', 255)->unique();
             $table->date('payment_date');
             $table->enum('payment_method', ['Cash', 'Transfer', 'QR']);
-            $table->enum('payment_status', ['paid', 'unpaid']);
+            $table->enum('payment_status', ['paid', 'unpaid', 'partially_paid']);
             $table->float('rental_amount',  8, 2);
             $table->string('proof')->nullable();
             $table->timestamps();
