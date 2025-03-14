@@ -20,7 +20,8 @@
                         <table id="tableData" class="datatable table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No.</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Name</th>
                                     <th>Matric</th>
                                     <th>Email</th>
@@ -31,7 +32,8 @@
                             <tbody>
                                 @foreach ($customers as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        {{-- <td>{{ $item->id }}</td> --}}
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->matric }}</td>
                                         <td>{{ $item->email }}</td>
