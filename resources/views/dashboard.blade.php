@@ -211,7 +211,7 @@
                                                 <td><a href="#"
                                                         class="text-primary">{{ $item->fleet->license_plate }}</a>
                                                 </td>
-                                                <td>{{ $item->pickup_time }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->pickup_time)->format('h:i A') }}</td>
                                                 <td>
                                                     @if ($item->payment->payment_status == 'paid')
                                                         <span class="badge bg-success">Paid</span>
@@ -268,7 +268,7 @@
                                                 <td><a href="#"
                                                         class="text-primary">{{ $item->fleet->license_plate }}</a>
                                                 </td>
-                                                <td>{{ $item->pickup_time }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->return_time)->format('h:i A') }}</td>
                                                 <td>
                                                     @if ($item->payment->payment_status == 'paid')
                                                         <span class="badge bg-success">Paid</span>
