@@ -85,7 +85,7 @@ class DepositController extends Controller
         }
         $depo->delete();
         return redirect()->route('deposit.index')
-        ->with('success', 'Fleet deleted successfully');
+        ->with('success', 'Deposit deleted successfully');
     }
 
     public function export(){
