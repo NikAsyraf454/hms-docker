@@ -185,27 +185,46 @@
 
           <li class="nav-heading">Pages</li>
 
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('claim.index') }}">
-                  <i class="bi bi-person"></i>
-                  <span>Claims</span>
-              </a>
-          </li><!-- End Profile Page Nav -->
-          @if ($role == 'Admin' || $role == 'Management')
+          @if ($role == 'Admin' || $role == 'Management' || $role == 'Staff')
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('rental.index') }}">
+                      <i class="bi bi-card-list"></i>
+                      <span>Rental</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('claim.index') }}">
+                      <i class="bi bi-person"></i>
+                      <span>Claims</span>
+                  </a>
+              </li>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="{{ route('fleet.index') }}">
                       <i class="bi bi-car-front"></i>
                       <span>Fleet</span>
                   </a>
               </li>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('deposit.index') }}">
+                      <i class="bi bi-cash"></i>
+                      <span>Deposit</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('user.index') }}">
+                      <i class="bi bi-person"></i>
+                      <span>User</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="{{ route('customer.index') }}">
+                      <i class="bi bi-people-fill"></i>
+                      <span>Customer</span>
+                  </a>
+              </li>
           @endif
 
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('rental.index') }}">
-                  <i class="bi bi-card-list"></i>
-                  <span>Rental</span>
-              </a>
-          </li>
+
           {{-- <li class="nav-item">
               <a class="nav-link collapsed" href="{{ route('password.request') }}">
                   <i class="bi bi-envelope"></i>
@@ -214,26 +233,21 @@
           </li> --}}
           <!-- End Contact Page Nav -->
 
+
           <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('customer.index') }}">
+              <a class="nav-link collapsed" href="{{ route('report.index') }}">
                   <i class="bi bi-people-fill"></i>
-                  <span>Customer</span>
+                  <span>Reporting</span>
               </a>
-          </li><!-- End Register Page Nav -->
+          </li>
+
+          <!-- End Register Page Nav -->
           {{-- <li class="nav-item">
               <a class="nav-link collapsed" href="{{ route('customer.index') }}">
                   <i class="bi bi-card-list"></i>
                   <span>Sales</span>
               </a>
           </li> --}}
-          @can('delete user')
-              <li class="nav-item">
-                  <a class="nav-link collapsed" href="{{ route('user.index') }}">
-                      <i class="bi bi-person-fill"></i>
-                      <span>User</span>
-                  </a>
-              </li><!-- End Login Page Nav -->
-          @endcan
 
           {{--
       <li class="nav-item">
