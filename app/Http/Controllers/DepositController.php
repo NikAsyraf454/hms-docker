@@ -10,7 +10,11 @@ class DepositController extends Controller
 {
     
     public function index(){
-        $depo = Deposit::with('rentals.payment')->get();
+        $depo = Deposit::with('rentals.payment')
+        ->join('rentals', 'deposits.id', '=', 'rentals.depo_id')
+        ->orderBy('rentals.pickup_date', 'desc')
+        ->select('deposits.*')
+        ->get();
         // return response()->json($depo);
         return view('deposit.index')->with('deposit', $depo);
     }

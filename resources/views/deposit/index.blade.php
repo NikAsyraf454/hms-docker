@@ -10,12 +10,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Deposits</h5>
+
                     <div class="table-responsive">
-                        <a href="{{ route('export.deposits') }}" class="btn btn-primary">Export</a>
                         <table id="tableData" class="datatable table">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    {{-- <th>No.</th> --}}
                                     <th>Pickup Date</th>
                                     <th>Customer</th>
                                     <th>Return Amount</th>
@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($deposit as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        {{-- <td>{{ $loop->iteration }}</td> --}}
                                         @if ($item->rentals)
                                             <td>
                                                 {{ $item->rentals ? $item->rentals->fleet->license_plate : '-' }}
@@ -48,7 +48,12 @@
                                         <td>{{ $item->return_amount }}</td>
 
                                         <td>
-                                            {{ $item->status }}
+                                            {{-- {{ $item->status }} --}}
+                                            @if ($item->status == 'Paid')
+                                                <span class="badge bg-success">Paid</span>
+                                            @elseif($item->status == 'Unpaid')
+                                                <span class="badge bg-danger">Unpaid</span>
+                                            @endif
                                         </td>
                                         <td>{{ $item->remarks }}</td>
                                         <td>
@@ -77,7 +82,6 @@
                     </div>
                     {{-- <a href="{{ route('claim.create') }}" class="btn btn-primary">New Deposit</a> --}}
 
-
                 </div>
             </div>
 
@@ -85,21 +89,8 @@
     </div>
 @endsection
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+    <!-- Include jQuery DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 @endsection
-{{-- 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#tableData').DataTable();
-        });
-    </script>
-@endpush --}}

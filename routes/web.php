@@ -22,6 +22,9 @@ Route::post('/session/refresh', function () {
 })->name('session.refresh');
 
 Route::get('/dashboard' , [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+// Reporting Route
+Route::get('/report' , [ReportController::class, 'index'])->middleware(['auth', 'verified'])->name('report.index');
+Route::get('/report/fleet/{id}' , [ReportController::class, 'byfleet'])->name('report.byfleet');
 // Route::get('/test' , [DashboardController::class, 'test'])->middleware(['auth', 'verified'])->name('test');
 
 Route::get('/home', [ClaimController::class, 'home'])->name('claim.home');
@@ -44,11 +47,12 @@ Route::get('role-assign',[UserController::class,'assignRole']);
         Route::put('/fleet/{id}', [FleetController::class, 'update'])->name('fleet.update');
         Route::get('/fleet/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
         Route::get('/available-vehicles', [FleetController::class, 'getAvailableVehicles']);
+        Route::get('/fleet-detail/{id}', [FleetController::class, 'getFleetDetails']);
         // Claim Module
         Route::get('/claim', [ClaimController::class, 'index'])->name('claim.index');
         Route::get('/claim/create', [ClaimController::class, 'create'])->name('claim.create');
         Route::post('/claim/{id}', [ClaimController::class, 'store'])->name('claim.store');
-        Route::get('/claim/{id}/{category}', [ClaimController::class, 'show'])->name('claim.show');
+        // Route::get('/claim/{id}/{category}', [ClaimController::class, 'show'])->name('claim.show');
         Route::get('/claim/{id}/edit', [ClaimController::class, 'edit'])->name('claim.edit');
         Route::put('/claim/{id}', [ClaimController::class, 'update'])->name('claim.update');
         Route::get('/claim{id}', [ClaimController::class, 'destroy'])->name('claim.destroy');
