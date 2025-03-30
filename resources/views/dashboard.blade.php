@@ -142,14 +142,13 @@
                     <!-- End Customers Card -->
 
                     <!-- Available Fleet -->
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
                                 <h5 class="card-title">Fleet Available <span>| Today</span></h5>
                                 <table class="table table-borderless datatable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Model</th>
                                             <th scope="col">Plate</th>
                                             <th scope="col">Color</th>
@@ -159,7 +158,6 @@
                                         @foreach ($data['car'] as $item)
                                             {{-- {{ $item }} --}}
                                             <tr>
-                                                <th scope="row"><a href="#">{{ $loop->index + 1 }}</a></th>
                                                 <td>{{ $item->model }}</td>
                                                 <td><a href="#" class="text-primary">{{ $item->license_plate }}</a>
                                                 </td>
@@ -172,7 +170,84 @@
                             </div>
 
                         </div>
-                    </div><!-- End Available Fleet -->
+                    </div>
+                    <!-- End Available Fleet -->
+
+                    <!-- Check Fleet Availability -->
+                    <div class="col-md-6">
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Check Fleet Availability <span>| Today</span></h5>
+                                <form action="{{ route('check.availability') }}" method="GET">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label for="pickup_date" class="form-label">Pickup Date</label>
+                                            <input type="date" class="form-control" id="pickup_date"
+                                                name="pickup_date" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="pickup_time" class="form-label">Pickup Time</label>
+                                            <select class="form-select" name="pickup_time" required id="pickup_time">
+                                                @php
+                                                    $start = strtotime('00:00');
+                                                    $end = strtotime('23:45');
+                                                    $interval = 15 * 60; // 15 minutes
+                                                @endphp
+                                                @for ($time = $start; $time <= $end; $time += $interval)
+                                                    <option value="{{ date('H:i', $time) }}">
+                                                        {{ date('h:i A', $time) }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="return_date" class="form-label">Return Date</label>
+                                            <input type="date" class="form-control" id="return_date"
+                                                name="return_date" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="return_time" class="form-label">Return Time</label>
+                                            <select class="form-select" name="return_time" required id="return_time">
+                                                @for ($time = $start; $time <= $end; $time += $interval)
+                                                    <option value="{{ date('H:i', $time) }}">
+                                                        {{ date('h:i A', $time) }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Check Availability</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                @if (isset($availableFleets))
+                                    <div class="mt-4">
+                                        <h6>Available Vehicles:</h6>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <th>License Plate</th>
+                                                    <th>Color</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($availableFleets as $fleet)
+                                                    <tr>
+                                                        <td>{{ $fleet->model }}</td>
+                                                        <td>{{ $fleet->license_plate }}</td>
+                                                        <td>{{ $fleet->color }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Check Fleet Availability -->
 
                     <!-- Pickup Today -->
                     <div class="col-md-12">
@@ -203,7 +278,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($rentalToday as $item)
+                                        @foreach ($data['rentalToday'] as $item)
                                             {{-- {{ $item }} --}}
                                             <tr>
                                                 <th scope="row"><a href="#">{{ $loop->index + 1 }}</a></th>
