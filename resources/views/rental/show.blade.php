@@ -102,6 +102,12 @@
                                             <input type="text" placeholder="" class="form-control" name="acc_num"
                                                 id="acc_num" value="{{ $rental->customer->acc_num }}" disabled>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="acc_num_name" class="form-label">Account Owner</label>
+                                            <input type="text" placeholder="" class="form-control"
+                                                name="acc_num_name" id="acc_num_name"
+                                                value="{{ $rental->customer->acc_num_name }}" disabled>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- Rental Detail --}}
@@ -216,18 +222,18 @@
                                     </div>
                                     @if (isset($pre))
                                         <a href="{{ route('inspection.show', ['id' => $rental->id, 'type' => 'pre']) }}"
-                                            class="btn btn-success mt-2">Pre Inspection Form</a>
+                                            class="btn btn-success mt-2">Pickup Form</a>
                                     @else
                                         <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'pre']) }}"
-                                            class="btn btn-primary mt-2">Pre Inspection Form</a>
+                                            class="btn btn-primary mt-2">Pickup Form</a>
                                     @endif
 
                                     @if (isset($post))
                                         <a href="{{ route('inspection.show', ['id' => $rental->id, 'type' => 'post']) }}"
-                                            class="btn btn-success mt-2">Post Inspection Form</a>
+                                            class="btn btn-success mt-2">Return Form</a>
                                     @else
                                         <a href="{{ route('inspection.create', ['id' => $rental->id, 'type' => 'post']) }}"
-                                            class="btn btn-primary mt-2">Post Inspection Form</a>
+                                            class="btn btn-primary mt-2">Return Form</a>
                                     @endif
                                 </div>
                                 {{-- Rental Detail --}}
@@ -235,7 +241,7 @@
                             </div>
 
                             <div class="pt-2">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
                                 <a href="{{ route('rental.index') }}" class="btn btn-primary">Back</a>
                             </div>
                         </form><!-- Vertical Form -->

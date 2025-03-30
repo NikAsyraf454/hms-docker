@@ -309,8 +309,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="depo_amount" class="form-label">Depo Amount</label>
-                                                <input type="number" class="form-control" name="depo_amount"
-                                                    id="depo_amount" value="{{ old('depo_amount') }}">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">RM</span>
+                                                    <input type="number" name="depo_amount" id="depo_amount"
+                                                        class="form-control" placeholder="Deposit Amount"
+                                                        aria-label="Rental Amount" aria-describedby="basic-addon1"
+                                                        value="{{ old('depo_amount') }}" required>
+                                                </div>
                                                 @error('depo_amount')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -404,7 +409,7 @@
                     $('#name').val(ui.item.value);
                     $('#customer_id').val(ui.item.id);
                     // $('#ic').val(ui.item.ic);
-                    $('#ic').val(Number(ui.item.ic));
+                    $('#ic').val((ui.item.ic));
                     $('#matric').val(ui.item.matric);
                     $('#email').val(ui.item.email);
                     $('#phone').val(ui.item.phone);

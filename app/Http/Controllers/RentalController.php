@@ -117,7 +117,7 @@ class RentalController extends Controller
         $depositRequest['updated_by'] = $user_id;
 
         $customer = DB::table('customers')
-                    ->where('matric', $customerRequest['matric'])
+                    ->where('ic', $customerRequest['ic'])
                     ->first();
 
         if($customer){
@@ -125,15 +125,14 @@ class RentalController extends Controller
             $rentalRequest['customer_id'] = $customer->id;
             $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
             $payment = $this->paymentService->storePayment($paymentRequest, $filePay);
+            $customer = $this->customerService->updateCustomer($customer->id,$customerRequest); //update customer detail
 
             $rentalRequest['depo_id'] = $deposit->id;
             $rentalRequest['payment_id'] = $payment->id;
-            // dd($rentalRequest['payment_id']);
 
             $this->rentalService->storeRental($rentalRequest);
            
         }else{
-            // dd('masuk');
             //store rental and customer
             $deposit = $this->depositService->addDeposit($depositRequest,$fileDepo);
             $payment = $this->paymentService->storePayment($paymentRequest, $filePay);
@@ -146,7 +145,6 @@ class RentalController extends Controller
 
             $rentalRequest['customer_id'] = $customer;
             
-            // dd($rentalRequest);
            $this->rentalService->storeRental($rentalRequest);
 
         }
@@ -193,7 +191,7 @@ class RentalController extends Controller
             'return_location' => 'required|string|max:255',
             'note' => 'nullable|string|max:500',
             'destination' => 'required|string|max:255',
-            'payment_status' => 'required|in:paid,unpaid',
+            'payment_status' => 'required|in:paid,unpaid,partially_paid',
             'payment_proof' => 'nullable',
             'rental_amount' => 'required|numeric|min:0',
             'depo_amount' => 'required|numeric|min:0',
