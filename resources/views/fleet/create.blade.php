@@ -26,13 +26,30 @@
                             </div>
                             <div class="col-12">
                                 <label for="model">Model</label>
-                                <input class="form-control" type="text" class="" id="model" name="model"
-                                    required>
+                                <select name="model" id="model" class="form-select">
+                                    <option value="Axia">Axia</option>
+                                    <option value="Axia (2nd Gen)">Axia (2nd Gen)</option>
+                                    <option value="Myvi (2nd Gen)">Myvi (2nd Gen)</option>
+                                    <option value="Myvi (3rd Gen)">Myvi (3rd Gen)</option>
+                                    <option value="Bezza">Bezza</option>
+                                    <option value="Bezza (2nd Gen)">Bezza (2nd Gen)</option>
+                                    <option value="Alza">Alza</option>
+                                    <option value="Alza (2nd Gen)">Alza (2nd Gen)</option>
+                                    <option value="Iriz">Iriz</option>
+                                    <option value="Saga">Saga</option>
+                                    <option value="Persona">Persona</option>
+                                    <option value="X70">X70</option>
+                                    <option value="X50">X50</option>
+                                    <option value="City">City</option>
+                                    <option value="Civic">Civic</option>
+                                    <option value="Vios">Vios</option>
+                                    <option value="Yaris">Yaris</option>
+                                </select>
                             </div>
                             <div class="col-12">
                                 <label for="year">Year</label>
-                                <input class="form-control" type="number" class="" id="year" name="year"
-                                    required>
+                                <input class="form-control" type="number" id="year" name="year" min="2000"
+                                    max="2030" step="1" value="{{ date('Y') }}" required>
                             </div>
                             <div class="col-12">
                                 <label for="license_plate">Plate Number</label>
