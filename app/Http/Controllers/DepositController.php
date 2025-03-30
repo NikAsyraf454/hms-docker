@@ -8,15 +8,40 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DepositController extends Controller
 {
-    
+    private function getPending(){
+        $pending = Deposit::where('return_status', 'pending')->get();
+        return $pending;
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'return_status' => 'required|string|max:255',
+        ]);
+
+        $depo = Deposit::find($id);
+        if (!$depo) {
+            return redirect()->route('deposit.index')
+                ->with('error', 'Deposit not found.');
+        }
+
+        $depo->return_status = $request->return_status;
+        $depo->save();
+
+        return redirect()->route('deposit.index', $id)
+            ->with('success', 'Deposit status updated successfully.');
+    }
+
     public function index(){
-        $depo = Deposit::with('rentals.payment')
+        $deposit = Deposit::with('rentals.payment')
         ->join('rentals', 'deposits.id', '=', 'rentals.depo_id')
         ->orderBy('rentals.pickup_date', 'desc')
         ->select('deposits.*')
         ->get();
-        // return response()->json($depo);
-        return view('deposit.index')->with('deposit', $depo);
+
+        $pending = $this->getPending();
+        // return response()->json($pending);
+        return view('deposit.index')->with(compact('deposit', 'pending'));
     }
 
     public function create()
@@ -51,7 +76,7 @@ class DepositController extends Controller
 
     public function show($id){
         $depo = Deposit::find($id);
-        // return response()->json($depo);
+        // return response()->json($id);
         return view('deposit.show', compact('depo'));
     }
 

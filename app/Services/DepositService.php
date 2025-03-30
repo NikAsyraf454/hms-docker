@@ -8,12 +8,6 @@ class DepositService
 {
     public function addDeposit($data, $file)
     {
-        $newArray;
-        $newArray['amount'] = $data['depo_amount'];
-        $newArray['date'] = $data['depo_date'];
-        $newArray['status'] = $data['depo_status'];
-        // $newArray['return_date'] = $data['depo_amount'];
-        // dd($newArray);
 
         if($file){
             $filename = 'deposits/'.time(). '.' . $file->getClientOriginalExtension();  
@@ -22,7 +16,6 @@ class DepositService
             $filename = null;
         }
 
-        //    return Rental::create($data);
         return Deposit::create([
             'amount' => $data['depo_amount'],
             'date' => $data['depo_date'],
@@ -30,7 +23,6 @@ class DepositService
             'proof' => $filename,
         ]);
 
-        return Deposit::create($newArray);
     }
 
     public function getDepositById($epositId)

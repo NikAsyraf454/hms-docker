@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('proof')->nullable();
             $table->string('return_date')->nullable();
             $table->integer('return_amount')->nullable();
+            $table->enum('return_status',['pending', 'approve', 'decline'])->nullable();
             $table->integer('remarks')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
