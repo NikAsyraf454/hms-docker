@@ -21,7 +21,8 @@
                         @php
                             $userId = session('user_id');
                         @endphp
-                        <form action="{{ route('customer.update', $customer->id) }}" method="post">
+                        <form action="{{ route('customer.update', $customer->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="" id="staff_id" name="staff_id"
@@ -56,15 +57,31 @@
                                             <input type="number" class="form-control" name="phone" id="phone"
                                                 value="{{ $customer->phone }}">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="college" class="form-label">College </label>
-                                            <input type="text" class="form-control" name="college"
-                                                value="{{ $customer->college }}">
+                                            <select class="form-control" name="college" id="college"
+                                                value="{{ old('college') }}">
+                                                @foreach ($colleges as $college)
+                                                    <option value="{{ $college }}"
+                                                        {{ $customer->college == $college ? 'selected' : '' }}>
+                                                        {{ $college }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('college')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="faculty" class="form-label">Faculty </label>
-                                            <input type="text" class="form-control" name="faculty"
-                                                value="{{ $customer->faculty }}">
+                                            <select class="form-control" name="faculty" id="faculty"
+                                                value="{{ old('faculty') }}">
+                                                @foreach ($faculties as $item)
+                                                    <option value="{{ $item }}"
+                                                        {{ $customer->faculty == $item ? 'selected' : '' }}>
+                                                        {{ $item }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-6">
                                             <label for="address" class="form-label">Address </label>
@@ -75,10 +92,16 @@
                                     </div>
                                     <div class="row pt-2">
                                         <h5>Bank Details</h5>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <label for="bank" class="form-label">Bank</label>
-                                            <input type="text" class="form-control" name="bank" id="bank"
-                                                value="{{ $customer->bank }}">
+                                            <select class="form-control" name="bank" id="bank"
+                                                value="{{ old('bank') }}">
+                                                @foreach ($banks as $item)
+                                                    <option value="{{ $item }}"
+                                                        {{ $customer->bank == $item ? 'selected' : '' }}>
+                                                        {{ $item }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-6">
                                             <label for="acc_num" class="form-label"> Account Number</label>
@@ -91,6 +114,19 @@
                                                 name="acc_num_name" id="acc_num_name"
                                                 value="{{ $customer->acc_num_name }}">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h4>IC/Passport</h4>
+                                    <div class="col-12">
+                                        <label for="photo" class="form-label">Upload Photo</label>
+                                        <input type="file" class="form-control" name="photo" id="photo">
+                                        @if ($customer->photo_ic)
+                                            <div class="mt-2">
+                                                <img src="{{ asset('storage/' . $customer->photo) }}"
+                                                    alt="Customer Photo" class="img-thumbnail" style="max-width: 150px;">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

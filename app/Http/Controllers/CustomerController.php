@@ -13,6 +13,59 @@ class CustomerController extends Controller
 
     protected $customerService;
 
+    protected $faculties = [
+        'Others',
+        'CIVIL/FKA',
+        'MEKANIKAL/FKM',
+        'ELECTRIC/FKE',
+        'KIMIA/FKT',
+        'KOMPUTER/FK',
+        'PENDIDIKAN/SOE',
+        'SAINS',
+        'FABU',
+        'FSSH/FSSK',
+        'MANAGEMENT',
+        'AHIBS',
+        'MJIIT',
+        'SPACE',
+    ];
+
+    protected $banks = [
+        'Maybank',
+        'Bank Islam',
+        'Bank Rakyat',
+        'Bank Muamalat',
+        'Public Bank',
+        'RHB Bank',
+        'Hong Leong',
+        'Ambank',
+        'CIMB Bank',
+        'Affin Bank',
+        'BSN',
+        'Ambank',
+        'UOB',
+        'OCBC',
+        'Rize',
+        'GXBank',
+        'TNG',
+    ];
+
+    protected $colleges = [
+        'KRP',
+        'KTF',
+        'KTC',
+        'KP',
+        'KTHO',
+        'KTR',
+        'KTDI',
+        'K9',
+        'K10',
+        'KDSE',
+        'KDOJ',
+        'KLG',
+        'Others',
+    ];
+
     public function __construct(CustomerService $customerService){
         $this->customerService = $customerService;
     }
@@ -31,8 +84,11 @@ class CustomerController extends Controller
 
     public function edit($id){
         $customer = $this->customerService->getCustomerById($id);
+        $colleges = $this->colleges;
+        $faculties = $this->faculties; 
+        $banks = $this->banks;
         // return response()->json($customer);
-        return view('customer.edit', compact('customer'));
+        return view('customer.edit', compact('customer', 'colleges', 'faculties', 'banks'));
     }
 
     public function autocomplete(Request $request){
@@ -49,7 +105,7 @@ class CustomerController extends Controller
         $data = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|max:255',
-            'matric' => 'required|max:255',
+            'matric' => 'nullable|max:255',
             'ic' => 'required',
             'college' => 'required',
             'phone' => 'required',
@@ -60,9 +116,18 @@ class CustomerController extends Controller
             'acc_num_name' => 'required',
         ]);
 
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photoPath = $photo->storeAs('customers', $photoName);
+            $data['photo_ic'] = $photoPath;
+        }
+
+
+        // return response()->json($data);
         // $fleet = Fleet::find($id);
         $customer = $this->customerService->updateCustomer($id, $data);
-
+        // dd($customer);
         // $customer->update($request->all());
         return redirect()->route('customer.index')
         ->with('success', 'Customer updated successfully.');
