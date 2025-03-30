@@ -3,25 +3,169 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @php
+                    $userId = session('user_id');
+                @endphp
+                @if ($preinspection)
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pickup Form</h5>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="col-md-12">
+                                        <label for="text" class="form-label">Parts</label>
+                                        @php
+                                            // Decode the JSON string to an array
+                                            $selectedParts = json_decode($preinspection->parts, true);
+                                        @endphp
+
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="parts[]"
+                                                    id="parts[]" value="Power Outlet"
+                                                    {{ in_array('Power Outlet', $selectedParts) ? 'checked' : '' }}
+                                                    disabled>
+                                                <label class="form-check-label" for="parts[]">
+                                                    Power Outlet
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="parts[]"
+                                                    id="parts[]" value="Infotainment System"
+                                                    {{ in_array('Infotainment System', $selectedParts) ? 'checked' : '' }}
+                                                    disabled>
+                                                <label class="form-check-label" for="parts[]">
+                                                    Infotainment System
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="parts[]"
+                                                    id="parts[]" value="Carpet"
+                                                    {{ in_array('Carpet', $selectedParts) ? 'checked' : '' }} disabled>
+                                                <label class="form-check-label" for="parts[]">
+                                                    Carpet
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="parts[]"
+                                                    id="parts[]" value="Spare Tyre"
+                                                    {{ in_array('Spare Tyre', $selectedParts) ? 'checked' : '' }} disabled>
+                                                <label class="form-check-label" for="parts[]">
+                                                    Spare Tyre
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="parts[]"
+                                                    id="parts[]" value="Car Toolkit"
+                                                    {{ in_array('Car Toolkit', $selectedParts) ? 'checked' : '' }} disabled>
+                                                <label class="form-check-label" for="parts[]">
+                                                    Car Toolkit
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        {{-- <input type="text" class="form-control" name="parts" id="parts"> --}}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="mileage" class="form-label">Mileage</label>
+                                        {{-- <input type="number" class="form-control" name="mileage" id="mileage"
+                                                value="{{ $preinspection->mileage }}"> --}}
+                                        <div class="input-group mb-3">
+                                            <input type="number" name="mileage" class="form-control" placeholder="Mileage"
+                                                aria-label="Mileage" aria-describedby="basic-addon2"
+                                                value="{{ $preinspection->mileage }}" readonly>
+                                            <span class="input-group-text" id="basic-addon2">KM</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fuel" class="form-label">Fuel</label>
+                                        <div class="input-group mb-3">
+                                            <input type="number" name="fuel" class="form-control" placeholder="Fuel"
+                                                aria-label="fuel" aria-describedby="basic-addon2"
+                                                value="{{ $preinspection->fuel }}" readonly>
+                                            <span class="input-group-text" id="basic-addon2">Bar</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="remarks" class="form-label">Remarks</label>
+                                        <input type="text" class="form-control" name="remarks" id="remarks" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    @php
+                                        $gambar = json_decode($preinspection->image);
+                                    @endphp
+                                    {{-- @dd($gambar) --}}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Image Front</label><br>
+                                            <img src="{{ asset($gambar->front) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Image Left</label><br>
+                                            <img src="{{ asset($gambar->left) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Image Right</label><br>
+                                            <img src="{{ asset($gambar->right) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Image Back</label><br>
+                                            <img src="{{ asset($gambar->back) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image">
+                                        </div>
+                                        @if (isset($gambar->add1))
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="file">Additional Image 1</label><br>
+                                                <img src="{{ asset($gambar->add1) }}" alt="" width="50%"
+                                                    data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                    class="enlarge-image">
+                                            </div>
+                                        @endif
+                                        @if (isset($gambar->add2))
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="file">Additional Image 2</label><br>
+                                                <img src="{{ asset($gambar->add2) }}" alt="" width="50%"
+                                                    data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                    class="enlarge-image">
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        @if ($type == 'pre')
+                            <h5 class="card-title"> Pickup Form</h5>
+                        @else
+                            <h5 class="card-title">Return Form</h5>
                         @endif
-                        @php
-                            $userId = session('user_id');
-                        @endphp
-                        <h5 class="card-title">{{ ucfirst($type) }} Inspection Form</h5>
                         {{-- <form action="{{ route('inspection.store') }}" method="post" enctype="multipart/form-data"> --}}
                         {{-- @csrf --}}
-                        <input type="hidden" class="" name="staff_id" id="staff_id" value="{{ $userId }}">
-                        <input type="hidden" class="" name="rental_id" id="rental_id" value="{{ $id }}">
+                        <input type="hidden" class="" name="staff_id" id="staff_id"
+                            value="{{ $userId }}">
+                        <input type="hidden" class="" name="rental_id" id="rental_id"
+                            value="{{ $id }}">
                         <div class="row">
                             <div class="col">
                                 <div class="col-md-12">
@@ -33,16 +177,16 @@
 
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="parts[]" id="parts[]"
-                                                value="Power Outlet"
+                                            <input class="form-check-input" type="checkbox" name="parts[]"
+                                                id="parts[]" value="Power Outlet"
                                                 {{ in_array('Power Outlet', $selectedParts) ? 'checked' : '' }} disabled>
                                             <label class="form-check-label" for="parts[]">
                                                 Power Outlet
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="parts[]" id="parts[]"
-                                                value="Infotainment System"
+                                            <input class="form-check-input" type="checkbox" name="parts[]"
+                                                id="parts[]" value="Infotainment System"
                                                 {{ in_array('Infotainment System', $selectedParts) ? 'checked' : '' }}
                                                 disabled>
                                             <label class="form-check-label" for="parts[]">
@@ -50,24 +194,24 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="parts[]" id="parts[]"
-                                                value="Carpet" {{ in_array('Carpet', $selectedParts) ? 'checked' : '' }}
-                                                disabled>
+                                            <input class="form-check-input" type="checkbox" name="parts[]"
+                                                id="parts[]" value="Carpet"
+                                                {{ in_array('Carpet', $selectedParts) ? 'checked' : '' }} disabled>
                                             <label class="form-check-label" for="parts[]">
                                                 Carpet
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="parts[]" id="parts[]"
-                                                value="Spare Tyre"
+                                            <input class="form-check-input" type="checkbox" name="parts[]"
+                                                id="parts[]" value="Spare Tyre"
                                                 {{ in_array('Spare Tyre', $selectedParts) ? 'checked' : '' }} disabled>
                                             <label class="form-check-label" for="parts[]">
                                                 Spare Tyre
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="parts[]" id="parts[]"
-                                                value="Car Toolkit"
+                                            <input class="form-check-input" type="checkbox" name="parts[]"
+                                                id="parts[]" value="Car Toolkit"
                                                 {{ in_array('Car Toolkit', $selectedParts) ? 'checked' : '' }} disabled>
                                             <label class="form-check-label" for="parts[]">
                                                 Car Toolkit
@@ -89,21 +233,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="row">
-                                        <label for="fuel" class="form-label">Fuel</label>
-
-                                        <div class="col fw-bold">
-                                            <span id="demo">0 </span> Bar
-                                        </div>
-                                        <div class="col">
-                                            <input type="range" name="fuel" id="fuel" class="form-range"
-                                                min="0" max="8" step="1"
-                                                value="{{ $inspection->fuel }}" disabled>
-                                        </div>
+                                    <label for="fuel" class="form-label">Fuel</label>
+                                    <div class="input-group mb-3">
+                                        <input type="number" name="fuel" class="form-control" placeholder="Fuel"
+                                            aria-label="fuel" aria-describedby="basic-addon2"
+                                            value="{{ $inspection->fuel }}" readonly>
+                                        <span class="input-group-text" id="basic-addon2">Bar</span>
                                     </div>
 
-
-                                    {{-- <input type="text" class="form-control" name="fuel" id="fuel"> --}}
                                 </div>
                                 <div class="col-md-12">
                                     <label for="remarks" class="form-label">Remarks</label>
@@ -115,6 +252,7 @@
                                     $gambar = json_decode($inspection->image);
                                 @endphp
                                 {{-- @dd($gambar->front --}}
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="form-label" for="file">Image Front</label><br>
@@ -136,14 +274,25 @@
                                         <img src="{{ asset($gambar->back) }}" alt="" width="50%"
                                             data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="file">Additional Image 1</label><br>
 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="file">Additional Image 2</label><br>
+                                    @if (isset($gambar->add1))
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Additional Image 1</label><br>
+                                            <img src="{{ asset($gambar->add1) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image">
+                                        </div>
+                                    @endif
+                                    @if (isset($gambar->add2))
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="file">Additional Image 2</label><br>
+                                            <img src="{{ asset($gambar->add2) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image">
 
-                                    </div>
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -151,6 +300,9 @@
 
                         <div class="pt-2">
                             <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+                            <a href="{{ route('deposit.show', ['id' => $depositId]) }}" target="_blank"
+                                class="btn btn-secondary">View
+                                Deposit</a>
                         </div>
 
                         {{-- <input type="file" class="form-control" name="image[]" multiple /> --}}

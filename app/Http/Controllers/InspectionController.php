@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
+use App\Models\Rental;
 use Illuminate\Http\Request;
 use App\Services\InspectionService;
 
@@ -49,8 +50,29 @@ class InspectionController extends Controller
         $inspection = $this->inspectionService->getInspectionById($rentalId, $type);
         $id = $rentalId;
 
+        $depositId = Rental::where('id', $id)->value('depo_id');
+        // dd($depositId);
+
+        if($type == 'post'){
+            $preinspection = $this->inspectionService->getInspectionById($rentalId, 'pre');
+            // dd($preinspection);
+        }else{
+            $preinspection = null;
+        }
+        
+        // $gambar = json_decode($inspection->image);
+        // $keys = ['front', 'back', 'right', 'left', 'add1', 'add2'];
+        // foreach ($keys as $key) {
+        //     if (!isset($gambar->$key)) {
+        //         $gambar->$key = 'null'; // Replace with your desired default value
+        //     }
+        // }
+        
+        // return response()->json($gambar);
+        return view('rental.inspection.show', compact('depositId','id','preinspection','inspection','type'));
+
         // dd($inspection);
-        return view('rental.inspection.show', compact('id','inspection','type'));
+        // return view('rental.inspection.show', compact('id','inspection','type'));
     }
 
     /**
@@ -58,7 +80,9 @@ class InspectionController extends Controller
      */
     public function edit(Inspection $inspection)
     {
-        //
+        $id = $inspection->rental_id;
+        $type = $inspection->type;
+        return view('rental.inspection.edit', compact('inspection', 'id', 'type'));
     }
 
     /**
@@ -66,7 +90,9 @@ class InspectionController extends Controller
      */
     public function update(Request $request, Inspection $inspection)
     {
-        //
+        $data = $request->all();
+        $updatedData = $this->inspectionService->updateInspection($inspection, $data);
+        return redirect()->route('rental.index')->with('success', 'Inspection Updated');
     }
 
     /**

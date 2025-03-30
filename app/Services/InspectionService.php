@@ -7,33 +7,30 @@ use Illuminate\Support\Facades\DB;
 
 class InspectionService
 {
-    public function addInspection($data)
-    {
+    public function addInspection($data){
         $gambar = [
-            'front' => $data['img_front'],
-            'left' => $data['img_left'],
-            'right' => $data['img_right'],
-            'back' => $data['img_back']
+            'front' => $data['img_front']?? null,
+            'left' => $data['img_left']?? null,
+            'right' => $data['img_right']?? null,
+            'back' => $data['img_back']?? null,
+            'add1' => $data['img_add1'] ?? null,
+            'add2' => $data['img_add2'] ?? null,
         ];
-        
+
         $names = [];
 
         foreach ($gambar as $key => $image) {
-            $destinationPath = 'inspections/';
-            // $destinationPath = 'public/inspections/'; for live server
-            $filename = date('Ymd'). '_' . $image->getClientOriginalName();
-            $image->move($destinationPath, $filename);
-            $names[$key] = 'inspections/'. $filename; 
-            // array_push($names, $filename); 
+            if ($image) {
+                $destinationPath = 'inspections/';
+                $filename = date('Ymd') . '_' . $image->getClientOriginalName();
+                $image->move($destinationPath, $filename);
+                $names[$key] = 'inspections/' . $filename;
+            } else {
+                $names[$key] = null; // Handle empty images
+            }
         }
-        // dd($names);
-
-        // $korok = implode(',', $names);
 
         $data['image'] = json_encode($names);
-        // dd($data['image']);
-
-        // $data['type'] = 'pre';
 
         $inspection = new Inspection();
 
@@ -48,11 +45,65 @@ class InspectionService
         $inspection->save();
 
         return $inspection;
-
-        // return Inspection::create($data);
     }
 
-     public function getInspectionById($rentalId, $type){
+    public function updateInspection($id, $data){
+        $inspection = Inspection::findOrFail($id);
+        
+        // Handle image updates if new images are provided
+        if (isset($data['img_front']) || isset($data['img_left']) || isset($data['img_right']) || isset($data['img_back']) || isset($data['img_add1']) || isset($data['img_add2'])) {
+            $existingImages = json_decode($inspection->image, true);
+            $newImages = [];
+            
+            $imagesToUpdate = [
+                'front' => $data['img_front'] ?? null,
+                'left' => $data['img_left'] ?? null,
+                'right' => $data['img_right'] ?? null,
+                'back' => $data['img_back'] ?? null,
+                'add1' => $data['img_add1'] ?? null,
+                'add2' => $data['img_add2'] ?? null
+            ];
+
+            foreach ($imagesToUpdate as $key => $image) {
+                if ($image) {
+                    // Delete old image if exists
+                    if (isset($existingImages[$key]) && file_exists(public_path($existingImages[$key]))) {
+                        unlink(public_path($existingImages[$key]));
+                    }
+                    
+                    // Save new image
+                    $destinationPath = 'inspections/';
+                    $filename = date('Ymd') . '_' . $image->getClientOriginalName();
+                    $image->move($destinationPath, $filename);
+                    $newImages[$key] = 'inspections/' . $filename;
+                } else {
+                    // Keep existing image
+                    $newImages[$key] = $existingImages[$key] ?? null;
+                }
+            }
+            
+            $data['image'] = json_encode($newImages);
+        }
+
+        // Update other fields
+        $inspection->staff_id = $data['staff_id'];
+        $inspection->type = $data['type'];
+        $inspection->parts = json_encode($data['parts']);
+        $inspection->mileage = $data['mileage'];
+        $inspection->fuel = $data['fuel'];
+        $inspection->remarks = $data['remarks'];
+        
+        // Only update image if new images were processed
+        if (isset($data['image'])) {
+            $inspection->image = $data['image'];
+        }
+
+        $inspection->save();
+
+        return $inspection;
+    }
+
+    public function getInspectionById($rentalId, $type){
         $inspection = Inspection::where('rental_id', '=' , $rentalId)
                                 ->where('type', '=' , $type)
                                 ->first();

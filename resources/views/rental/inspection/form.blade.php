@@ -69,27 +69,25 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="mileage" class="form-label">Mileage</label>
-                                        <input type="number" class="form-control" name="mileage" id="mileage">
+                                        {{-- <input type="number" class="form-control" name="mileage" id="mileage"> --}}
+                                        <div class="input-group mb-3">
+                                            <input type="number" name="mileage" class="form-control" placeholder="Mileage"
+                                                aria-label="Mileage" aria-describedby="basic-addon2" value="">
+                                            <span class="input-group-text" id="basic-addon2">KM</span>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="row">
-                                            <label for="fuel" class="form-label">Fuel</label>
-
-                                            <div class="col fw-bold">
-                                                <span id="demo">0 </span> Bar
-                                            </div>
-                                            <div class="col">
-                                                <input type="range" name="fuel" id="fuel" class="form-range"
-                                                    min="0" max="8" step="1">
-                                            </div>
+                                        <label for="fuel" class="form-label">Fuel</label>
+                                        <div class="input-group mb-3">
+                                            <input type="number" name="fuel" class="form-control" placeholder="Fuel"
+                                                aria-label="fuel" aria-describedby="basic-addon2" value="">
+                                            <span class="input-group-text" id="basic-addon2">Bar</span>
                                         </div>
-
-
-                                        {{-- <input type="text" class="form-control" name="fuel" id="fuel"> --}}
                                     </div>
                                     <div class="col-md-12">
                                         <label for="remarks" class="form-label">Remarks</label>
-                                        <input type="text" class="form-control" name="remarks" id="remarks">
+                                        <input type="text" class="form-control" name="remarks" id="remarks"
+                                            placeholder="Remarks">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -102,17 +100,17 @@
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Left</label><br>
                                             <input type="file" class="form-control-file" id="img_left"
-                                                name="img_left" required>
+                                                name="img_left">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Right</label><br>
                                             <input type="file" class="form-control-file" id="img_right"
-                                                name="img_right" required>
+                                                name="img_right">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Image Back</label><br>
                                             <input type="file" class="form-control-file" id="img_back"
-                                                name="img_back" required>
+                                                name="img_back">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="file">Additional Image 1</label><br>
