@@ -20,6 +20,8 @@ use App\Services\InspectionService;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\NewRentalNotification;
+use Illuminate\Support\Facades\Mail;
 
 class RentalController extends Controller
 {
@@ -85,12 +87,49 @@ class RentalController extends Controller
         $this->inspectionService = $inspectionService;
     }
 
-    public function index(){
-        $rentals = Rental::with(['customer', 'staff', 'fleet'])
-                ->orderBy('pickup_date', 'desc') // Sort by latest created_at
-                ->get();
+    public function index(Request $request){
+        // $query = Rental::with(['customer', 'staff', 'fleet'])
+        //         ->orderBy('pickup_date', 'desc') // Sort by latest created_at
+        //         ->get();
+        $query = Rental::with(['fleet', 'customer', 'payment']);
+        $car = Fleet::all();
+          // Filter by pickup and return date range
+        // if ($request->filled('pickup_date')) {
+        //     $query->whereDate('pickup_date', $request->pickup_date);
+        // }
+    
+        // if ($request->filled('return_date')) {
+        //     $query->whereDate('return_date', $request->return_date);
+        // }
+    
+        // if ($request->filled('car_id')) {
+        //     $query->where('fleet_id', $request->car_id);
+        // }
+        
+          if ($request->filled('pickup_date') && $request->filled('return_date') && $request->filled('car_id')) {
+            $query->whereDate('pickup_date', $request->pickup_date)
+                  ->whereDate('return_date', $request->return_date)
+                  ->where('fleet_id', $request->car_id);
+        } elseif ($request->filled('pickup_date') && $request->filled('return_date')) {
+            $query->whereDate('pickup_date', $request->pickup_date)
+                  ->whereDate('return_date',  $request->return_date);
+        } elseif ($request->filled('pickup_date') && $request->filled('car_id')) {
+            $query->whereDate('pickup_date', $request->pickup_date)
+                  ->where('fleet_id', $request->car_id);
+        } elseif ($request->filled('return_date') && $request->filled('car_id')) {
+            $query->whereDate('return_date', $request->return_date)
+                  ->where('fleet_id', $request->car_id);
+        } elseif ($request->filled('pickup_date')) {
+            $query->whereDate('pickup_date', $request->pickup_date);
+        } elseif ($request->filled('return_date')) {
+            $query->whereDate('return_date', $request->return_date);
+        } elseif ($request->filled('car_id')) {
+            $query->where('fleet_id', $request->car_id);
+        }
 
-        return view('rental.index')->with('rentals', $rentals);
+        $rentals = $query->orderBy('pickup_date', 'desc')->get();
+
+        return view('rental.index')->with(['rentals' => $rentals, 'cars' => $car]);
     }
 
     public function create(){
@@ -130,7 +169,7 @@ class RentalController extends Controller
             $rentalRequest['depo_id'] = $deposit->id;
             $rentalRequest['payment_id'] = $payment->id;
 
-            $this->rentalService->storeRental($rentalRequest);
+            $rental = $this->rentalService->storeRental($rentalRequest);
            
         }else{
             //store rental and customer
@@ -145,9 +184,12 @@ class RentalController extends Controller
 
             $rentalRequest['customer_id'] = $customer;
             
-           $this->rentalService->storeRental($rentalRequest);
+            $rental = $this->rentalService->storeRental($rentalRequest);
 
         }
+
+        
+        Mail::to('faizirfan@hastatravel.com')->send(new NewRentalNotification($rental));
     
         return redirect()->route('rental.index')
         ->with('success', 'Rental created successfully.');

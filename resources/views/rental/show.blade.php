@@ -28,6 +28,8 @@
                                     <a class="dropdown-item" href="{{ route('invoice.create', $rental->id) }}">Invoice</a>
                                     <a class="dropdown-item" href="{{ route('agreement.create', $rental->id) }}">Rental
                                         Agreement</a>
+                                    <a class="dropdown-item" href="{{ route('inspectionform.create') }}">Inspection Form</a>
+
                                 </div>
                             </div>
                             {{-- <a href="{{ route('invoice.create', $rental->id) }}" class="btn btn-primary btn-sm">Invoice</a> --}}

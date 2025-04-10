@@ -11,9 +11,37 @@
                 <div class="card-body">
                     <h5 class="card-title">Rental</h5>
                     <a href="{{ route('rental.create') }}" class="btn btn-primary mb-3">New Rental</a>
-                    <div class="d-none d-md-block table-responsive">
+                    <form method="GET" action="{{ route('rental.index') }}" class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <label for="pickup_date" class="form-label">Pickup Date</label>
+                            <input type="date" id="pickup_date" name="pickup_date" class="form-control"
+                                value="{{ request('pickup_date') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="return_date" class="form-label">Return Date</label>
+                            <input type="date" id="return_date" name="return_date" class="form-control"
+                                value="{{ request('return_date') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="car_id" class="form-label">Car</label>
+                            <select name="car_id" id="car_id" class="form-select">
+                                <option value="">-- All Cars --</option>
+                                @foreach ($cars as $car)
+                                    <option value="{{ $car->id }}"
+                                        {{ request('car_id') == $car->id ? 'selected' : '' }}>
+                                        {{ $car->license_plate }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary me-2">Filter</button>
+                            <a href="{{ route('rental.index') }}" class="btn btn-secondary">Reset</a>
+                        </div>
+                    </form>
+
+                    <div class="d-md-block">
                         <div class="table-responsive">
-                            {{-- <div class="d-none d-md-block table-responsive"> --}}
                             <table id="tableData" class="datatable table">
                                 <thead>
                                     <tr>
@@ -99,82 +127,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="d-md-none">
-                @foreach ($rentals as $item)
-                    <div class="card mb-3">
-                        <div class="card-body pt-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="card-subtitle text-primary">{{ $item->fleet->license_plate }}</h6>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-primary" type="button" data-toggle="dropdown">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item"
-                                            href="{{ route('deposit.show', $item->depo_id) }}">Deposit</a>
-                                        <a class="dropdown-item" href="{{ route('rental.show', $item->id) }}">Show</a>
-                                        <a class="dropdown-item" href="{{ route('rental.edit', $item->id) }}">Edit</a>
-                                        <a class="dropdown-item" href="{{ route('rental.destroy', $item->id) }}">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-6">
-                                    <small class="text-muted">Customer</small>
-                                    <div>{{ $item->customer->name }}</div>
-                                    <div class="small">{{ $item->customer->phone }}</div>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <small class="text-muted">Payment</small>
-                                    <div>MYR {{ $item->payment->rental_amount }}</div>
-                                    @if ($item->payment->payment_status == 'paid')
-                                        <span class="badge bg-success">Paid</span>
-                                    @elseif($item->payment->payment_status == 'unpaid')
-                                        <span class="badge bg-danger">Unpaid</span>
-                                    @else
-                                        <span class="badge bg-warning">Partially Paid</span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <small class="text-muted">Pickup</small>
-                                    <div>{{ date('d M Y', strtotime($item->pickup_date)) }}</div>
-                                    <div>{{ date('g:i A', strtotime($item->pickup_time)) }}</div>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <small class="text-muted">Return</small>
-                                    <div>{{ date('d M Y', strtotime($item->return_date)) }}</div>
-                                    <div>{{ date('g:i A', strtotime($item->return_time)) }}</div>
-                                </div>
-                            </div>
-
-                            <div class="mt-2">
-                                <small class="text-muted">Duration</small>
-                                <div>
-                                    @php
-                                        $pickup = \Carbon\Carbon::parse($item->pickup_date . ' ' . $item->pickup_time);
-                                        $return = \Carbon\Carbon::parse($item->return_date . ' ' . $item->return_time);
-                                        $durationHours = $pickup->diffInHours($return);
-                                        $days = floor($durationHours / 24);
-                                        $hours = $durationHours % 24;
-                                    @endphp
-                                    @if ($days == 0)
-                                        {{ $hours }} hours
-                                    @else
-                                        {{ $days }} {{ $days > 1 ? 'days' : 'day' }} {{ $hours }}
-                                        hours
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div> --}}
-
-
         </div>
     </div>
 @endsection
