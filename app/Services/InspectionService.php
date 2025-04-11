@@ -15,6 +15,7 @@ class InspectionService
             'back' => $data['img_back']?? null,
             'add1' => $data['img_add1'] ?? null,
             'add2' => $data['img_add2'] ?? null,
+            'fuel' => $data['fuel'] ?? null,
         ];
 
         $names = [];

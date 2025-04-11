@@ -252,44 +252,54 @@
                                     $gambar = json_decode($inspection->image);
                                 @endphp
                                 {{-- @dd($gambar->front --}}
-
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="form-label" for="file">Image Front</label><br>
                                         <img src="{{ asset($gambar->front) }}" alt="" width="50%"
-                                            data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
+                                            data-bs-toggle="modal" data-bs-target="#imageModal"
+                                            class="enlarge-image"><br>
+                                        <label class="form-label" for="file">Image Front</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label" for="file">Image Left</label><br>
                                         <img src="{{ asset($gambar->left) }}" alt="" width="50%"
-                                            data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
+                                            data-bs-toggle="modal" data-bs-target="#imageModal"
+                                            class="enlarge-image"><br>
+                                        <label class="form-label" for="file">Image Left</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label" for="file">Image Right</label><br>
                                         <img src="{{ asset($gambar->right) }}" alt="" width="50%"
-                                            data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
+                                            data-bs-toggle="modal" data-bs-target="#imageModal"
+                                            class="enlarge-image"><br>
+                                        <label class="form-label" for="file">Image Right</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label" for="file">Image Back</label><br>
                                         <img src="{{ asset($gambar->back) }}" alt="" width="50%"
-                                            data-bs-toggle="modal" data-bs-target="#imageModal" class="enlarge-image">
+                                            data-bs-toggle="modal" data-bs-target="#imageModal"
+                                            class="enlarge-image"><br>
+                                        <label class="form-label" for="file">Image Back</label>
                                     </div>
 
                                     @if (isset($gambar->add1))
                                         <div class="col-md-6">
-                                            <label class="form-label" for="file">Additional Image 1</label><br>
                                             <img src="{{ asset($gambar->add1) }}" alt="" width="50%"
                                                 data-bs-toggle="modal" data-bs-target="#imageModal"
-                                                class="enlarge-image">
+                                                class="enlarge-image"><br>
+                                            <label class="form-label" for="file">Additional Image 1</label>
                                         </div>
                                     @endif
                                     @if (isset($gambar->add2))
                                         <div class="col-md-6">
-                                            <label class="form-label" for="file">Additional Image 2</label><br>
                                             <img src="{{ asset($gambar->add2) }}" alt="" width="50%"
                                                 data-bs-toggle="modal" data-bs-target="#imageModal"
-                                                class="enlarge-image">
-
+                                                class="enlarge-image"><br>
+                                            <label class="form-label" for="file">Additional Image 2</label>
+                                        </div>
+                                    @endif
+                                    @if (isset($gambar->fuel))
+                                        <div class="col-md-6">
+                                            <img src="{{ asset($gambar->fuel) }}" alt="" width="50%"
+                                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                                class="enlarge-image"><br>
+                                            <label class="form-label" for="file">Fuel</label>
                                         </div>
                                     @endif
 
@@ -300,13 +310,109 @@
 
                         <div class="pt-2">
                             <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
-                            <a href="{{ route('deposit.show', ['id' => $depositId]) }}" target="_blank"
+                            {{-- <a href="{{ route('deposit.show', ['id' => $depositId]) }}" target="_blank"
                                 class="btn btn-secondary">View
-                                Deposit</a>
+                                Deposit</a> --}}
                         </div>
 
-                        {{-- <input type="file" class="form-control" name="image[]" multiple /> --}}
-                        {{-- </form> --}}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deposit Details</h5>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @php
+                            $userId = session('user_id');
+                        @endphp
+                        <form action="{{ route('deposit.update', $depositId) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="updated_by" value="{{ $userId }}">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <strong>Amount:</strong>
+                                        <span>{{ $depo->amount }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <strong>Date:</strong>
+                                        <span>{{ $depo->date }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <strong>Status:</strong>
+                                        <span class="badge bg-{{ $depo->status === 'Paid' ? 'success' : 'danger' }}">
+                                            {{ $depo->status }}
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Fuel:</strong>
+                                        <input type="number" name="fuel" id="fuel" class="form-control mt-2"
+                                            value="{{ $depo->fuel ?? 0 }}">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Late Return:</strong>
+                                        <input type="number" name="late" id="late" class="form-control mt-2"
+                                            value="{{ $depo->late ?? 0 }}">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Extend Rental:</strong>
+                                        <div class="d-flex mt-2">
+                                            <input type="number" name="extend" id="extend"
+                                                class="form-control me-2" value="{{ $depo->extend ?? 0 }}">
+                                            <select name="extend_status" id="extend_status" class="form-select">
+                                                <option value="Paid"
+                                                    {{ $depo->extend_status == 'Paid' ? 'selected' : '' }}>Paid
+                                                </option>
+                                                <option value="Unpaid"
+                                                    {{ $depo->extend_status == 'Unpaid' ? 'selected' : '' }}>Unpaid
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Remarks:</strong>
+                                        <input type="text" name="remarks" id="remarks" class="form-control mt-2"
+                                            value="{{ $depo->remarks }}">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Return Date:</strong>
+                                        <input type="date" name="return_date" class="form-control mt-2"
+                                            value="{{ $depo->return_date }}">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Return Amount:</strong>
+                                        <input type="number" name="return_amount" id="return_amount"
+                                            class="form-control mt-2" value="{{ $depo->return_amount }}" readonly>
+                                    </li>
+                                </ul>
+                                @if (isset($depo->proof))
+                                    {{-- @dd($rental->deposit->proof) --}}
+                                    <div class="col-4 d-flex align-items-end mt-2">
+                                        <a class="btn btn-primary" href="{{ asset($depo->proof) }}" target="_blank">View
+                                            Receipt</a>
+                                    </div>
+                                @else
+                                    {{-- Add Proof Logic --}}
+                                @endif
+                                <div class="text-center pt-2">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -328,17 +434,6 @@
 @endsection
 
 @section('script')
-    <script>
-        var slider = document.getElementById("fuel");
-        var output = document.getElementById("demo");
-        output.innerHTML = slider.value; // Display the default slider value
-
-        // Update the current slider value (each time you drag the slider handle)
-        slider.oninput = function() {
-            output.innerHTML = this.value;
-        }
-    </script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const images = document.querySelectorAll('.enlarge-image');

@@ -97,7 +97,8 @@ class DepositController extends Controller
         $depo = Deposit::find($id);
         $depo->update($request->all());
 
-        return redirect()->route('deposit.show',$id)
+        // return redirect()->route('deposit.show',$id)
+        return redirect()->back()
         ->with('success', 'Deposit updated successfully.');
     }
 

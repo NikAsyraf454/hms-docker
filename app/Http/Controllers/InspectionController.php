@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inspection;
 use App\Models\Rental;
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 use App\Services\InspectionService;
 
@@ -27,7 +28,10 @@ class InspectionController extends Controller
      */
     public function create($id, $type)
     {
-        return view('rental.inspection.form', compact('id', 'type'));
+        
+        $pickup_time = Rental::where('id', $id)->value('pickup_time');
+        
+        return view('rental.inspection.form', compact('id', 'type','pickup_time'));
     }
 
     /**
@@ -51,6 +55,7 @@ class InspectionController extends Controller
         $id = $rentalId;
 
         $depositId = Rental::where('id', $id)->value('depo_id');
+        $depo =  Deposit::find($depositId);
         // dd($depositId);
 
         if($type == 'post'){
@@ -69,10 +74,7 @@ class InspectionController extends Controller
         // }
         
         // return response()->json($gambar);
-        return view('rental.inspection.show', compact('depositId','id','preinspection','inspection','type'));
-
-        // dd($inspection);
-        // return view('rental.inspection.show', compact('id','inspection','type'));
+        return view('rental.inspection.show', compact('depo','depositId','id','preinspection','inspection','type'));
     }
 
     /**

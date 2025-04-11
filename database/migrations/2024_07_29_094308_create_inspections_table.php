@@ -21,14 +21,8 @@ return new class extends Migration
             $table->string('fuel')->nullable();
             $table->string('remarks')->nullable();
             $table->json('image')->nullable();
-            // $table->string('img_front')->nullable();
-            // $table->string('img_back')->nullable();
-            // $table->string('img_left')->nullable();
-            // $table->string('img_right')->nullable();
-            // $table->string('img_add1')->nullable();
-            // $table->string('img_add2')->nullable();
             $table->string('PIC')->nullable();
-            $table->foreign('rental_id')->nullable()->references('id')->on('rentals');
+            $table->foreign('rental_id')->nullable()->references('id')->on('rentals')->onDelete('cascade');
             $table->foreign('staff_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
