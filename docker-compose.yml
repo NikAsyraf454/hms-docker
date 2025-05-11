@@ -59,12 +59,12 @@ services:
       - ./data/conf.d:/etc/mysql/conf.d
       - ./data/logs:/logs
     environment:
-      MYSQL_ROOT_PASSWORD:${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE:${DB_DATABASE}
-      MYSQL_USER:${DB_USERNAME}
-      MYSQL_PASSWORD:${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      # - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
-    - dokploy-network
+      - dokploy-network
   # db:
   #   image: bitnami/postgresql:16.3.0
   #   platform: linux/amd64
