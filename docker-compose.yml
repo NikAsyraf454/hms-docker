@@ -1,5 +1,5 @@
 services:
-  app:
+  app2:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -7,7 +7,7 @@ services:
     # ports:
     #   - 9000:9001
     depends_on:
-      - db
+      - db2
     env_file:
       - ./.env
     volumes:
@@ -35,7 +35,7 @@ services:
   #     - public:/usr/share/nginx/html/public:rw
   #   networks:
   #     - dokploy-network
-  nginx:
+  nginx2:
     image: nginx:1-alpine
     ports:
       # - 80:80
@@ -46,16 +46,16 @@ services:
       - app2_storage:/usr/share/nginx/html/storage:rw
       - app2_public:/usr/share/nginx/html/public:ro
     depends_on:
-      - app
+      - app2
     networks:
       - dokploy-network
-  db:
+  db2:
     image: mysql
     ports:
       - 3306:3306
     restart: always
     volumes:
-      - db-data:/var/lib/mysql
+      - app2-db-data:/var/lib/mysql
       - ./data/conf.d:/etc/mysql/conf.d
       - ./data/logs:/logs
     environment:
@@ -97,8 +97,8 @@ services:
 volumes:
   app2_storage:
   app2_public:
-  db-data:
-  redis-data:
+  app2_db-data:
+  app2_redis-data:
 
 networks:
   dokploy-network:
