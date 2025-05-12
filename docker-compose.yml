@@ -95,8 +95,8 @@ services:
   #     - dokploy-network
 
 volumes:
-  storage:
-  public:
+  app2_storage:
+  app2_public:
   db-data:
   redis-data:
 
