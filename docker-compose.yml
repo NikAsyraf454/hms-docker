@@ -55,7 +55,7 @@ services:
       - 3306:3306
     restart: always
     volumes:
-      - app2-db-data:/var/lib/mysql
+      - app2_db-data:/var/lib/mysql
       - ./data/conf.d:/etc/mysql/conf.d
       - ./data/logs:/logs
     environment:
